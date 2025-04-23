@@ -1,4 +1,5 @@
-import 'package:firebase_sample/view/home/widgets/outlined_button.dart';
+import 'package:firebase_sample/widgets/outlined_button_widget.dart';
+import 'package:firebase_sample/view/phone/number_screen.dart';
 import 'package:firebase_sample/widgets/constants.dart';
 import 'package:firebase_sample/widgets/textformfield_widget.dart';
 import 'package:flutter/material.dart';
@@ -19,7 +20,7 @@ class _HomeScreenState extends State<HomeScreen> {
       resizeToAvoidBottomInset: false,
       body: SafeArea(
           child: Padding(
-        padding: const EdgeInsets.all(8.0),
+        padding: const EdgeInsets.all(10),
         child: Column(
           children: [
             const Text(
@@ -37,11 +38,17 @@ class _HomeScreenState extends State<HomeScreen> {
             ),
             kHeight20,
             TextformfieldWidget(
+              prefixIcon: const Icon(Icons.email),
               hintText: "Email",
               textEditingController: emailController,
             ),
-            kHeight,
             TextformfieldWidget(
+              obscureText: true,
+              onDoubleTap: () {
+                print("eye button pressed");
+              },
+              suffixIcon: const Icon(Icons.remove_red_eye),
+              prefixIcon: const Icon(Icons.lock),
               hintText: "Password",
               textEditingController: passController,
             ),
@@ -50,7 +57,9 @@ class _HomeScreenState extends State<HomeScreen> {
               style: ElevatedButton.styleFrom(
                 backgroundColor: kwhite,
               ),
-              onPressed: () {},
+              onPressed: () {
+                print("pressed");
+              },
               child: Text(
                 "Sign in",
                 style: textStyleBlack,
@@ -65,8 +74,17 @@ class _HomeScreenState extends State<HomeScreen> {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
-                const OutlinedButtonWidget(
-                  child: Row(
+                OutlinedButtonWidget(
+                  onPressed: () {
+                    Navigator.of(context).push(
+                      MaterialPageRoute(
+                        builder: (ctx) {
+                          return NumberScreen();
+                        },
+                      ),
+                    );
+                  },
+                  child: const Row(
                     children: [
                       Icon(
                         Icons.phone,
@@ -76,6 +94,9 @@ class _HomeScreenState extends State<HomeScreen> {
                   ),
                 ),
                 OutlinedButtonWidget(
+                  onPressed: () {
+                    print("pressed");
+                  },
                   child: Image.asset(
                     "assets/OIP.jpeg",
                     height: 25,

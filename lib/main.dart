@@ -19,6 +19,12 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      // initialRoute: "homescreen",
+      // routes: {
+      //   "homescreen": (context) => HomeScreen(),
+      //   "phonescreen": (context) => HomeScreen(),
+      //   "otpscreen": (context) => HomeScreen(),
+      // },
       theme: ThemeData(
         scaffoldBackgroundColor: kwhite,
 
