@@ -17,26 +17,29 @@ class NumberScreen extends StatelessWidget {
           child: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 10),
         child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            CupertinoButton(
-              child: Icon(
-                CupertinoIcons.back,
-                color: kBlack,
+            Align(
+              alignment: Alignment.topLeft,
+              child: CupertinoButton(
+                child: Icon(
+                  CupertinoIcons.back,
+                  color: kBlack,
+                ),
+                onPressed: () {
+                  Navigator.of(context).pop();
+                },
               ),
-              onPressed: () {
-                Navigator.of(context).pop();
-              },
             ),
             Text(
               "Sign In",
-              style: TextStyle(fontSize: 25),
+              style: TextStyle(fontSize: 25, fontWeight: FontWeight.w600),
             ),
             kHeight20,
             Text(
               "Enter your phone number to continue",
               style: TextStyle(
-                fontSize: 18,
+                fontSize: 15,
               ),
             ),
             kHeight,
