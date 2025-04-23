@@ -1,5 +1,4 @@
 import 'package:firebase_sample/view/home/home_screen.dart';
-import 'package:firebase_sample/widgets/outlined_button_widget.dart';
 import 'package:firebase_sample/view/phone/number_screen.dart';
 import 'package:firebase_sample/widgets/constants.dart';
 import 'package:flutter/cupertino.dart';
@@ -13,6 +12,7 @@ class OtpScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      resizeToAvoidBottomInset: false,
       // appBar: AppBar(
       //   backgroundColor: kwhite,
       // ),

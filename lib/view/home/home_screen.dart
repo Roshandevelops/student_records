@@ -24,17 +24,16 @@ class _HomeScreenState extends State<HomeScreen> {
         child: Column(
           children: [
             const Text(
-              "Student Home",
+              "Welcome !",
               style: TextStyle(
                 fontSize: 25,
+                fontWeight: FontWeight.w700,
                 color: kBlack,
               ),
             ),
             const Text(
-              "Welcome",
-              style: TextStyle(
-                fontSize: 16,
-              ),
+              "Student Home",
+              style: TextStyle(fontSize: 16, fontWeight: FontWeight.w500),
             ),
             kHeight20,
             TextformfieldWidget(
@@ -52,17 +51,48 @@ class _HomeScreenState extends State<HomeScreen> {
               hintText: "Password",
               textEditingController: passController,
             ),
-            kHeight20,
+            Column(
+              children: [
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Row(
+                      children: [
+                        Checkbox(
+                          value: true,
+                          onChanged: (value) {},
+                        ),
+                        Text(
+                          "Remember me",
+                        ),
+                      ],
+                    ),
+                    Text(
+                      "Forgot Password?",
+                      style: TextStyle(fontWeight: FontWeight.w700),
+                    ),
+                  ],
+                ),
+                Align(
+                  alignment: Alignment.topRight,
+                  child: Text(
+                    "Create New Account",
+                    style: TextStyle(fontWeight: FontWeight.w700),
+                  ),
+                ),
+              ],
+            ),
+            kHeight,
             ElevatedButton(
               style: ElevatedButton.styleFrom(
-                backgroundColor: kwhite,
+                backgroundColor: const Color(0xED012542),
               ),
               onPressed: () {
                 print("pressed");
               },
               child: Text(
                 "Sign in",
-                style: textStyleBlack,
+                style: textStyleWhite,
               ),
             ),
             kHeight,
