@@ -53,7 +53,9 @@ class OtpScreen extends StatelessWidget {
                       // kHeight,
                       Text(
                         "+91******0451",
+                        style: TextStyle(fontWeight: FontWeight.w800),
                       ),
+
                       InkWell(
                         onTap: () {
                           Navigator.of(context).pushAndRemoveUntil(
@@ -83,7 +85,7 @@ class OtpScreen extends StatelessWidget {
                           style: TextStyle(
                             fontSize: 18,
                             fontWeight: FontWeight.w600,
-                            color: const Color(0xED012542),
+                            color: Color(0xFF1B9C8F),
                           ),
                         ),
                       ),
@@ -120,7 +122,7 @@ class OtpScreen extends StatelessWidget {
                           "Validate",
                           style: TextStyle(
                             fontSize: 18,
-                            color: kBlack,
+                            color: const Color(0xFF1B9C8F),
                             fontWeight: FontWeight.w600,
                           ),
                         ),
@@ -143,7 +145,7 @@ class OtpScreen extends StatelessWidget {
                       Text(
                         "Resent code",
                         style: TextStyle(
-                          color: const Color(0xED012542),
+                          color: const Color(0xFF1B9C8F),
                           fontSize: 15,
                           fontWeight: FontWeight.w600,
                         ),

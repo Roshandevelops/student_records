@@ -20,7 +20,7 @@ class OutlinedButtonWidget extends StatelessWidget {
           ),
           backgroundColor: backgroundColor,
           side: const BorderSide(
-            color: kBlack,
+            color: kwhite,
           ),
         ),
         onPressed: onPressed,

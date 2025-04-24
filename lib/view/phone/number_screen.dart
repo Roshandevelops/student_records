@@ -13,7 +13,7 @@ class NumberScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-       resizeToAvoidBottomInset: false,
+      resizeToAvoidBottomInset: false,
       body: SafeArea(
           child: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 10),
@@ -66,6 +66,7 @@ class NumberScreen extends StatelessWidget {
             kHeight,
             Center(
               child: OutlinedButtonWidget(
+                
                 onPressed: () {
                   print("pressed");
 
@@ -77,7 +78,7 @@ class NumberScreen extends StatelessWidget {
                     ),
                   );
                 },
-                backgroundColor: const Color(0xED012542),
+                backgroundColor: Color(0xFF1B9C8F),
                 child: const Text(
                   "Send OTP",
                   style: TextStyle(

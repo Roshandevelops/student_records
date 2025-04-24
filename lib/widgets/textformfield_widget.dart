@@ -20,25 +20,33 @@ class TextformfieldWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return TextFormField(
-      maxLength: 30,
-      obscureText: obscureText,
-      style: const TextStyle(
-        color: kBlack,
-      ),
-      controller: textEditingController,
-      decoration: InputDecoration(
-        suffixIcon: suffixIcon,
-        prefixIcon: InkWell(
-          onDoubleTap: onDoubleTap,
-          child: prefixIcon,
-        ),
-        border: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(10),
-        ),
-        hintText: hintText,
-        hintStyle: const TextStyle(
+    return
+        // color: const Color(0xFF1B9C8F),
+        Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 15),
+      child: TextFormField(
+        maxLength: 30,
+        obscureText: obscureText,
+        style: const TextStyle(
           color: kBlack,
+        ),
+        controller: textEditingController,
+        decoration: InputDecoration(
+          fillColor: kwhite,
+          filled: true,
+          suffixIcon: suffixIcon,
+          prefixIcon: InkWell(
+            onDoubleTap: onDoubleTap,
+            child: prefixIcon,
+          ),
+          border: OutlineInputBorder(
+            borderSide: BorderSide.none,
+            borderRadius: BorderRadius.circular(10),
+          ),
+          hintText: hintText,
+          hintStyle: const TextStyle(
+            color: Color(0xFF1B9C8F),
+          ),
         ),
       ),
     );
