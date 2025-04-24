@@ -5,13 +5,13 @@ class TextformfieldWidget extends StatelessWidget {
   const TextformfieldWidget(
       {super.key,
       required this.hintText,
-      required this.textEditingController,
+      this.textEditingController,
       this.suffixIcon,
       this.prefixIcon,
       this.onDoubleTap,
       this.obscureText = false});
   final String hintText;
-  final TextEditingController textEditingController;
+  final TextEditingController? textEditingController;
   final Widget? suffixIcon;
   final Widget? prefixIcon;
   final void Function()? onDoubleTap;

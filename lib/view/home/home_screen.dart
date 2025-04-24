@@ -1,3 +1,4 @@
+import 'package:firebase_sample/view/home/register_now_screen.dart';
 import 'package:firebase_sample/widgets/outlined_button_widget.dart';
 import 'package:firebase_sample/view/phone/number_screen.dart';
 import 'package:firebase_sample/widgets/constants.dart';
@@ -18,178 +19,191 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       resizeToAvoidBottomInset: false,
+      backgroundColor: Colors.white,
       body: SafeArea(
-          child: Padding(
-        padding: const EdgeInsets.all(15),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            const Text(
-              "Welcome Back!",
-              style: TextStyle(
-                fontSize: 25,
-                fontWeight: FontWeight.w700,
-                color: const Color(0xFF1B9C8F),
+        child: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 20),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              const Text(
+                "Welcome Back!",
+                style: TextStyle(
+                  fontSize: 32,
+                  fontWeight: FontWeight.bold,
+                  color: Color(0xFF1B9C8F),
+                ),
               ),
-            ),
-            const Text(
-              "Student Home",
-              style: TextStyle(
-                fontSize: 16,
-                fontWeight: FontWeight.w500,
-                color: const Color(0xFF1B9C8F),
+              const SizedBox(height: 8),
+              const Text(
+                "Login to your account",
+                style: TextStyle(
+                  fontSize: 16,
+                  fontWeight: FontWeight.w500,
+                  color: Colors.grey,
+                ),
               ),
-            ),
-            kHeight20,
-            Container(
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(30),
-                color: Color(0xFF1B9C8F),
-              ),
-              child: Column(
-                children: [
-                  SizedBox(
-                    height: 45,
+              const SizedBox(height: 30),
+              Container(
+                padding: const EdgeInsets.all(20),
+                decoration: BoxDecoration(
+                  gradient: const LinearGradient(
+                    colors: [
+                      Color(0xFF08AD9D),
+                      Color(0xFF1D8076),
+                    ],
                   ),
-                  TextformfieldWidget(
-                    prefixIcon: const Icon(Icons.email),
-                    hintText: "Email",
-                    textEditingController: emailController,
-                  ),
-                  TextformfieldWidget(
-                    obscureText: true,
-                    onDoubleTap: () {
-                      print("eye button pressed");
-                    },
-                    suffixIcon: const Icon(Icons.remove_red_eye),
-                    prefixIcon: const Icon(Icons.lock),
-                    hintText: "Password",
-                    textEditingController: passController,
-                  ),
-                  Column(
-                    children: [
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Row(
-                            children: [
-                              Checkbox(
-                                value: true,
-                                onChanged: (value) {},
-                                activeColor: Colors.deepPurple[700],
-                              ),
-                              Text(
-                                "Remember me",
-                                style: textStyleWhite,
-                              ),
-                            ],
-                          ),
-                          Padding(
-                            padding: const EdgeInsets.only(right: 20),
-                            child: Text(
-                              "Forgot Password?",
-                              style: TextStyle(
-                                  fontWeight: FontWeight.w600, color: kwhite),
-                            ),
-                          ),
-                        ],
+                  borderRadius: BorderRadius.circular(20),
+                  boxShadow: [
+                    BoxShadow(
+                      color: Color(0xFF1D8076),
+                      blurRadius: 1,
+                      offset: Offset(0, 5),
+                    ),
+                  ],
+                ),
+                child: Column(
+                  children: [
+                    TextformfieldWidget(
+                      prefixIcon: const Icon(
+                        Icons.email,
+                        color: kBlack,
                       ),
-                      Align(
-                        alignment: Alignment.center,
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
+                      hintText: "Email",
+                      textEditingController: emailController,
+                    ),
+                    const SizedBox(height: 16),
+                    TextformfieldWidget(
+                      obscureText: true,
+                      onDoubleTap: () {
+                        print("eye button pressed");
+                      },
+                      suffixIcon:
+                          const Icon(Icons.remove_red_eye, color: kBlack),
+                      prefixIcon: const Icon(Icons.lock, color: kBlack),
+                      hintText: "Password",
+                      textEditingController: passController,
+                    ),
+                    const SizedBox(height: 10),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Row(
                           children: [
-                            Text(
-                              "Don't have an account?",
-                              style: TextStyle(
-                                  fontWeight: FontWeight.w600, color: kwhite),
+                            Checkbox(
+                              value: true,
+                              onChanged: (value) {},
+                              activeColor: kBlack,
                             ),
-                            Text(
-                              "Register Now",
-                              style: TextStyle(
-                                  color: Colors.deepPurple[700],
-                                  fontWeight: FontWeight.w700),
+                            const Text(
+                              "Remember me",
+                              style: TextStyle(color: kwhite),
                             ),
                           ],
                         ),
+                        const Text(
+                          "Forgot Password?",
+                          style: TextStyle(
+                            fontWeight: FontWeight.w600,
+                            color: Colors.white,
+                          ),
+                        ),
+                      ],
+                    ),
+                    const SizedBox(height: 20),
+                    Container(
+                      width: double.infinity,
+                      decoration: BoxDecoration(
+                        color: kwhite,
+                        borderRadius: BorderRadius.circular(30),
                       ),
-                      kHeight,
-                      Container(
-                        decoration: BoxDecoration(
-                          color: Color(0xFF08AD9D),
-                          borderRadius: BorderRadius.circular(10),
+                      child: MaterialButton(
+                        onPressed: () {},
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(30),
                         ),
-                        width: 200,
-                        child: MaterialButton(
-                          onPressed: () {},
-                          child: Text("Sign in"),
+                        padding: const EdgeInsets.symmetric(vertical: 14),
+                        child: const Text(
+                          "Sign In",
+                          style: TextStyle(
+                            fontSize: 16,
+                            fontWeight: FontWeight.bold,
+                            color: appColor,
+                          ),
                         ),
-                      )
-                      // ElevatedButton(
-                      //   style: ElevatedButton.styleFrom(
-                      //     backgroundColor: Color.fromARGB(255, 5, 179, 162),
-                      //   ),
-                      //   onPressed: () {
-                      //     print("pressed");
-                      //   },
-                      //   child: Text(
-                      //     "Sign in",
-                      //     style: textStyleWhite,
-                      //   ),
-                      // ),
-                    ],
-                  ),
-                  SizedBox(
-                    height: 40,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              const SizedBox(height: 16),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  const Text("Don't have an account?"),
+                  const SizedBox(width: 10),
+                  InkWell(
+                    onTap: () {
+                      Navigator.of(context).push(
+                        MaterialPageRoute(builder: (ctx) {
+                          return const RegisterNowScreen();
+                        }),
+                      );
+                    },
+                    child: const Text(
+                      "Register Now",
+                      style: TextStyle(
+                        color: Color(0xFF1B9C8F),
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
                   ),
                 ],
               ),
-            ),
-            // kHeight20,
-
-            kHeight,
-            Text("Or",
+              const SizedBox(height: 30),
+              const Text(
+                "Or continue with",
                 style: TextStyle(
-                  fontWeight: FontWeight.w700,
-                  color: Color(0xFF1B9C8F),
-                )),
-            kHeight,
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: [
-                OutlinedButtonWidget(
-                  onPressed: () {
-                    Navigator.of(context).push(
-                      MaterialPageRoute(
-                        builder: (ctx) {
-                          return NumberScreen();
-                        },
-                      ),
-                    );
-                  },
-                  child: const Row(
-                    children: [
-                      Icon(
-                        Icons.phone,
-                        color: kBlack,
-                      ),
-                    ],
-                  ),
+                  color: Colors.grey,
+                  fontWeight: FontWeight.w600,
                 ),
-                OutlinedButtonWidget(
-                  onPressed: () {
-                    print("pressed");
-                  },
-                  child: Image.asset(
-                    "assets/OIP.jpeg",
-                    height: 25,
+              ),
+              const SizedBox(height: 16),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  OutlinedButtonWidget(
+                    onPressed: () {
+                      Navigator.of(context).push(
+                        MaterialPageRoute(
+                          builder: (ctx) => const NumberScreen(),
+                        ),
+                      );
+                    },
+                    child: const Row(
+                      children: [
+                        Icon(Icons.phone, color: kBlack),
+                        SizedBox(width: 6),
+                        // Text("Phone")
+                      ],
+                    ),
                   ),
-                ),
-              ],
-            ),
-          ],
+                  const SizedBox(width: 16),
+                  OutlinedButtonWidget(
+                    onPressed: () {
+                      print("Google sign in pressed");
+                    },
+                    child: Image.asset(
+                      "assets/OIP.jpeg",
+                      height: 25,
+                    ),
+                  ),
+                ],
+              ),
+            ],
+          ),
         ),
-      )),
+      ),
     );
   }
 }
