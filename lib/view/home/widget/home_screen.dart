@@ -1,29 +1,28 @@
 import 'dart:developer';
-
-import 'package:firebase_sample/controller/google_sign_in_provider.dart';
-import 'package:firebase_sample/view/home/widget/register_now_screen.dart';
-import 'package:firebase_sample/widgets/outlined_button_widget.dart';
-import 'package:firebase_sample/view/home/widget/number_screen.dart';
-import 'package:firebase_sample/widgets/constants.dart';
-import 'package:firebase_sample/widgets/textformfield_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:provider/provider.dart';
 
+import 'package:firebase_sample/controller/google_sign_in_provider.dart';
+import 'package:firebase_sample/view/home/widget/register_now_screen.dart';
+import 'package:firebase_sample/view/home/widget/number_screen.dart';
+import 'package:firebase_sample/widgets/constants.dart';
+import 'package:firebase_sample/widgets/outlined_button_widget.dart';
+
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
+
   @override
   State<HomeScreen> createState() => _HomeScreenState();
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  TextEditingController emailController = TextEditingController();
-  TextEditingController passController = TextEditingController();
+  final TextEditingController emailController = TextEditingController();
+  final TextEditingController passController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      resizeToAvoidBottomInset: false,
       backgroundColor: Colors.white,
       body: SafeArea(
         child: Padding(
@@ -57,44 +56,75 @@ class _HomeScreenState extends State<HomeScreen> {
                       Color(0xFF08AD9D),
                       Color(0xFF1D8076),
                     ],
+                    begin: Alignment.topLeft,
+                    end: Alignment.bottomRight,
                   ),
                   borderRadius: BorderRadius.circular(20),
                   boxShadow: [
                     BoxShadow(
-                      color: Color(0xFF1D8076),
-                      blurRadius: 1,
-                      offset: Offset(0, 5),
+                      color: Colors.teal.shade700.withOpacity(0.4),
+                      blurRadius: 8,
+                      offset: const Offset(0, 5),
                     ),
                   ],
                 ),
                 child: Column(
                   children: [
-                    TextformfieldWidget(
-                      prefixIcon: const Icon(
-                        Icons.supervised_user_circle_rounded,
-                        color: kBlack,
+                    // Email TextField
+                    TextFormField(
+                      controller: emailController,
+                      decoration: InputDecoration(
+                        labelText: 'Email',
+                        prefixIcon: const Icon(Icons.email_outlined,
+                            color: Colors.white),
+                        labelStyle: const TextStyle(color: Colors.white),
+                        enabledBorder: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(12),
+                          borderSide: const BorderSide(
+                              color: Colors.white60, width: 1.5),
+                        ),
+                        focusedBorder: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(12),
+                          borderSide:
+                              const BorderSide(color: Colors.white, width: 2),
+                        ),
+                        filled: true,
+                        fillColor: Colors.teal.withOpacity(0.1),
                       ),
-                      hintText: "Email",
-                      textEditingController: emailController,
+                      style: const TextStyle(color: Colors.white),
                     ),
+
                     const SizedBox(height: 16),
-                    TextformfieldWidget(
+
+                    // Password TextField
+                    TextFormField(
+                      controller: passController,
                       obscureText: true,
-                      onDoubleTap: () {
-                        print("eye button pressed");
-                      },
-                      suffixIcon: const Icon(
-                        Icons.remove_red_eye,
-                        color: kBlack,
+                      decoration: InputDecoration(
+                        labelText: 'Password',
+                        prefixIcon:
+                            const Icon(Icons.lock_outline, color: Colors.white),
+                        suffixIcon: const Icon(Icons.visibility_off_outlined,
+                            color: Colors.white70),
+                        labelStyle: const TextStyle(color: Colors.white),
+                        enabledBorder: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(12),
+                          borderSide: const BorderSide(
+                              color: Colors.white60, width: 1.5),
+                        ),
+                        focusedBorder: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(12),
+                          borderSide:
+                              const BorderSide(color: Colors.white, width: 2),
+                        ),
+                        filled: true,
+                        fillColor: Colors.teal.withOpacity(0.1),
                       ),
-                      prefixIcon: const Icon(
-                        Icons.lock,
-                        color: kBlack,
-                      ),
-                      hintText: "Password",
-                      textEditingController: passController,
+                      style: const TextStyle(color: Colors.white),
                     ),
-                    const SizedBox(height: 10),
+
+                    const SizedBox(height: 12),
+
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
@@ -103,12 +133,11 @@ class _HomeScreenState extends State<HomeScreen> {
                             Checkbox(
                               value: true,
                               onChanged: (value) {},
-                              activeColor: kBlack,
+                              activeColor: Colors.white,
+                              checkColor: Colors.teal,
                             ),
-                            const Text(
-                              "Remember me",
-                              style: TextStyle(color: kwhite),
-                            ),
+                            const Text("Remember me",
+                                style: TextStyle(color: Colors.white)),
                           ],
                         ),
                         const Text(
@@ -120,15 +149,19 @@ class _HomeScreenState extends State<HomeScreen> {
                         ),
                       ],
                     ),
+
                     const SizedBox(height: 20),
+
                     Container(
                       width: double.infinity,
                       decoration: BoxDecoration(
-                        color: kwhite,
+                        color: Colors.white,
                         borderRadius: BorderRadius.circular(30),
                       ),
                       child: MaterialButton(
-                        onPressed: () {},
+                        onPressed: () {
+                          // Handle sign-in
+                        },
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(30),
                         ),
@@ -155,9 +188,8 @@ class _HomeScreenState extends State<HomeScreen> {
                   InkWell(
                     onTap: () {
                       Navigator.of(context).push(
-                        MaterialPageRoute(builder: (ctx) {
-                          return const RegisterNowScreen();
-                        }),
+                        MaterialPageRoute(
+                            builder: (_) => const RegisterNowScreen()),
                       );
                     },
                     child: const Text(
@@ -185,41 +217,24 @@ class _HomeScreenState extends State<HomeScreen> {
                   OutlinedButtonWidget(
                     onPressed: () {
                       Navigator.of(context).push(
-                        MaterialPageRoute(
-                          builder: (ctx) => const NumberScreen(),
-                        ),
+                        MaterialPageRoute(builder: (_) => const NumberScreen()),
                       );
                     },
                     child: const Row(
                       children: [
-                        Icon(Icons.phone, color: kBlack),
-                        SizedBox(width: 6),
-                        // Text("Phone")
+                        Icon(Icons.phone, color: Colors.black),
                       ],
                     ),
                   ),
                   const SizedBox(width: 16),
                   OutlinedButtonWidget(
-                      onPressed: () {
-                        Provider.of<GoogleSignInProvider>(context,
-                                listen: false)
-                            .googleLogin();
-
-                        // Navigator.of(context).push(
-                        //   MaterialPageRoute(
-                        //     builder: (ctx) {
-                        //       return GoogleAccountScreen();
-                        //     },
-                        //   ),
-                        // );
-                        log("Google sign in pressed");
-                      },
-                      child: const FaIcon(FontAwesomeIcons.google)
-                      // Image.asset(
-                      //   "assets/OIP.jpeg",
-                      //   height: 25,
-                      // ),
-                      ),
+                    onPressed: () {
+                      Provider.of<GoogleSignInProvider>(context, listen: false)
+                          .googleLogin();
+                      log("Google sign in pressed");
+                    },
+                    child: const FaIcon(FontAwesomeIcons.google),
+                  ),
                 ],
               ),
             ],
