@@ -18,136 +18,152 @@ class RegisterNowScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Stack(
-        children: [
-          // Background gradient
-          Container(
-            decoration: const BoxDecoration(
-              gradient: LinearGradient(
-                colors: [Color(0xFF08AD9D), Color(0xFF1D8076)],
-                begin: Alignment.topCenter,
-                end: Alignment.bottomCenter,
-              ),
-            ),
-          ),
-
-          // White curved container
-          Align(
-            alignment: Alignment.bottomCenter,
-            child: Container(
-              height: MediaQuery.of(context).size.height * 0.8,
-              padding: const EdgeInsets.all(25),
+      backgroundColor: const Color(0xFFF9F9F9),
+      body: SafeArea(
+        child: Stack(
+          children: [
+            Container(
+              height: MediaQuery.of(context).size.height * 0.4,
+              width: double.infinity,
               decoration: const BoxDecoration(
-                color: Colors.white,
-                borderRadius: BorderRadius.vertical(top: Radius.circular(40)),
-                boxShadow: [
-                  BoxShadow(
-                    color: Colors.black12,
-                    blurRadius: 10,
-                    offset: Offset(0, -4),
-                  ),
-                ],
-              ),
-              child: SingleChildScrollView(
-                child: Column(
-                  children: [
-                    const SizedBox(height: 10),
-                    const Text(
-                      "Create Your Account",
-                      style: TextStyle(
-                        fontSize: 28,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                    const SizedBox(height: 8),
-                    const Text(
-                      "Let’s get started with your journey!",
-                      style: TextStyle(
-                        fontSize: 16,
-                        color: Colors.grey,
-                      ),
-                    ),
-                    const SizedBox(height: 30),
-
-                    // Email Field
-                    TextformfieldWidget(
-                      textEditingController: registerEmailController,
-                      prefixIcon: const Icon(Icons.email, color: kBlack),
-                      hintText: "Email",
-                    ),
-                    const SizedBox(height: 15),
-
-                    // Password Field
-                    TextformfieldWidget(
-                      textEditingController: registerPassController,
-                      obscureText: true,
-                      suffixIcon:
-                          const Icon(Icons.remove_red_eye, color: kBlack),
-                      prefixIcon: const Icon(Icons.lock, color: kBlack),
-                      hintText: "Password",
-                    ),
-                    const SizedBox(height: 15),
-
-                    // Confirm Password Field
-                    TextformfieldWidget(
-                      textEditingController: confirmRegisterPassController,
-                      obscureText: true,
-                      suffixIcon:
-                          const Icon(Icons.remove_red_eye, color: kBlack),
-                      prefixIcon: const Icon(Icons.lock, color: kBlack),
-                      hintText: "Confirm Password",
-                    ),
-                    const SizedBox(height: 30),
-
-                    // Register Button
-                    Container(
-                      width: double.infinity,
-                      decoration: BoxDecoration(
-                        gradient: const LinearGradient(
-                          colors: [Color(0xFF08AD9D), Color(0xFF1D8076)],
-                        ),
-                        borderRadius: BorderRadius.circular(30),
-                        boxShadow: [
-                          BoxShadow(
-                            color: Colors.teal.withOpacity(0.4),
-                            blurRadius: 10,
-                            offset: const Offset(0, 4),
-                          ),
-                        ],
-                      ),
-                      child: MaterialButton(
-                        onPressed: () {},
-                        padding: const EdgeInsets.symmetric(vertical: 14),
-                        child: const Text(
-                          "Register Now",
-                          style: TextStyle(
-                            color: Colors.white,
-                            fontSize: 16,
-                            fontWeight: FontWeight.w600,
-                          ),
-                        ),
-                      ),
-                    ),
-                    const SizedBox(height: 20),
-                  ],
+                gradient: LinearGradient(
+                  colors: [Color(0xFF08AD9D), Color(0xFF1D8076)],
+                  begin: Alignment.topLeft,
+                  end: Alignment.bottomRight,
+                ),
+                borderRadius: BorderRadius.only(
+                  bottomLeft: Radius.circular(60),
+                  bottomRight: Radius.circular(60),
                 ),
               ),
             ),
-          ),
-
-          // Top Back Button
-          SafeArea(
-            child: Padding(
-              padding: const EdgeInsets.only(left: 15, top: 10),
-              child: CupertinoButton(
-                padding: EdgeInsets.zero,
-                onPressed: () => Navigator.of(context).pop(),
-                child: const Icon(CupertinoIcons.back,
-                    color: Colors.white, size: 30),
+            SingleChildScrollView(
+              padding: const EdgeInsets.symmetric(horizontal: 20),
+              child: Column(
+                children: [
+                  const SizedBox(height: 10),
+                  // Align(
+                  //   alignment: Alignment.topLeft,
+                  //   child: CupertinoButton(
+                  //     padding: EdgeInsets.zero,
+                  //     child:
+                  //         const Icon(CupertinoIcons.back, color: Colors.white),
+                  //     onPressed: () => Navigator.of(context).pop(),
+                  //   ),
+                  // ),
+                  const SizedBox(height: 30),
+                  const Align(
+                    alignment: Alignment.centerLeft,
+                    child: Text(
+                      "Ready to Explore?",
+                      style: TextStyle(
+                        fontSize: 30,
+                        fontWeight: FontWeight.bold,
+                        color: kwhite,
+                      ),
+                    ),
+                  ),
+                  const SizedBox(height: 5),
+                  const Align(
+                    alignment: Alignment.centerLeft,
+                    child: Text(
+                      "A few taps away from awesome",
+                      style: TextStyle(
+                        fontSize: 16,
+                        color: Colors.white70,
+                      ),
+                    ),
+                  ),
+                  const SizedBox(height: 40),
+                  Container(
+                    width: double.infinity,
+                    padding: const EdgeInsets.all(20),
+                    margin: const EdgeInsets.only(top: 20),
+                    decoration: BoxDecoration(
+                      color: kwhite,
+                      borderRadius: BorderRadius.circular(25),
+                      boxShadow: [
+                        BoxShadow(
+                          color: Colors.teal.withOpacity(0.1),
+                          spreadRadius: 2,
+                          blurRadius: 15,
+                          offset: const Offset(0, 5),
+                        ),
+                      ],
+                    ),
+                    child: Column(
+                      children: [
+                        TextformfieldWidget(
+                          textEditingController: registerEmailController,
+                          prefixIcon: const Icon(
+                            Icons.email_outlined,
+                            color: Colors.teal,
+                          ),
+                          hintText: "Email",
+                        ),
+                        const SizedBox(height: 15),
+                        TextformfieldWidget(
+                          textEditingController: registerPassController,
+                          obscureText: true,
+                          onDoubleTap: () => print("eye pressed"),
+                          suffixIcon: const Icon(Icons.remove_red_eye_outlined,
+                              color: Colors.teal),
+                          prefixIcon: const Icon(Icons.lock_outline,
+                              color: Colors.teal),
+                          hintText: "Password",
+                        ),
+                        const SizedBox(height: 15),
+                        TextformfieldWidget(
+                          textEditingController: confirmRegisterPassController,
+                          obscureText: true,
+                          onDoubleTap: () => print("eye pressed"),
+                          suffixIcon: const Icon(Icons.remove_red_eye_outlined,
+                              color: Colors.teal),
+                          prefixIcon: const Icon(Icons.lock_outline,
+                              color: Colors.teal),
+                          hintText: "Confirm Password",
+                        ),
+                        const SizedBox(height: 30),
+                        Container(
+                          width: 180,
+                          decoration: BoxDecoration(
+                            gradient: const LinearGradient(
+                              colors: [
+                                Color(0xFF08AD9D),
+                                Color(0xFF1D8076),
+                              ],
+                            ),
+                            borderRadius: BorderRadius.circular(30),
+                            boxShadow: [
+                              BoxShadow(
+                                color: Colors.teal.withOpacity(0.4),
+                                blurRadius: 10,
+                                offset: const Offset(0, 4),
+                              ),
+                            ],
+                          ),
+                          child: MaterialButton(
+                            onPressed: () {},
+                            padding: const EdgeInsets.symmetric(vertical: 14),
+                            child: const Text(
+                              "Register Now",
+                              style: TextStyle(
+                                color: Colors.white,
+                                fontSize: 16,
+                                fontWeight: FontWeight.w600,
+                              ),
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                  const SizedBox(height: 40),
+                ],
               ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }

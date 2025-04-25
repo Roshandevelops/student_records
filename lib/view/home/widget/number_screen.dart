@@ -1,7 +1,5 @@
-import 'package:firebase_sample/widgets/outlined_button_widget.dart';
 import 'package:firebase_sample/view/home/widget/otp_screen.dart';
 import 'package:firebase_sample/widgets/constants.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:intl_phone_field/intl_phone_field.dart';
@@ -11,165 +9,134 @@ class NumberScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final size = MediaQuery.of(context).size;
+
     return Scaffold(
       resizeToAvoidBottomInset: false,
-      backgroundColor: Colors.white,
+      backgroundColor: const Color(0xFFF5F8FA),
       body: SafeArea(
         child: Column(
           children: [
-            Align(
-              alignment: Alignment.topLeft,
-              child: CupertinoButton(
-                padding: EdgeInsets.zero,
-                child: const Icon(
-                  CupertinoIcons.back,
-                  color: kBlack,
-                ),
-                onPressed: () {
-                  Navigator.of(context).pop();
-                },
-              ),
-            ),
-
-            // Welcome Text
-            const Padding(
-              padding: EdgeInsets.symmetric(horizontal: 20, vertical: 20),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    "Welcome Back 👋",
-                    style: TextStyle(
-                      fontSize: 26,
-                      fontWeight: FontWeight.w700,
-                      color: Colors.black87,
+            // Header with wave & gradient
+            Stack(
+              children: [
+                ClipPath(
+                  clipper: WaveClipper(),
+                  child: Container(
+                    width: double.infinity,
+                    height: size.height * 0.35,
+                    decoration: const BoxDecoration(
+                      gradient: LinearGradient(
+                        colors: [Color(0xFF08AD9D), Color(0xFF1D8076)],
+                        begin: Alignment.topLeft,
+                        end: Alignment.bottomRight,
+                      ),
                     ),
                   ),
-                  SizedBox(height: 8),
-                  Text(
-                    "We’re happy to see you again.\nLogin quickly with your phone number to continue.",
-                    style: TextStyle(
-                      fontSize: 16,
-                      color: Colors.grey,
-                      height: 1.4,
-                    ),
-                  ),
-                ],
-              ),
-            ),
-
-            // Sign In header with gradient
-            Padding(
-              padding: EdgeInsets.symmetric(horizontal: 20),
-              child: Container(
-                width: double.infinity,
-                padding: const EdgeInsets.only(
-                  top: 100,
-                  left: 10,
-                  right: 10,
-                  bottom: 20,
                 ),
-                decoration: BoxDecoration(
-                  boxShadow: [
-                    BoxShadow(
-                      color: Color(0xFF1D8076),
-                      offset: Offset(0, 5),
-                      blurRadius: 1,
-                    ),
-                  ],
-                  gradient: LinearGradient(
-                    colors: [
-                      Color(0xFF08AD9D),
-                      Color(0xFF1D8076),
+                Positioned(
+                  top: 60,
+                  left: 24,
+                  right: 24,
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: const [
+                      Text(
+                        "Welcome Back 👋",
+                        style: TextStyle(
+                          fontSize: 26,
+                          fontWeight: FontWeight.w700,
+                          color: kwhite,
+                        ),
+                      ),
+                      kHeight,
+                      Text(
+                        "Login quickly with your phone number to continue.",
+                        style: TextStyle(
+                          fontSize: 16,
+                          color: Colors.white70,
+                        ),
+                      ),
+                      SizedBox(height: 30),
+                      Text(
+                        "Sign In",
+                        style: TextStyle(
+                          fontSize: 28,
+                          fontWeight: FontWeight.bold,
+                          color: Colors.white,
+                        ),
+                      ),
                     ],
-                    begin: Alignment.topLeft,
-                    end: Alignment.topLeft,
                   ),
-                  borderRadius: BorderRadius.vertical(
-                    bottom: Radius.circular(40),
-                    top: Radius.circular(20),
-                  ),
-                ),
+                )
+              ],
+            ),
+
+            // Input & Button
+            Expanded(
+              child: Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 24),
                 child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: const [
-                    SizedBox(height: 10),
-                    Text(
-                      "Sign In",
-                      style: TextStyle(
-                        fontSize: 28,
-                        fontWeight: FontWeight.bold,
-                        color: Colors.white,
+                  children: [
+                    const SizedBox(height: 30),
+
+                    // Phone Input Field
+                    IntlPhoneField(
+                      initialCountryCode: "IN",
+                      inputFormatters: [
+                        FilteringTextInputFormatter.digitsOnly,
+                      ],
+                      decoration: InputDecoration(
+                        filled: true,
+                        fillColor: Colors.white,
+                        hintText: 'Phone Number',
+                        hintStyle: const TextStyle(color: Colors.grey),
+                        border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(14),
+                          borderSide: BorderSide.none,
+                        ),
+                        contentPadding: const EdgeInsets.symmetric(
+                            vertical: 18, horizontal: 16),
                       ),
+                      onChanged: (value) {},
+                      onCountryChanged: (value) {
+                        print(value.code);
+                      },
+                      languageCode: "en",
                     ),
-                    SizedBox(height: 8),
-                    Text(
-                      "Enter your phone number to continue",
-                      style: TextStyle(
-                        fontSize: 16,
-                        color: Colors.white70,
+
+                    const SizedBox(height: 40),
+
+                    // Send OTP Button
+                    SizedBox(
+                      width: double.infinity,
+                      height: 50,
+                      child: ElevatedButton(
+                        style: ElevatedButton.styleFrom(
+                          elevation: 4,
+                          backgroundColor: const Color(0xFF1B9C8F),
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(12),
+                          ),
+                        ),
+                        onPressed: () {
+                          Navigator.of(context).push(
+                            MaterialPageRoute(
+                              builder: (ctx) => const OtpScreen(),
+                            ),
+                          );
+                        },
+                        child: const Text(
+                          "Send OTP",
+                          style: TextStyle(
+                            fontSize: 16,
+                            fontWeight: FontWeight.w600,
+                            color: kwhite,
+                          ),
+                        ),
                       ),
                     ),
                   ],
-                ),
-              ),
-            ),
-
-            const SizedBox(height: 30),
-
-            // Phone number input
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 20),
-              child: IntlPhoneField(
-                initialCountryCode: "IN",
-                inputFormatters: [
-                  FilteringTextInputFormatter.digitsOnly,
-                ],
-                decoration: InputDecoration(
-                  filled: true,
-                  fillColor: Colors.grey[100],
-                  hintText: 'Phone Number',
-                  hintStyle: const TextStyle(color: Colors.grey),
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(12),
-                    borderSide: BorderSide.none,
-                  ),
-                  contentPadding:
-                      const EdgeInsets.symmetric(vertical: 18, horizontal: 16),
-                ),
-                onChanged: (value) {
-                  // Handle number change
-                },
-                onCountryChanged: (value) {
-                  print(value.code);
-                },
-                languageCode: "en",
-              ),
-            ),
-
-            const SizedBox(height: 40),
-
-            // Send OTP button
-            Center(
-              child: OutlinedButtonWidget(
-                borderColor: Colors.transparent,
-                backgroundColor: const Color(0xFF1B9C8F),
-                onPressed: () {
-                  Navigator.of(context).push(
-                    MaterialPageRoute(
-                      builder: (ctx) => const OtpScreen(),
-                    ),
-                  );
-                },
-                child: const Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 40, vertical: 14),
-                  child: Text(
-                    "Send OTP",
-                    style: TextStyle(
-                      fontSize: 16,
-                      color: Colors.white,
-                    ),
-                  ),
                 ),
               ),
             ),
@@ -178,4 +145,23 @@ class NumberScreen extends StatelessWidget {
       ),
     );
   }
+}
+
+// Wavy ClipPath
+class WaveClipper extends CustomClipper<Path> {
+  @override
+  Path getClip(Size size) {
+    var path = Path();
+
+    path.lineTo(0, size.height - 40);
+    path.quadraticBezierTo(
+        size.width / 2, size.height, size.width, size.height - 40);
+    path.lineTo(size.width, 0);
+    path.close();
+
+    return path;
+  }
+
+  @override
+  bool shouldReclip(CustomClipper<Path> oldClipper) => false;
 }
