@@ -1,9 +1,14 @@
-import 'package:firebase_sample/view/home/register_now_screen.dart';
+import 'dart:developer';
+
+import 'package:firebase_sample/controller/google_sign_in_provider.dart';
+import 'package:firebase_sample/view/home/widget/register_now_screen.dart';
 import 'package:firebase_sample/widgets/outlined_button_widget.dart';
-import 'package:firebase_sample/view/phone/number_screen.dart';
+import 'package:firebase_sample/view/home/widget/number_screen.dart';
 import 'package:firebase_sample/widgets/constants.dart';
 import 'package:firebase_sample/widgets/textformfield_widget.dart';
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:provider/provider.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -27,7 +32,7 @@ class _HomeScreenState extends State<HomeScreen> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               const Text(
-                "Welcome Back!",
+                "Welcome Buddy !!",
                 style: TextStyle(
                   fontSize: 32,
                   fontWeight: FontWeight.bold,
@@ -66,7 +71,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   children: [
                     TextformfieldWidget(
                       prefixIcon: const Icon(
-                        Icons.email,
+                        Icons.supervised_user_circle_rounded,
                         color: kBlack,
                       ),
                       hintText: "Email",
@@ -78,9 +83,14 @@ class _HomeScreenState extends State<HomeScreen> {
                       onDoubleTap: () {
                         print("eye button pressed");
                       },
-                      suffixIcon:
-                          const Icon(Icons.remove_red_eye, color: kBlack),
-                      prefixIcon: const Icon(Icons.lock, color: kBlack),
+                      suffixIcon: const Icon(
+                        Icons.remove_red_eye,
+                        color: kBlack,
+                      ),
+                      prefixIcon: const Icon(
+                        Icons.lock,
+                        color: kBlack,
+                      ),
                       hintText: "Password",
                       textEditingController: passController,
                     ),
@@ -190,14 +200,26 @@ class _HomeScreenState extends State<HomeScreen> {
                   ),
                   const SizedBox(width: 16),
                   OutlinedButtonWidget(
-                    onPressed: () {
-                      print("Google sign in pressed");
-                    },
-                    child: Image.asset(
-                      "assets/OIP.jpeg",
-                      height: 25,
-                    ),
-                  ),
+                      onPressed: () {
+                        Provider.of<GoogleSignInProvider>(context,
+                                listen: false)
+                            .googleLogin();
+
+                        // Navigator.of(context).push(
+                        //   MaterialPageRoute(
+                        //     builder: (ctx) {
+                        //       return GoogleAccountScreen();
+                        //     },
+                        //   ),
+                        // );
+                        log("Google sign in pressed");
+                      },
+                      child: const FaIcon(FontAwesomeIcons.google)
+                      // Image.asset(
+                      //   "assets/OIP.jpeg",
+                      //   height: 25,
+                      // ),
+                      ),
                 ],
               ),
             ],

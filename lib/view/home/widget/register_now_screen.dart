@@ -4,7 +4,16 @@ import 'package:firebase_sample/widgets/constants.dart';
 import 'package:firebase_sample/widgets/textformfield_widget.dart';
 
 class RegisterNowScreen extends StatelessWidget {
-  const RegisterNowScreen({super.key});
+  const RegisterNowScreen({
+    super.key,
+    this.confirmRegisterPassController,
+    this.registerEmailController,
+    this.registerPassController,
+  });
+
+  final TextEditingController? registerEmailController;
+  final TextEditingController? registerPassController;
+  final TextEditingController? confirmRegisterPassController;
 
   @override
   Widget build(BuildContext context) {
@@ -18,15 +27,12 @@ class RegisterNowScreen extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              // Back button
               CupertinoButton(
                 padding: EdgeInsets.zero,
                 child: const Icon(CupertinoIcons.back, color: Colors.black),
                 onPressed: () => Navigator.of(context).pop(),
               ),
               const SizedBox(height: 20),
-
-              // Header text
               const Text(
                 "Create Account",
                 style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold),
@@ -36,10 +42,7 @@ class RegisterNowScreen extends StatelessWidget {
                 "Register to get started!",
                 style: TextStyle(fontSize: 16, color: Colors.grey),
               ),
-
               const SizedBox(height: 40),
-
-              // Form container with gradient
               Container(
                 padding: const EdgeInsets.all(20),
                 decoration: BoxDecoration(
@@ -61,55 +64,43 @@ class RegisterNowScreen extends StatelessWidget {
                 child: Column(
                   children: [
                     TextformfieldWidget(
+                      textEditingController: registerEmailController,
                       prefixIcon: const Icon(Icons.email, color: kBlack),
                       hintText: "Email",
-                      // hintStyle: const TextStyle(color: Colors.white70),
-                      // fillColor: Colors.white.withOpacity(0.1),
-                      // filled: true,
-                      // borderColor: Colors.white38,
-                      // textColor: Colors.white,
                     ),
                     const SizedBox(height: 15),
                     TextformfieldWidget(
+                      textEditingController: registerPassController,
                       obscureText: true,
                       onDoubleTap: () => print("eye pressed"),
                       suffixIcon:
                           const Icon(Icons.remove_red_eye, color: kBlack),
                       prefixIcon: const Icon(Icons.lock, color: kBlack),
                       hintText: "Password",
-                      // hintStyle: const TextStyle(color: Colors.white70),
-                      // fillColor: Colors.white.withOpacity(0.1),
-                      // filled: true,
-                      // borderColor: Colors.white38,
-                      // textColor: Colors.white,
                     ),
                     const SizedBox(height: 15),
                     TextformfieldWidget(
+                      textEditingController: confirmRegisterPassController,
                       obscureText: true,
                       onDoubleTap: () => print("eye pressed"),
                       suffixIcon:
                           const Icon(Icons.remove_red_eye, color: kBlack),
                       prefixIcon: const Icon(Icons.lock, color: kBlack),
                       hintText: "Confirm Password",
-                      // hintStyle: const TextStyle(color: Colors.white70),
-                      // fillColor: Colors.white.withOpacity(0.1),
-                      // filled: true,
-                      // borderColor: Colors.white38,
-                      // textColor: Colors.white,
                     ),
                   ],
                 ),
               ),
-
               const SizedBox(height: 30),
-
-              // Register Button
               Center(
                 child: Container(
                   width: 200,
                   decoration: BoxDecoration(
                     gradient: const LinearGradient(
-                      colors: [Color(0xFF08AD9D), Color(0xFF1D8076)],
+                      colors: [
+                        Color(0xFF08AD9D),
+                        Color(0xFF1D8076),
+                      ],
                     ),
                     borderRadius: BorderRadius.circular(30),
                     boxShadow: [
@@ -134,7 +125,6 @@ class RegisterNowScreen extends StatelessWidget {
                   ),
                 ),
               ),
-
               const SizedBox(height: 30),
             ],
           ),

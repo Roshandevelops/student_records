@@ -1,5 +1,5 @@
-import 'package:firebase_sample/view/home/home_screen.dart';
-import 'package:firebase_sample/view/phone/number_screen.dart';
+import 'package:firebase_sample/view/home/widget/home_screen.dart';
+import 'package:firebase_sample/view/home/widget/number_screen.dart';
 import 'package:firebase_sample/widgets/constants.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';

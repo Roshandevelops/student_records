@@ -1,5 +1,5 @@
 import 'package:firebase_sample/widgets/outlined_button_widget.dart';
-import 'package:firebase_sample/view/phone/otp_screen.dart';
+import 'package:firebase_sample/view/home/widget/otp_screen.dart';
 import 'package:firebase_sample/widgets/constants.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
