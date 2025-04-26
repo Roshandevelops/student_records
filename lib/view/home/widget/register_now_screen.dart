@@ -94,6 +94,10 @@ class RegisterNowScreen extends StatelessWidget {
                     child: Column(
                       children: [
                         TextformfieldWidget(
+                          padding: EdgeInsets.symmetric(
+                            horizontal: 5,
+                          ),
+                          fillColor: kwhite,
                           textEditingController: registerEmailController,
                           prefixIcon: const Icon(
                             Icons.email_outlined,
@@ -103,6 +107,10 @@ class RegisterNowScreen extends StatelessWidget {
                         ),
                         const SizedBox(height: 15),
                         TextformfieldWidget(
+                          padding: EdgeInsets.symmetric(
+                            horizontal: 5,
+                          ),
+                          fillColor: kwhite,
                           textEditingController: registerPassController,
                           obscureText: true,
                           onDoubleTap: () => print("eye pressed"),
@@ -114,6 +122,10 @@ class RegisterNowScreen extends StatelessWidget {
                         ),
                         const SizedBox(height: 15),
                         TextformfieldWidget(
+                          padding: EdgeInsets.symmetric(
+                            horizontal: 5,
+                          ),
+                          fillColor: kwhite,
                           textEditingController: confirmRegisterPassController,
                           obscureText: true,
                           onDoubleTap: () => print("eye pressed"),

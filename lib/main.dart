@@ -1,5 +1,4 @@
 import 'package:firebase_sample/controller/google_sign_in_provider.dart';
-import 'package:firebase_sample/view/home/widget/home_screen.dart';
 import 'package:firebase_sample/view/home/home_widget.dart';
 
 import 'package:firebase_sample/widgets/constants.dart';

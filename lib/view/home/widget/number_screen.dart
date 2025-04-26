@@ -27,7 +27,10 @@ class NumberScreen extends StatelessWidget {
                     height: size.height * 0.35,
                     decoration: const BoxDecoration(
                       gradient: LinearGradient(
-                        colors: [Color(0xFF08AD9D), Color(0xFF1D8076)],
+                        colors: [
+                          Color(0xFF08AD9D),
+                          Color(0xFF1D8076),
+                        ],
                         begin: Alignment.topLeft,
                         end: Alignment.bottomRight,
                       ),

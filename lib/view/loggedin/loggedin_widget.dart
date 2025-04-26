@@ -32,7 +32,8 @@ class LoggedinWidget extends StatelessWidget {
                 onPressed: () {
                   log("hey button clicked");
                 },
-                child: Text("hey"))
+                child: Text("hey"),
+                )
           ],
         ),
       ),
