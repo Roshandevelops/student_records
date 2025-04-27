@@ -17,6 +17,8 @@ class TextformfieldWidget extends StatelessWidget {
       this.fillColor,
       this.hintStyle,
       this.color,
+      this.onSaved,
+      this.validator,
       this.padding = const EdgeInsets.symmetric(horizontal: 15)});
   final String? hintText;
   final TextEditingController? textEditingController;
@@ -33,16 +35,17 @@ class TextformfieldWidget extends StatelessWidget {
   final EdgeInsetsGeometry? padding;
   final TextStyle? hintStyle;
   final Color? color;
-
-  // final TextEditingController passController;
+  final void Function(String?)? onSaved;
+  final String? Function(String?)? validator;
 
   @override
   Widget build(BuildContext context) {
     return
-        // color: const Color(0xFF1B9C8F),
         Padding(
       padding: padding!,
       child: TextFormField(
+        validator: validator,
+        onSaved: onSaved,
         maxLength: 30,
         obscureText: obscureText,
         style: TextStyle(
