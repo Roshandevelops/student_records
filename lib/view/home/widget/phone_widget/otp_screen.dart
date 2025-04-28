@@ -1,7 +1,6 @@
 import 'package:firebase_sample/view/home/widget/login_widget.dart';
 import 'package:firebase_sample/view/home/widget/phone_widget/number_screen.dart';
 import 'package:firebase_sample/widgets/constants.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_otp_text_field/flutter_otp_text_field.dart';
@@ -18,23 +17,10 @@ class OtpScreen extends StatelessWidget {
           padding: const EdgeInsets.symmetric(horizontal: 10),
           child: Center(
             child: Column(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                Align(
-                  alignment: Alignment.topLeft,
-                  child: CupertinoButton(
-                    child: Icon(
-                      CupertinoIcons.back,
-                      color: kBlack,
-                    ),
-                    onPressed: () {
-                      Navigator.of(context).pop();
-                    },
-                  ),
-                ),
                 SizedBox(
-                  // color: Colors.amber,
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
@@ -89,7 +75,8 @@ class OtpScreen extends StatelessWidget {
                     ],
                   ),
                 ),
-                // kHeight20,
+                kHeight20,
+                kHeight20,
                 SizedBox(
                   // color: Colors.amber,
                   child: Column(
