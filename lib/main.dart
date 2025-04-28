@@ -1,5 +1,5 @@
 import 'package:firebase_sample/controller/google_sign_in_provider.dart';
-import 'package:firebase_sample/view/home/home_widget.dart';
+import 'package:firebase_sample/view/home/login_screen.dart';
 
 import 'package:firebase_sample/widgets/constants.dart';
 import 'package:flutter/material.dart';
@@ -29,19 +29,11 @@ class MyApp extends StatelessWidget {
         )
       ],
       child: MaterialApp(
-        // initialRoute: "homescreen",
-        // routes: {
-        //   "homescreen": (context) => HomeScreen(),
-        //   "phonescreen": (context) => HomeScreen(),
-        //   "otpscreen": (context) => HomeScreen(),
-        // },
         theme: ThemeData(
           scaffoldBackgroundColor: kwhite,
-
-          //  Color(0xFF0C2539),
         ),
         debugShowCheckedModeBanner: false,
-        home: const HomeWidget(),
+        home: const LoginScreen(),
       ),
     );
   }

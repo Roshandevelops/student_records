@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_sample/widgets/constants.dart';
 import 'package:firebase_sample/widgets/textformfield_widget.dart';
@@ -41,17 +40,7 @@ class RegisterNowScreen extends StatelessWidget {
               padding: const EdgeInsets.symmetric(horizontal: 20),
               child: Column(
                 children: [
-                  const SizedBox(height: 10),
-                  // Align(
-                  //   alignment: Alignment.topLeft,
-                  //   child: CupertinoButton(
-                  //     padding: EdgeInsets.zero,
-                  //     child:
-                  //         const Icon(CupertinoIcons.back, color: Colors.white),
-                  //     onPressed: () => Navigator.of(context).pop(),
-                  //   ),
-                  // ),
-                  const SizedBox(height: 30),
+                  const SizedBox(height: 50),
                   const Align(
                     alignment: Alignment.centerLeft,
                     child: Text(

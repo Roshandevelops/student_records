@@ -1,5 +1,5 @@
-import 'package:firebase_sample/view/home/widget/home_screen.dart';
-import 'package:firebase_sample/view/home/widget/number_screen.dart';
+import 'package:firebase_sample/view/home/widget/login_widget.dart';
+import 'package:firebase_sample/view/home/widget/phone_widget/number_screen.dart';
 import 'package:firebase_sample/widgets/constants.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -13,9 +13,6 @@ class OtpScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       resizeToAvoidBottomInset: false,
-      // appBar: AppBar(
-      //   backgroundColor: kwhite,
-      // ),
       body: SafeArea(
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 10),
@@ -60,7 +57,7 @@ class OtpScreen extends StatelessWidget {
                         onTap: () {
                           Navigator.of(context).pushAndRemoveUntil(
                             MaterialPageRoute(
-                              builder: (ctx) => HomeScreen(),
+                              builder: (ctx) => LoginWidget(),
                             ),
                             // ModalRoute.withName("homescreen"),
                             (route) {

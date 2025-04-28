@@ -6,8 +6,8 @@ import 'package:firebase_sample/widgets/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-class LoggedinWidget extends StatelessWidget {
-  const LoggedinWidget({super.key});
+class HomeScreen extends StatelessWidget {
+  const HomeScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -29,11 +29,11 @@ class LoggedinWidget extends StatelessWidget {
               child: const Text("Logout"),
             ),
             ElevatedButton(
-                onPressed: () {
-                  log("hey button clicked");
-                },
-                child: Text("hey"),
-                )
+              onPressed: () {
+                log("hey button clicked");
+              },
+              child: Text("hey"),
+            )
           ],
         ),
       ),
