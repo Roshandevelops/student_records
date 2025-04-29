@@ -85,7 +85,15 @@ class _LoginEmailTextformfieldwidgetState
           enabledBorder: customOutlineBorder(color: Colors.white60, width: 2),
           focusedBorder: customOutlineBorder(color: kwhite, width: 2),
         ),
+        
+
+
+
       ],
     );
   }
 }
+
+
+
+

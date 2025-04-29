@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_sample/widgets/constants.dart';
 import 'package:flutter/material.dart';
 
@@ -5,9 +6,12 @@ class LoginSignButtonWidget extends StatelessWidget {
   const LoginSignButtonWidget({super.key, required this.formKey});
   final GlobalKey<FormState> formKey;
 
+  
+
   @override
   Widget build(BuildContext context) {
-    return Container(
+    return 
+    Container(
       width: double.infinity,
       decoration: BoxDecoration(
         color: Colors.white,
@@ -33,5 +37,10 @@ class LoginSignButtonWidget extends StatelessWidget {
         ),
       ),
     );
+  }
+
+  Future emailPasswordSignin(TextEditingController emailController,TextEditingController passwordController)async{
+    await FirebaseAuth.instance.signInWithEmailAndPassword(email: emailController.text.trim(), password: passwordController.text);
+
   }
 }

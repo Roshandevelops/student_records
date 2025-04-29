@@ -13,6 +13,7 @@ class HomeScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     final userName = FirebaseAuth.instance.currentUser!;
     return Scaffold(
+      
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
@@ -28,6 +29,7 @@ class HomeScreen extends StatelessWidget {
               },
               child: const Text("Logout"),
             ),
+
             ElevatedButton(
               onPressed: () {
                 log("hey button clicked");

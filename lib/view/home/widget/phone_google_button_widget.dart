@@ -31,7 +31,7 @@ class LoginPhoneGoogleButtonWidget extends StatelessWidget {
         OutlinedButtonWidget(
           onPressed: () {
             Provider.of<GoogleSignInProvider>(context, listen: false)
-                .googleLogin();
+                .googleLogin(context);
             log("Google sign in pressed");
           },
           child: const FaIcon(FontAwesomeIcons.google),
