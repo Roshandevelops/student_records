@@ -1,6 +1,6 @@
-import 'package:firebase_sample/view/home/login_textformfieldwidget.dart';
-import 'package:firebase_sample/view/home/widget/login_checkbox_row_widget.dart';
-import 'package:firebase_sample/view/home/widget/login_sign_button_widget.dart';
+import 'package:firebase_sample/view/auth/widgets/login_textformfieldwidget.dart';
+import 'package:firebase_sample/view/auth/widgets/login_checkbox_row_widget.dart';
+import 'package:firebase_sample/view/auth/widgets/login_sign_button_widget.dart';
 import 'package:firebase_sample/widgets/constants.dart';
 import 'package:flutter/material.dart';
 
@@ -12,8 +12,6 @@ class LoginContainerWidget extends StatefulWidget {
 }
 
 class _LoginContainerWidgetState extends State<LoginContainerWidget> {
-  final TextEditingController passController = TextEditingController();
-
   final _formkey = GlobalKey<FormState>();
 
   @override
@@ -43,11 +41,11 @@ class _LoginContainerWidgetState extends State<LoginContainerWidget> {
               children: [
                 const LoginEmailTextformfieldwidget(),
                 const LoginCheckboxRowWidget(),
-                LoginSignButtonWidget(formKey: _formkey),
+                LoginSignButtonWidget(formKey: _formkey,),
               ],
             ),
           ),
-          // const SizedBox(height: 16),
+          const SizedBox(height: 16),
         ],
       ),
     );

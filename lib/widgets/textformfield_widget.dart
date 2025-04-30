@@ -4,7 +4,7 @@ class TextformfieldWidget extends StatelessWidget {
   const TextformfieldWidget(
       {super.key,
       this.hintText,
-      this.textEditingController,
+      this.controller,
       this.suffixIcon,
       this.prefixIcon,
       this.onDoubleTap,
@@ -21,7 +21,7 @@ class TextformfieldWidget extends StatelessWidget {
       this.validator,
       this.padding = const EdgeInsets.symmetric(horizontal: 15)});
   final String? hintText;
-  final TextEditingController? textEditingController;
+  final TextEditingController? controller;
   final Widget? suffixIcon;
   final Widget? prefixIcon;
   final void Function()? onDoubleTap;
@@ -40,8 +40,7 @@ class TextformfieldWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return
-        Padding(
+    return Padding(
       padding: padding!,
       child: TextFormField(
         validator: validator,
@@ -51,7 +50,7 @@ class TextformfieldWidget extends StatelessWidget {
         style: TextStyle(
           color: color,
         ),
-        controller: textEditingController,
+        controller: controller,
         decoration: InputDecoration(
           labelText: labelText,
           labelStyle: labelStyle,

@@ -1,7 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_sample/controller/google_sign_in_provider.dart';
-import 'package:firebase_sample/view/home/widget/login_widget.dart';
-import 'package:firebase_sample/view/homee/home_screen.dart';
+import 'package:firebase_sample/view/auth/widgets/login_widget.dart';
+import 'package:firebase_sample/view/home/home_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_sample/firebase_options.dart';
@@ -34,29 +34,13 @@ class MyApp extends StatelessWidget {
           return MaterialApp(
             debugShowCheckedModeBanner: false,
             home: snapshot.connectionState == ConnectionState.waiting
-                ? Center(child: CircularProgressIndicator())
+                ?const Center(child: CircularProgressIndicator())
                 : snapshot.hasError
-                    ? Text("Something went wrong")
+                    ?const Text("Something went wrong")
                     : snapshot.hasData
-                        ? HomeScreen()
-                        : LoginWidget(),
+                        ?const HomeScreen()
+                        :const LoginWidget(),
           );
-          //    if (snapshot.connectionState == ConnectionState.waiting) {
-          //   return const Center(child: CircularProgressIndicator());
-          // } else if (snapshot.hasError) {
-          //   return const Center(
-          //     child: Text("Something went wrong"),
-          //   );
-          // } else if (snapshot.hasData) {
-          //   return MaterialApp(
-          //   theme: ThemeData(
-          //     scaffoldBackgroundColor: kwhite,
-          //   ),
-          //   debugShowCheckedModeBanner: false,
-          //   home: const HomeScreen(),
-          // );
-          // }
-          // return const LoginWidget();
         },
       ),
     );

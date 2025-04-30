@@ -6,12 +6,9 @@ class LoginSignButtonWidget extends StatelessWidget {
   const LoginSignButtonWidget({super.key, required this.formKey});
   final GlobalKey<FormState> formKey;
 
-  
-
   @override
   Widget build(BuildContext context) {
-    return 
-    Container(
+    return Container(
       width: double.infinity,
       decoration: BoxDecoration(
         color: Colors.white,
@@ -39,8 +36,8 @@ class LoginSignButtonWidget extends StatelessWidget {
     );
   }
 
-  Future emailPasswordSignin(TextEditingController emailController,TextEditingController passwordController)async{
-    await FirebaseAuth.instance.signInWithEmailAndPassword(email: emailController.text.trim(), password: passwordController.text);
+  // Future emailPasswordSignin(TextEditingController emailC)async{
+  //   await FirebaseAuth.instance.signInWithEmailAndPassword(email: "email", password: "password");
 
-  }
+  // }
 }

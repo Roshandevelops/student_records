@@ -1,5 +1,5 @@
-import 'package:firebase_sample/view/home/widget/phone_widget/intphone_field_widget.dart';
-import 'package:firebase_sample/view/home/widget/phone_widget/stack_widget.dart';
+import 'package:firebase_sample/view/auth/widgets/login_intlphone_field_widget.dart';
+import 'package:firebase_sample/view/auth/widgets/login_intl_stack_widget.dart';
 import 'package:flutter/material.dart';
 
 class NumberScreen extends StatelessWidget {

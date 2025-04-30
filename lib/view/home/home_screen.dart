@@ -13,12 +13,11 @@ class HomeScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     final userName = FirebaseAuth.instance.currentUser!;
     return Scaffold(
-      
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Text("Name :${userName.displayName!}"),
+            Text("Name :${userName.email!}"),
             Text("Email :${userName.email!}"),
             kHeight20,
             ElevatedButton(
@@ -29,13 +28,13 @@ class HomeScreen extends StatelessWidget {
               },
               child: const Text("Logout"),
             ),
-
             ElevatedButton(
               onPressed: () {
-                log("hey button clicked");
+                FirebaseAuth.instance.signOut();
+                log("email loging out");
               },
-              child: Text("hey"),
-            )
+              child: Text("email log out"),
+            ),
           ],
         ),
       ),

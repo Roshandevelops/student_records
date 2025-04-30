@@ -1,5 +1,5 @@
-import 'package:firebase_sample/view/home/widget/login_widget.dart';
-import 'package:firebase_sample/view/home/widget/phone_widget/number_screen.dart';
+import 'package:firebase_sample/view/auth/widgets/login_widget.dart';
+import 'package:firebase_sample/view/auth/view/number_screen.dart';
 import 'package:firebase_sample/widgets/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -53,17 +53,19 @@ class OtpScreen extends StatelessWidget {
                           Future.delayed(
                             Duration.zero,
                             () {
-                              Navigator.of(context).push(
-                                MaterialPageRoute(
-                                  builder: (ctx) {
-                                    return NumberScreen();
-                                  },
-                                ),
-                              );
+                              if (context.mounted) {
+                                Navigator.of(context).push(
+                                  MaterialPageRoute(
+                                    builder: (ctx) {
+                                      return const NumberScreen();
+                                    },
+                                  ),
+                                );
+                              }
                             },
                           );
                         },
-                        child: Text(
+                        child: const Text(
                           "Change phone number ?",
                           style: TextStyle(
                             fontSize: 18,
@@ -82,7 +84,7 @@ class OtpScreen extends StatelessWidget {
                   child: Column(
                     children: [
                       OtpTextField(
-                        decoration: InputDecoration(hintText: "0"),
+                        decoration: const InputDecoration(hintText: "0"),
                         onCodeChanged: (value) {
                           // if (value.length == 1) {
                           //   FocusScope.of(context).nextFocus();
@@ -95,18 +97,18 @@ class OtpScreen extends StatelessWidget {
                         fieldWidth: 50,
                         fieldHeight: 50,
                         numberOfFields: 4,
-                        borderColor: Color(0xFF512DA8),
+                        borderColor: const Color(0xFF512DA8),
                         showFieldAsBox: true,
                         keyboardType: TextInputType.number,
                       ),
                       kHeight,
                       TextButton(
                         onPressed: () {},
-                        child: Text(
+                        child: const Text(
                           "Validate",
                           style: TextStyle(
                             fontSize: 18,
-                            color: const Color(0xFF1B9C8F),
+                            color: Color(0xFF1B9C8F),
                             fontWeight: FontWeight.w600,
                           ),
                         ),
@@ -114,7 +116,7 @@ class OtpScreen extends StatelessWidget {
                     ],
                   ),
                 ),
-                SizedBox(
+                const SizedBox(
                   // color: Colors.amber,
                   child: Column(
                     children: [
@@ -129,7 +131,7 @@ class OtpScreen extends StatelessWidget {
                       Text(
                         "Resent code",
                         style: TextStyle(
-                          color: const Color(0xFF1B9C8F),
+                          color: Color(0xFF1B9C8F),
                           fontSize: 15,
                           fontWeight: FontWeight.w600,
                         ),
@@ -137,7 +139,7 @@ class OtpScreen extends StatelessWidget {
                     ],
                   ),
                 ),
-                SizedBox(
+                const SizedBox(
                   // color: Colors.amber,
                   child: Column(
                     children: [

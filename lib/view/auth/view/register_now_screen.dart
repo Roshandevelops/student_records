@@ -1,18 +1,29 @@
+import 'dart:developer';
+
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_sample/widgets/constants.dart';
 import 'package:firebase_sample/widgets/textformfield_widget.dart';
 
-class RegisterNowScreen extends StatelessWidget {
+class RegisterNowScreen extends StatefulWidget {
   const RegisterNowScreen({
     super.key,
-    this.confirmRegisterPassController,
-    this.registerEmailController,
-    this.registerPassController,
+    // this.confirmRegisterPassController,
+    // this.registerEmailController,
+    // this.registerPassController,
   });
 
-  final TextEditingController? registerEmailController;
-  final TextEditingController? registerPassController;
-  final TextEditingController? confirmRegisterPassController;
+  @override
+  State<RegisterNowScreen> createState() => _RegisterNowScreenState();
+}
+
+class _RegisterNowScreenState extends State<RegisterNowScreen> {
+  final TextEditingController registerEmailController = TextEditingController();
+
+  final TextEditingController registerPassController = TextEditingController();
+
+  final TextEditingController confirmRegisterPassController =
+      TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -87,7 +98,7 @@ class RegisterNowScreen extends StatelessWidget {
                             horizontal: 5,
                           ),
                           fillColor: kwhite,
-                          textEditingController: registerEmailController,
+                          controller: registerEmailController,
                           prefixIcon: const Icon(
                             Icons.email_outlined,
                             color: Colors.teal,
@@ -100,7 +111,7 @@ class RegisterNowScreen extends StatelessWidget {
                             horizontal: 5,
                           ),
                           fillColor: kwhite,
-                          textEditingController: registerPassController,
+                          controller: registerPassController,
                           obscureText: true,
                           onDoubleTap: () => print("eye pressed"),
                           suffixIcon: const Icon(Icons.remove_red_eye_outlined,
@@ -115,7 +126,7 @@ class RegisterNowScreen extends StatelessWidget {
                             horizontal: 5,
                           ),
                           fillColor: kwhite,
-                          textEditingController: confirmRegisterPassController,
+                          controller: confirmRegisterPassController,
                           obscureText: true,
                           onDoubleTap: () => print("eye pressed"),
                           suffixIcon: const Icon(Icons.remove_red_eye_outlined,
@@ -144,7 +155,9 @@ class RegisterNowScreen extends StatelessWidget {
                             ],
                           ),
                           child: MaterialButton(
-                            onPressed: () {},
+                            onPressed: () {
+                              creatNewAccount(context);
+                            },
                             padding: const EdgeInsets.symmetric(vertical: 14),
                             child: const Text(
                               "Register Now",
@@ -167,5 +180,48 @@ class RegisterNowScreen extends StatelessWidget {
         ),
       ),
     );
+  }
+
+  void creatNewAccount(BuildContext context) async {
+    try {
+      final email = registerEmailController.text.trim();
+      final password = registerPassController.text.trim();
+      final confirmPassword = confirmRegisterPassController.text.trim();
+
+      if (email.isEmpty || password.isEmpty || confirmPassword.isEmpty) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(content: Text("Please fill all fields")),
+        );
+        return;
+      }
+
+      if (password != confirmPassword) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(content: Text("Passwords do not match")),
+        );
+        return;
+      }
+
+      await FirebaseAuth.instance.createUserWithEmailAndPassword(
+        email: email,
+        password: password,
+      );
+
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+          content: Text("Account created successfully"),
+        ),
+      );
+
+      Navigator.of(context).pop();
+
+      // Optionally, navigate to login/home screen
+      // Navigator.pushReplacement(context, MaterialPageRoute(builder: (_) => HomeScreen()));
+    } catch (e) {
+      log("Register Error: $e");
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text("Error: ${e.toString()}")),
+      );
+    }
   }
 }

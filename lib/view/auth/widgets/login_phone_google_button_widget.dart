@@ -1,7 +1,7 @@
 import 'dart:developer';
 
 import 'package:firebase_sample/controller/google_sign_in_provider.dart';
-import 'package:firebase_sample/view/home/widget/phone_widget/number_screen.dart';
+import 'package:firebase_sample/view/auth/view/number_screen.dart';
 import 'package:firebase_sample/widgets/outlined_button_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';

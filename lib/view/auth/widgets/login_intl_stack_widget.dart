@@ -1,4 +1,4 @@
-import 'package:firebase_sample/view/home/widget/phone_widget/waveclipper.dart';
+import 'package:firebase_sample/view/auth/widgets/login_intl_stack_waveclipper.dart';
 import 'package:firebase_sample/widgets/constants.dart';
 import 'package:flutter/material.dart';
 

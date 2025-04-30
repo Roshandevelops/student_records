@@ -1,4 +1,4 @@
-import 'package:firebase_sample/view/home/widget/login_column_widget.dart';
+import 'package:firebase_sample/view/auth/widgets/login_column_widget.dart';
 import 'package:flutter/material.dart';
 
 class LoginWidget extends StatefulWidget {

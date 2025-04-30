@@ -1,5 +1,5 @@
 import 'dart:developer';
-import 'package:firebase_sample/view/home/widget/phone_widget/otp_screen.dart';
+import 'package:firebase_sample/view/auth/view/otp_screen.dart';
 import 'package:firebase_sample/widgets/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';

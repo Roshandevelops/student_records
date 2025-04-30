@@ -1,3 +1,6 @@
+import 'dart:developer';
+
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_sample/widgets/constants.dart';
 import 'package:firebase_sample/widgets/textformfield_widget.dart';
 import 'package:flutter/material.dart';
@@ -44,7 +47,7 @@ class _LoginEmailTextformfieldwidgetState
           padding: const EdgeInsets.symmetric(horizontal: 0),
           fillColor: Colors.teal.withOpacity(0.1),
           hintText: "Email",
-          textEditingController: emailController,
+          controller: emailController,
           labelText: "Email",
           prefixIcon: const Icon(
             Icons.email_outlined,
@@ -75,7 +78,7 @@ class _LoginEmailTextformfieldwidgetState
           padding: const EdgeInsets.symmetric(horizontal: 0),
           fillColor: Colors.teal.withOpacity(0.1),
           hintText: "Paaword",
-          textEditingController: passController,
+          controller: passController,
           labelText: "Password",
           prefixIcon: const Icon(
             Icons.email_outlined,
@@ -85,15 +88,24 @@ class _LoginEmailTextformfieldwidgetState
           enabledBorder: customOutlineBorder(color: Colors.white60, width: 2),
           focusedBorder: customOutlineBorder(color: kwhite, width: 2),
         ),
-        
-
-
-
+        // ElevatedButton(
+        //   onPressed: () {
+        //     emailPasswordSignin();
+        //   },
+        //   child: const Text("sample"),
+        // )
       ],
     );
   }
+
+  Future emailPasswordSignin() async {
+    try {
+      await FirebaseAuth.instance.signInWithEmailAndPassword(
+        email: emailController.text.trim(),
+        password: passController.text.trim(),
+      );
+    } catch (e) {
+      log(e.toString());
+    }
+  }
 }
-
-
-
-
