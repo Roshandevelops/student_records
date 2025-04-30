@@ -98,14 +98,16 @@ class _LoginEmailTextformfieldwidgetState
     );
   }
 
-  Future emailPasswordSignin() async {
-    try {
-      await FirebaseAuth.instance.signInWithEmailAndPassword(
-        email: emailController.text.trim(),
-        password: passController.text.trim(),
-      );
-    } catch (e) {
-      log(e.toString());
-    }
-  }
+  // Future emailPasswordSignin() async {
+  //   try {
+  //     await FirebaseAuth.instance.signInWithEmailAndPassword(
+  //       email: emailController.text.trim(),
+  //       password: passController.text.trim(),
+  //     );
+  //   } catch (e) {
+  //     log(e.toString());
+  //   }
+  // }
+
+
 }
