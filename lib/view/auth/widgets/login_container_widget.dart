@@ -13,6 +13,8 @@ class LoginContainerWidget extends StatefulWidget {
 
 class _LoginContainerWidgetState extends State<LoginContainerWidget> {
   final _formkey = GlobalKey<FormState>();
+  final TextEditingController emailController = TextEditingController();
+  final TextEditingController passwordController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -39,9 +41,16 @@ class _LoginContainerWidgetState extends State<LoginContainerWidget> {
             ),
             child: Column(
               children: [
-                const LoginEmailTextformfieldwidget(),
+                LoginEmailTextformfieldwidget(
+                  emailController: emailController,
+                  passController: passwordController,
+                ),
                 const LoginCheckboxRowWidget(),
-                LoginSignButtonWidget(formKey: _formkey,),
+                LoginSignButtonWidget(
+                  formKey: _formkey,
+                  emailController: emailController,
+                  passwordController: passwordController,
+                ),
               ],
             ),
           ),

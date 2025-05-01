@@ -1,27 +1,20 @@
-import 'dart:developer';
-
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_sample/widgets/constants.dart';
 import 'package:firebase_sample/widgets/textformfield_widget.dart';
 import 'package:flutter/material.dart';
 
-class LoginEmailTextformfieldwidget extends StatefulWidget {
-  const LoginEmailTextformfieldwidget({super.key});
+class LoginEmailTextformfieldwidget extends StatelessWidget {
+  const LoginEmailTextformfieldwidget({
+    super.key,
+    required this.emailController,
+    required this.passController,
+  });
+  final TextEditingController emailController;
+  final TextEditingController passController;
 
-  @override
-  State<LoginEmailTextformfieldwidget> createState() =>
-      _LoginEmailTextformfieldwidgetState();
-}
-
-class _LoginEmailTextformfieldwidgetState
-    extends State<LoginEmailTextformfieldwidget> {
-  final TextEditingController emailController = TextEditingController();
-  final TextEditingController passController = TextEditingController();
-
-  String email = "";
-  String password = "";
-  String emailDialogue = "Please Enter Valid Email";
-  String passwordDialogue = "Please Enter password of min length 6";
+  final String email = "";
+  final String password = "";
+  final String emailDialogue = "Please Enter Valid Email";
+  final String passwordDialogue = "Please Enter password of min length 6";
 
   @override
   Widget build(BuildContext context) {
@@ -35,11 +28,7 @@ class _LoginEmailTextformfieldwidgetState
               return null;
             }
           },
-          onSaved: (value) {
-            setState(() {
-              email = value!;
-            });
-          },
+          
           hintStyle: const TextStyle(
             color: kwhite,
           ),
@@ -66,11 +55,6 @@ class _LoginEmailTextformfieldwidgetState
               return null;
             }
           },
-          onSaved: (value) {
-            setState(() {
-              password = value!;
-            });
-          },
           hintStyle: const TextStyle(
             color: kwhite,
           ),
@@ -88,26 +72,7 @@ class _LoginEmailTextformfieldwidgetState
           enabledBorder: customOutlineBorder(color: Colors.white60, width: 2),
           focusedBorder: customOutlineBorder(color: kwhite, width: 2),
         ),
-        // ElevatedButton(
-        //   onPressed: () {
-        //     emailPasswordSignin();
-        //   },
-        //   child: const Text("sample"),
-        // )
       ],
     );
   }
-
-  // Future emailPasswordSignin() async {
-  //   try {
-  //     await FirebaseAuth.instance.signInWithEmailAndPassword(
-  //       email: emailController.text.trim(),
-  //       password: passController.text.trim(),
-  //     );
-  //   } catch (e) {
-  //     log(e.toString());
-  //   }
-  // }
-
-
 }

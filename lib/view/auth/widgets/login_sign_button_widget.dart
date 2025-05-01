@@ -5,11 +5,16 @@ import 'package:firebase_sample/widgets/constants.dart';
 import 'package:flutter/material.dart';
 
 class LoginSignButtonWidget extends StatelessWidget {
-  const LoginSignButtonWidget({super.key, required this.formKey,this.emailCont,this.passCont});
+  const LoginSignButtonWidget({
+    super.key,
+    required this.formKey,
+    required this.emailController,
+    required this.passwordController,
+  });
   final GlobalKey<FormState> formKey;
 
-  final TextEditingController? emailCont;
-  final TextEditingController? passCont;
+  final TextEditingController emailController;
+  final TextEditingController passwordController;
 
   @override
   Widget build(BuildContext context) {
@@ -23,12 +28,8 @@ class LoginSignButtonWidget extends StatelessWidget {
         onPressed: () async {
           if (formKey.currentState!.validate()) {
             formKey.currentState!.save();
+            await emailPasswordSignin();
           }
-          // emailPasswordSignin();
-
-
-
-
         },
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(30),
@@ -46,14 +47,14 @@ class LoginSignButtonWidget extends StatelessWidget {
     );
   }
 
-  //   Future emailPasswordSignin() async {
-  //   try {
-  //     await FirebaseAuth.instance.signInWithEmailAndPassword(
-  //       email: emailCont!.text.trim(),
-  //       password: passCont!.text.trim(),
-  //     );
-  //   } catch (e) {
-  //     log(e.toString());
-  //   }
-  // }
+  Future emailPasswordSignin() async {
+    try {
+      await FirebaseAuth.instance.signInWithEmailAndPassword(
+        email: emailController.text.trim(),
+        password: passwordController.text.trim(),
+      );
+    } catch (e) {
+      log(e.toString());
+    }
+  }
 }
