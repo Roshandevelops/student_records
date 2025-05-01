@@ -3,7 +3,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 
-class GoogleSignInProvider extends ChangeNotifier {
+class AuthenticationProvider extends ChangeNotifier {
   final googleSignIn = GoogleSignIn();
 
   GoogleSignInAccount? user;
@@ -28,7 +28,12 @@ class GoogleSignInProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  Future logOut() async {
+  Future emailLogOut() async {
+    await FirebaseAuth.instance.signOut();
+    notifyListeners();
+  }
+
+  Future googleLogOut() async {
     await googleSignIn.disconnect();
     await FirebaseAuth.instance.signOut();
     notifyListeners();

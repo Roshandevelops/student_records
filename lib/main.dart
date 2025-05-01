@@ -1,5 +1,5 @@
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:firebase_sample/controller/google_sign_in_provider.dart';
+import 'package:firebase_sample/controller/authentication_provider.dart';
 import 'package:firebase_sample/view/auth/view/login_screen.dart';
 import 'package:firebase_sample/view/home/home_screen.dart';
 import 'package:flutter/material.dart';
@@ -24,7 +24,7 @@ class MyApp extends StatelessWidget {
       providers: [
         ChangeNotifierProvider(
           create: (context) {
-            return GoogleSignInProvider();
+            return AuthenticationProvider();
           },
         )
       ],
@@ -34,12 +34,12 @@ class MyApp extends StatelessWidget {
           return MaterialApp(
             debugShowCheckedModeBanner: false,
             home: snapshot.connectionState == ConnectionState.waiting
-                ?const Center(child: CircularProgressIndicator())
+                ? const Center(child: CircularProgressIndicator())
                 : snapshot.hasError
-                    ?const Text("Something went wrong")
+                    ? const Text("Something went wrong")
                     : snapshot.hasData
-                        ?const HomeScreen()
-                        :const LoginWidget(),
+                        ? const HomeScreen()
+                        : const LoginWidget(),
           );
         },
       ),

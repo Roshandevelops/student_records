@@ -1,6 +1,6 @@
 import 'dart:developer';
 
-import 'package:firebase_sample/controller/google_sign_in_provider.dart';
+import 'package:firebase_sample/controller/authentication_provider.dart';
 import 'package:firebase_sample/view/auth/view/number_screen.dart';
 import 'package:firebase_sample/widgets/outlined_button_widget.dart';
 import 'package:flutter/material.dart';
@@ -30,7 +30,7 @@ class LoginPhoneGoogleButtonWidget extends StatelessWidget {
         const SizedBox(width: 16),
         OutlinedButtonWidget(
           onPressed: () {
-            Provider.of<GoogleSignInProvider>(context, listen: false)
+            Provider.of<AuthenticationProvider>(context, listen: false)
                 .googleLogin(context);
             log("Google sign in pressed");
           },
