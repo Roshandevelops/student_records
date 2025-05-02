@@ -1,7 +1,7 @@
 import 'dart:developer';
 import 'dart:io';
-
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/material.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 
 class AuthServices {
@@ -10,11 +10,9 @@ class AuthServices {
   factory AuthServices() {
     return AuthServices.instance;
   }
-
   Future<GoogleSignInAccount?> googleLoginService(context) async {
     final googleSignIn = GoogleSignIn();
     GoogleSignInAccount? user;
-
     try {
       final googleUser = await googleSignIn.signIn();
       if (googleUser == null) {
@@ -47,11 +45,26 @@ class AuthServices {
       }
       return null;
     } on SocketException catch (_) {
-      return "Please try again later";
+      return "Please check your Internet connection try again later";
     } on FirebaseException catch (e) {
       return e.message;
     } catch (e) {
       return e.toString();
     }
+  }
+
+  Future<String?> emailPasswordSignin(TextEditingController emailController,
+      TextEditingController passwordController) async {
+    try {
+      await FirebaseAuth.instance.signInWithEmailAndPassword(
+        email: emailController.text.trim(),
+        password: passwordController.text.trim(),
+      );
+    } on FirebaseException catch (e) {
+      return e.message;
+    } catch (e) {
+      return e.toString();
+    }
+    return null;
   }
 }

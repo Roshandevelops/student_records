@@ -21,9 +21,10 @@ class HomeScreen extends StatelessWidget {
             ElevatedButton(
               style: ElevatedButton.styleFrom(backgroundColor: Colors.amber),
               onPressed: () async {
-                await Provider.of<AuthenticationProvider>(context,
-                        listen: false)
-                    .logOut(context);
+                await Provider.of<AuthenticationProvider>(
+                  context,
+                  listen: false,
+                ).logOut(context);
               },
               child: const Text("Logout"),
             ),

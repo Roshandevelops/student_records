@@ -25,7 +25,26 @@ class AuthenticationProvider extends ChangeNotifier {
       }
     } else {
       if (context.mounted) {
-        snackBarWidget(context,errorMessage);
+        snackBarWidget(context, errorMessage);
+      }
+    }
+    notifyListeners();
+  }
+
+  Future<void> emailLogin(
+    BuildContext context,
+    TextEditingController emailController,
+    TextEditingController passwordController,
+  ) async {
+    final errorMessage = await AuthServices.instance
+        .emailPasswordSignin(emailController, passwordController);
+    if (errorMessage == null) {
+      if (context.mounted) {
+        snackBarWidget(context, "Login successfull");
+      }
+    } else {
+      if (context.mounted) {
+        snackBarWidget(context, errorMessage);
       }
     }
     notifyListeners();

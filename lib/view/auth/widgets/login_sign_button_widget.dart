@@ -1,8 +1,10 @@
 import 'dart:developer';
 
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_sample/controller/authentication_provider.dart';
 import 'package:firebase_sample/widgets/constants.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class LoginSignButtonWidget extends StatelessWidget {
   const LoginSignButtonWidget({
@@ -28,7 +30,12 @@ class LoginSignButtonWidget extends StatelessWidget {
         onPressed: () async {
           if (formKey.currentState!.validate()) {
             formKey.currentState!.save();
-            await emailPasswordSignin();
+
+          await  Provider.of<AuthenticationProvider>(
+              context,
+              listen: false,
+            ).emailLogin(context, emailController, passwordController);
+            // await emailPasswordSignin();
           }
         },
         shape: RoundedRectangleBorder(
@@ -47,14 +54,16 @@ class LoginSignButtonWidget extends StatelessWidget {
     );
   }
 
-  Future emailPasswordSignin() async {
-    try {
-      await FirebaseAuth.instance.signInWithEmailAndPassword(
-        email: emailController.text.trim(),
-        password: passwordController.text.trim(),
-      );
-    } catch (e) {
-      log(e.toString());
-    }
-  }
+  // Future emailPasswordSignin() async {
+  //   try {
+  //     await FirebaseAuth.instance.signInWithEmailAndPassword(
+  //       email: emailController.text.trim(),
+  //       password: passwordController.text.trim(),
+  //     );
+  //   } catch (e) {
+  //     log(e.toString());
+  //   }
+  // }
+
+  
 }
