@@ -5,10 +5,6 @@ import 'package:flutter/material.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 
 class AuthenticationProvider extends ChangeNotifier {
-  final googleSignIn = GoogleSignIn();
-
-  GoogleSignInAccount? user;
-
   Future<void> googleSignInAccount(BuildContext context) async {
     final hello = await AuthServices.instance.googleLogin(context);
     if (hello == null) {
@@ -43,18 +39,29 @@ class AuthenticationProvider extends ChangeNotifier {
   //   notifyListeners();
   // }
 
-  Future logOut() async {
-    final user = FirebaseAuth.instance.currentUser;
-    if (user != null) {
-      final providerId = user.providerData.first.providerId;
-      if (providerId == "google.com") {
-        await googleSignIn.disconnect();
-        await FirebaseAuth.instance.signOut();
-        notifyListeners();
+  Future<void> logOut(BuildContext context) async {
+    final hey = await AuthServices.instance.logout();
+    if (hey == true) {
+      if (context.mounted) {
+        snackBarWidget(context, "Logout Successfull");
       } else {
-        await FirebaseAuth.instance.signOut();
-        notifyListeners();
+        if (context.mounted) {
+          snackBarWidget(context, "Logout Failed");
+        }
       }
     }
+    notifyListeners();
+    // final user = FirebaseAuth.instance.currentUser;
+    // if (user != null) {
+    //   final providerId = user.providerData.first.providerId;
+    //   if (providerId == "google.com") {
+    //     await googleSignIn.disconnect();
+    //     await FirebaseAuth.instance.signOut();
+    //     notifyListeners();
+    //   } else {
+    //     await FirebaseAuth.instance.signOut();
+    //     notifyListeners();
+    //   }
+    // }
   }
 }

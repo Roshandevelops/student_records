@@ -23,7 +23,7 @@ class HomeScreen extends StatelessWidget {
               onPressed: () async {
                 await Provider.of<AuthenticationProvider>(context,
                         listen: false)
-                    .logOut();
+                    .logOut(context);
               },
               child: const Text("Logout"),
             ),
