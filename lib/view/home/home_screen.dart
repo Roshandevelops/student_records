@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_sample/controller/authentication_provider.dart';
 import 'package:firebase_sample/widgets/constants.dart';
@@ -23,20 +21,9 @@ class HomeScreen extends StatelessWidget {
             ElevatedButton(
               style: ElevatedButton.styleFrom(backgroundColor: Colors.amber),
               onPressed: () async {
-                final user = FirebaseAuth.instance.currentUser;
-                if (user != null) {
-                  final providerId = user.providerData.first.providerId;
-
-                  if (providerId == "google.com") {
-                    await Provider.of<AuthenticationProvider>(context,
-                            listen: false)
-                        .googleLogOut();
-                  } else {
-                    await Provider.of<AuthenticationProvider>(context,
-                            listen: false)
-                        .emailLogOut();
-                  }
-                }
+                await Provider.of<AuthenticationProvider>(context,
+                        listen: false)
+                    .logOut();
               },
               child: const Text("Logout"),
             ),
