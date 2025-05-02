@@ -1,3 +1,6 @@
+import 'dart:developer';
+import 'dart:io';
+
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 
@@ -8,7 +11,7 @@ class AuthServices {
     return AuthServices.instance;
   }
 
-  Future<GoogleSignInAccount?> googleLogin(context) async {
+  Future<GoogleSignInAccount?> googleLoginService(context) async {
     final googleSignIn = GoogleSignIn();
     GoogleSignInAccount? user;
 
@@ -31,22 +34,24 @@ class AuthServices {
     }
   }
 
-  Future<bool> logout() async {
+  Future<String?> logOutService() async {
     final googleSignIn = GoogleSignIn();
     final user = FirebaseAuth.instance.currentUser;
     try {
-      if (user != null) {
-        final providerId = user.providerData.first.providerId;
-        if (providerId == "google.com") {
-          await googleSignIn.disconnect();
-          await FirebaseAuth.instance.signOut();
-        } else {
-          await FirebaseAuth.instance.signOut();
-        }
+      final providerId = user!.providerData.first.providerId;
+      if (providerId == "google.com") {
+        await googleSignIn.disconnect();
+        await FirebaseAuth.instance.signOut();
+      } else {
+        await FirebaseAuth.instance.signOut();
       }
-      return true;
+      return null;
+    } on SocketException catch (_) {
+      return "Please try again later";
+    } on FirebaseException catch (e) {
+      return e.message;
     } catch (e) {
-      return false;
+      return e.toString();
     }
   }
 }

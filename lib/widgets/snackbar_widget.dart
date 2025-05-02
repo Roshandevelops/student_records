@@ -1,3 +1,4 @@
+import 'package:firebase_sample/widgets/constants.dart';
 import 'package:flutter/material.dart';
 
 void snackBarWidget(BuildContext context, String content,
@@ -14,7 +15,7 @@ void snackBarWidget(BuildContext context, String content,
         ),
         textAlign: TextAlign.center,
       ),
-      backgroundColor: isError ? Colors.red : Colors.green,
+      backgroundColor: isError ? Colors.red : appColor,
       duration: const Duration(seconds: 2),
     ),
   );
