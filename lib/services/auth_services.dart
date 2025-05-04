@@ -1,6 +1,7 @@
 import 'dart:developer';
 import 'dart:io';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_sample/widgets/snackbar_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 
@@ -53,17 +54,58 @@ class AuthServices {
     }
   }
 
-  Future<String?> emailPasswordSignin(TextEditingController emailController,
+  Future<String?> emailPasswordSigninService(
+      TextEditingController emailController,
       TextEditingController passwordController) async {
     try {
       await FirebaseAuth.instance.signInWithEmailAndPassword(
         email: emailController.text.trim(),
         password: passwordController.text.trim(),
       );
+      return null;
     } on FirebaseException catch (e) {
       return e.message;
     } catch (e) {
       return e.toString();
+    }
+  }
+
+  Future<String?> creatNewEmailAccountService(
+      BuildContext context,
+      TextEditingController registerEmailController,
+      TextEditingController registerPassController,
+      TextEditingController confirmRegisterPassController) async {
+    try {
+      final email = registerEmailController.text.trim();
+      final password = registerPassController.text.trim();
+      final confirmPassword = confirmRegisterPassController.text.trim();
+
+      if (email.isEmpty || password.isEmpty || confirmPassword.isEmpty) {
+        snackBarWidget(context, "Please fill all fields");
+
+        return null;
+      }
+      if (password != confirmPassword) {
+        snackBarWidget(context, "Passwords do not match");
+
+        return null;
+      }
+      await FirebaseAuth.instance
+          .createUserWithEmailAndPassword(email: email, password: password);
+      if (context.mounted) {
+        snackBarWidget(context, "Account created successfully");
+      }
+      if (context.mounted) {
+        Navigator.of(context).pop();
+      }
+      return null;
+    } on FirebaseException catch (e) {
+      e.message;
+    } catch (e) {
+      log("Register Error: $e");
+      if (context.mounted) {
+        snackBarWidget(context, "Error:${e.toString()}");
+      }
     }
     return null;
   }

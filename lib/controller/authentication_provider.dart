@@ -37,7 +37,33 @@ class AuthenticationProvider extends ChangeNotifier {
     TextEditingController passwordController,
   ) async {
     final errorMessage = await AuthServices.instance
-        .emailPasswordSignin(emailController, passwordController);
+        .emailPasswordSigninService(emailController, passwordController);
+    if (errorMessage == null) {
+      if (context.mounted) {
+        snackBarWidget(context, "Login successfull");
+      }
+    } else {
+      if (context.mounted) {
+        snackBarWidget(context, errorMessage);
+      }
+    }
+    notifyListeners();
+  }
+
+  Future<void> createEmailAccount(
+    BuildContext context,
+    TextEditingController emailController,
+    TextEditingController passwordController,
+    TextEditingController confirmPasswordController,
+  ) async {
+    final errorMessage =
+        await AuthServices.instance.creatNewEmailAccountService(
+      context,
+      emailController,
+      passwordController,
+      confirmPasswordController,
+    );
+
     if (errorMessage == null) {
       if (context.mounted) {
         snackBarWidget(context, "Login successfull");
