@@ -1,8 +1,14 @@
+import 'package:firebase_sample/view/auth/widgets/login_forgot_password_widget.dart';
 import 'package:firebase_sample/widgets/constants.dart';
 import 'package:flutter/material.dart';
 
 class LoginCheckboxRowWidget extends StatelessWidget {
-  const LoginCheckboxRowWidget({super.key});
+  const LoginCheckboxRowWidget(
+      {super.key,
+      required this.forgotEmailController,
+      required this.forgotFormKey});
+  final TextEditingController forgotEmailController;
+  final GlobalKey<FormState> forgotFormKey;
 
   @override
   Widget build(BuildContext context) {
@@ -25,11 +31,21 @@ class LoginCheckboxRowWidget extends StatelessWidget {
                 ),
               ],
             ),
-            const Text(
-              "Forgot Password?",
-              style: TextStyle(
-                fontWeight: FontWeight.w600,
-                color: Colors.white,
+            InkWell(
+              onTap: () {
+                Navigator.of(context).push(MaterialPageRoute(builder: (ctx) {
+                  return LoginForgotPasswordWidget(
+                    forgotEmailController: forgotEmailController,
+                    forgotFormKey: forgotFormKey,
+                  );
+                }));
+              },
+              child: const Text(
+                "Forgot Password?",
+                style: TextStyle(
+                  fontWeight: FontWeight.w600,
+                  color: Colors.white,
+                ),
               ),
             ),
           ],

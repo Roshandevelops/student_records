@@ -13,7 +13,7 @@ class LoginEmailTextformfieldwidget extends StatelessWidget {
 
   final String email = "";
   final String password = "";
-  final String emailDialogue = "Please Enter Valid Email";
+
   final String passwordDialogue = "Please Enter password of min length 6";
 
   @override
@@ -23,12 +23,11 @@ class LoginEmailTextformfieldwidget extends StatelessWidget {
         TextformfieldWidget(
           validator: (value) {
             if (value!.isEmpty || !value.contains("@")) {
-              return emailDialogue;
+              return emailErrorDialogue;
             } else {
               return null;
             }
           },
-          
           hintStyle: const TextStyle(
             color: kwhite,
           ),

@@ -1,8 +1,10 @@
+import 'package:firebase_sample/controller/authentication_provider.dart';
 import 'package:firebase_sample/view/auth/widgets/login_textformfieldwidget.dart';
 import 'package:firebase_sample/view/auth/widgets/login_checkbox_row_widget.dart';
-import 'package:firebase_sample/view/auth/widgets/login_sign_button_widget.dart';
+import 'package:firebase_sample/widgets/material_button_widget.dart';
 import 'package:firebase_sample/widgets/constants.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class LoginContainerWidget extends StatefulWidget {
   const LoginContainerWidget({super.key});
@@ -15,6 +17,9 @@ class _LoginContainerWidgetState extends State<LoginContainerWidget> {
   final _formkey = GlobalKey<FormState>();
   final TextEditingController emailController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
+
+  final forgotFormkey = GlobalKey<FormState>();
+  final TextEditingController forgotEmailController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -45,8 +50,23 @@ class _LoginContainerWidgetState extends State<LoginContainerWidget> {
                   emailController: emailController,
                   passController: passwordController,
                 ),
-                const LoginCheckboxRowWidget(),
-                LoginSignButtonWidget(
+                LoginCheckboxRowWidget(
+                  forgotEmailController: forgotEmailController,
+                  forgotFormKey: forgotFormkey,
+                ),
+                MaterialButtonWidget(
+                  onPressed: () async {
+                    if (_formkey.currentState!.validate()) {
+                      _formkey.currentState!.save();
+
+                      await Provider.of<AuthenticationProvider>(
+                        context,
+                        listen: false,
+                      ).emailLogin(
+                          context, emailController, passwordController);
+                    }
+                  },
+                  buttonText: "Sign in",
                   formKey: _formkey,
                   emailController: emailController,
                   passwordController: passwordController,

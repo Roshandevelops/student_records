@@ -1,25 +1,26 @@
 import 'package:flutter/material.dart';
 
 class TextformfieldWidget extends StatelessWidget {
-  const TextformfieldWidget(
-      {super.key,
-      this.hintText,
-      this.controller,
-      this.suffixIcon,
-      this.prefixIcon,
-      this.onDoubleTap,
-      this.obscureText = false,
-      this.disabledBorder,
-      this.enabledBorder,
-      this.focusedBorder,
-      this.labelStyle,
-      this.labelText,
-      this.fillColor,
-      this.hintStyle,
-      this.color,
-      this.onSaved,
-      this.validator,
-      this.padding = const EdgeInsets.symmetric(horizontal: 15)});
+  const TextformfieldWidget({
+    super.key,
+    this.hintText,
+    this.controller,
+    this.suffixIcon,
+    this.prefixIcon,
+    this.onDoubleTap,
+    this.obscureText = false,
+    this.disabledBorder,
+    this.enabledBorder,
+    this.focusedBorder,
+    this.labelStyle,
+    this.labelText,
+    this.fillColor,
+    this.hintStyle,
+    this.color,
+    this.onSaved,
+    this.validator,
+    this.padding = const EdgeInsets.symmetric(horizontal: 15),
+  });
   final String? hintText;
   final TextEditingController? controller;
   final Widget? suffixIcon;
@@ -70,9 +71,6 @@ class TextformfieldWidget extends StatelessWidget {
           ),
           hintText: hintText,
           hintStyle: hintStyle,
-          //const TextStyle(
-          //   color: Color(0xFF1B9C8F),
-          // ),
         ),
       ),
     );
