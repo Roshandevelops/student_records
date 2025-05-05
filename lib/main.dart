@@ -39,7 +39,7 @@ class MyApp extends StatelessWidget {
                     ? const Text("Something went wrong")
                     : snapshot.hasData
                         ? const HomeScreen()
-                        : const LoginWidget(),
+                        : const LoginScreen(),
           );
         },
       ),

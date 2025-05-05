@@ -1,14 +1,14 @@
 import 'package:firebase_sample/view/auth/widgets/login_column_widget.dart';
 import 'package:flutter/material.dart';
 
-class LoginWidget extends StatefulWidget {
-  const LoginWidget({super.key});
+class LoginScreen extends StatefulWidget {
+  const LoginScreen({super.key});
 
   @override
-  State<LoginWidget> createState() => _LoginWidgetState();
+  State<LoginScreen> createState() => _LoginScreenState();
 }
 
-class _LoginWidgetState extends State<LoginWidget> {
+class _LoginScreenState extends State<LoginScreen> {
   @override
   Widget build(BuildContext context) {
     return const Scaffold(

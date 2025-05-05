@@ -43,7 +43,7 @@ class OtpScreen extends StatelessWidget {
                         onTap: () {
                           Navigator.of(context).pushAndRemoveUntil(
                             MaterialPageRoute(
-                              builder: (ctx) => LoginWidget(),
+                              builder: (ctx) => LoginScreen(),
                             ),
                             // ModalRoute.withName("homescreen"),
                             (route) {

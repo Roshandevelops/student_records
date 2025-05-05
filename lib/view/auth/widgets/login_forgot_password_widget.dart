@@ -84,6 +84,13 @@ class LoginForgotPasswordWidget extends StatelessWidget {
   }
 
   Future resetPassword(BuildContext context) async {
+    showDialog(
+        context: context,
+        builder: (context) {
+          return Center(
+            child: CircularProgressIndicator(),
+          );
+        });
     try {
       final forgotEmail = forgotEmailController.text.trim();
       await FirebaseAuth.instance.sendPasswordResetEmail(email: forgotEmail);
@@ -91,6 +98,9 @@ class LoginForgotPasswordWidget extends StatelessWidget {
       if (context.mounted) {
         snackBarWidget(context, "Password Reset Email Sent");
       }
+      Navigator.of(context).popUntil(
+        (route) => route.isFirst,
+      );
     } on FirebaseException catch (e) {
       e.message;
     } on SocketException catch (_) {
@@ -100,14 +110,3 @@ class LoginForgotPasswordWidget extends StatelessWidget {
     }
   }
 }
-
-
-
-
-  // showDialog(
-    //     context: context,
-    //     builder: (context) {
-    //       return Center(
-    //         child: CircularProgressIndicator(),
-    //       );
-    //     });
