@@ -1,6 +1,7 @@
 import 'dart:developer';
 import 'dart:io';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_sample/utils/utils.dart';
 import 'package:firebase_sample/widgets/snackbar_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:google_sign_in/google_sign_in.dart';
@@ -88,20 +89,9 @@ class AuthServices {
         return "Please enter a valid email address";
       }
 
-      // common errors types
-      final commonTypos = [
-        "gamil.com",
-        "gnail.com",
-        "gmaill.com",
-        "gamail.com",
-        "hotnail.com",
-        "yahho.com",
-        "yaho.com",
-      ];
-
       final emailDomain = email.split("@").last.toLowerCase();
-      if (commonTypos.contains(emailDomain)) {
-        return "Did you mean ${suggestDomain(emailDomain)}?";
+      if (AppUtils.commonTypos.contains(emailDomain)) {
+        return "Did you mean ${AppUtils.suggestDomain(emailDomain)}?";
       }
 
       if (email.isEmpty || password.isEmpty || confirmPassword.isEmpty) {
@@ -136,23 +126,5 @@ class AuthServices {
       }
     }
     return null;
-  }
-
-  // suggest wrong domain function
-  String suggestDomain(String wrongDomain) {
-    switch (wrongDomain) {
-      case "gamil.com":
-      case "gnail.com":
-      case "gmaill.com":
-      case "gamail.com":
-        return "gmail.com";
-      case "hotnail.com":
-        return "hotmail.com";
-      case "yahho.com":
-      case "yaho.com":
-        return "yahoo.com";
-      default:
-        return "a valid email domain";
-    }
   }
 }
