@@ -80,15 +80,35 @@ class AuthServices {
       final password = registerPassController.text.trim();
       final confirmPassword = confirmRegisterPassController.text.trim();
 
-      if (email.isEmpty || password.isEmpty || confirmPassword.isEmpty) {
-        snackBarWidget(context, "Please fill all fields");
+      // using regex
 
-        return null;
+      final emailRegex =
+          RegExp(r"^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$");
+      if (!emailRegex.hasMatch(email)) {
+        return "Please enter a valid email address";
+      }
+
+      // common errors types
+      final commonTypos = [
+        "gamil.com",
+        "gnail.com",
+        "gmaill.com",
+        "gamail.com",
+        "hotnail.com",
+        "yahho.com",
+        "yaho.com",
+      ];
+
+      final emailDomain = email.split("@").last.toLowerCase();
+      if (commonTypos.contains(emailDomain)) {
+        return "Did you mean ${suggestDomain(emailDomain)}?";
+      }
+
+      if (email.isEmpty || password.isEmpty || confirmPassword.isEmpty) {
+        return "Please fill all fields";
       }
       if (password != confirmPassword) {
-        snackBarWidget(context, "Passwords do not match");
-
-        return null;
+        return "Passwords do not match";
       }
       await FirebaseAuth.instance
           .createUserWithEmailAndPassword(email: email, password: password);
@@ -100,13 +120,39 @@ class AuthServices {
       }
       return null;
     } on FirebaseException catch (e) {
-      e.message;
+      if (e.code == "email-already-in-use") {
+        return "This email is already registered. Please login or use a different email";
+      } else if (e.code == 'invalid-email') {
+        return "Invalid email format";
+      } else if (e.code == "weak-password") {
+        return "Password must be at least 6 characters long";
+      } else {
+        return "Registration failed: ${e.message}";
+      }
     } catch (e) {
       log("Register Error: $e");
       if (context.mounted) {
-        snackBarWidget(context, "Error:${e.toString()}");
+        snackBarWidget(context, "something went wrong:${e.toString()}");
       }
     }
     return null;
+  }
+
+  // suggest wrong domain function
+  String suggestDomain(String wrongDomain) {
+    switch (wrongDomain) {
+      case "gamil.com":
+      case "gnail.com":
+      case "gmaill.com":
+      case "gamail.com":
+        return "gmail.com";
+      case "hotnail.com":
+        return "hotmail.com";
+      case "yahho.com":
+      case "yaho.com":
+        return "yahoo.com";
+      default:
+        return "a valid email domain";
+    }
   }
 }

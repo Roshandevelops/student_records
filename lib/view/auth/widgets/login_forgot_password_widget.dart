@@ -98,6 +98,7 @@ class LoginForgotPasswordWidget extends StatelessWidget {
       if (context.mounted) {
         snackBarWidget(context, "Password Reset Email Sent");
       }
+      forgotEmailController.clear();
       Navigator.of(context).popUntil(
         (route) => route.isFirst,
       );
