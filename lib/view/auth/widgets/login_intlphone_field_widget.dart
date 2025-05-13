@@ -1,12 +1,28 @@
 import 'dart:developer';
+
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_sample/view/auth/view/otp_screen.dart';
 import 'package:firebase_sample/widgets/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:intl_phone_field/intl_phone_field.dart';
+import 'package:intl_phone_field/phone_number.dart';
 
-class IntphoneFieldWidget extends StatelessWidget {
+class IntphoneFieldWidget extends StatefulWidget {
   const IntphoneFieldWidget({super.key});
+
+  @override
+  State<IntphoneFieldWidget> createState() => _IntphoneFieldWidgetState();
+}
+
+class _IntphoneFieldWidgetState extends State<IntphoneFieldWidget> {
+  // final TextEditingController phoneController = TextEditingController();
+
+
+
+  // PhoneNumber phoneNumber=PhoneNumber.fromCompleteNumber(completeNumber: "");
+  String completePhoneNumber="";
+
 
   @override
   Widget build(BuildContext context) {
@@ -17,6 +33,7 @@ class IntphoneFieldWidget extends StatelessWidget {
           children: [
             const SizedBox(height: 30),
             IntlPhoneField(
+              // controller: phoneController,
               initialCountryCode: "IN",
               inputFormatters: [
                 FilteringTextInputFormatter.digitsOnly,
@@ -33,10 +50,19 @@ class IntphoneFieldWidget extends StatelessWidget {
                 contentPadding:
                     const EdgeInsets.symmetric(vertical: 18, horizontal: 16),
               ),
-              onChanged: (value) {},
-              onCountryChanged: (value) {
-                log(value.code);
+              onChanged: (value) {
+                setState(() {
+                   completePhoneNumber= value.completeNumber;
+                    log(" vasu Phone number: $completePhoneNumber");
+                  
+                });
+              
+
+
               },
+              // onCountryChanged: (value) {
+              //   log(value.code);
+              // },
               languageCode: "en",
             ),
 
@@ -54,12 +80,34 @@ class IntphoneFieldWidget extends StatelessWidget {
                     borderRadius: BorderRadius.circular(12),
                   ),
                 ),
-                onPressed: () {
-                  Navigator.of(context).push(
-                    MaterialPageRoute(
-                      builder: (ctx) => const OtpScreen(),
-                    ),
-                  );
+                onPressed: () async {
+                  try {
+                    await FirebaseAuth.instance.verifyPhoneNumber(
+                      verificationCompleted:
+                          (PhoneAuthCredential credential) {},
+                      verificationFailed: (FirebaseAuthException exception) {
+                        log("checking ${exception.message!}");
+                      },
+                      codeSent: (String verificationId, int? resendToken) {
+                        Navigator.of(context).push(
+                          MaterialPageRoute(
+                            builder: (ctx) => OtpScreen(
+                              verificationId: verificationId,
+                            ),
+                          ),
+                        );
+                      },
+                      codeAutoRetrievalTimeout: (String verificationId) {},
+                      phoneNumber:
+                      completePhoneNumber
+                      //  phoneController.text.toString(),
+                    );
+
+                    log("hello${completePhoneNumber.toString()}");
+                  } catch (e) {
+                    log(e.toString());
+            
+                  }
                 },
                 child: const Text(
                   "Send OTP",

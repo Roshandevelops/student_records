@@ -38,10 +38,15 @@ class AuthServices {
     final googleSignIn = GoogleSignIn();
     final user = FirebaseAuth.instance.currentUser;
     try {
-      final providerId = user!.providerData.first.providerId;
-      if (providerId == "google.com") {
-        await googleSignIn.disconnect();
-        await FirebaseAuth.instance.signOut();
+      if (user != null && user.providerData.isNotEmpty) {
+        final providerId = user.providerData.first.providerId;
+
+        if (providerId == "google.com") {
+          await googleSignIn.disconnect();
+          await FirebaseAuth.instance.signOut();
+        } else {
+          await FirebaseAuth.instance.signOut();
+        }
       } else {
         await FirebaseAuth.instance.signOut();
       }

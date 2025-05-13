@@ -9,14 +9,15 @@ class HomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final userName = FirebaseAuth.instance.currentUser!;
+    // final userName = FirebaseAuth.instance.currentUser!;
     return Scaffold(
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Text("Name :${userName.email!}"),
-            Text("Email :${userName.email!}"),
+            Text("hey you are logged in"),
+            // Text("Name :${userName.displayName}"),
+            // Text("Email :${userName.displayName}"),
             kHeight20,
             ElevatedButton(
               style: ElevatedButton.styleFrom(backgroundColor: Colors.amber),

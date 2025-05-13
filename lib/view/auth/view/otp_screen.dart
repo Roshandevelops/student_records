@@ -1,20 +1,36 @@
+import 'dart:developer';
+
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_sample/view/auth/view/login_screen.dart';
 import 'package:firebase_sample/view/auth/view/number_screen.dart';
+import 'package:firebase_sample/view/home/home_screen.dart';
 import 'package:firebase_sample/widgets/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_otp_text_field/flutter_otp_text_field.dart';
+import 'package:pinput/pinput.dart';
 
-class OtpScreen extends StatelessWidget {
-  const OtpScreen({super.key});
+class OtpScreen extends StatefulWidget {
+  const OtpScreen({
+    super.key,
+    required this.verificationId,
+  });
 
+  final String verificationId;
+
+  @override
+  State<OtpScreen> createState() => _OtpScreenState();
+}
+
+class _OtpScreenState extends State<OtpScreen> {
+  String otp = "";
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       resizeToAvoidBottomInset: false,
       body: SafeArea(
         child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 10),
+          padding: const EdgeInsets.symmetric(horizontal: 20),
           child: Center(
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
@@ -45,7 +61,6 @@ class OtpScreen extends StatelessWidget {
                             MaterialPageRoute(
                               builder: (ctx) => LoginScreen(),
                             ),
-                            // ModalRoute.withName("homescreen"),
                             (route) {
                               return false;
                             },
@@ -78,32 +93,77 @@ class OtpScreen extends StatelessWidget {
                   ),
                 ),
                 kHeight20,
-                kHeight20,
+                // kHeight20,
                 SizedBox(
                   // color: Colors.amber,
                   child: Column(
                     children: [
-                      OtpTextField(
-                        decoration: const InputDecoration(hintText: "0"),
-                        onCodeChanged: (value) {
-                          // if (value.length == 1) {
-                          //   FocusScope.of(context).nextFocus();
-                          // }
+                      kHeight,
+
+                      Pinput(
+                        length: 6,
+                        onCompleted: (value) {
+                          setState(
+                            () {
+                              otp = value;
+                              log("OTP Entered: $otp");
+                            },
+                          );
                         },
                         inputFormatters: [
                           FilteringTextInputFormatter.digitsOnly,
-                          // LengthLimitingTextInputFormatter(1)
                         ],
-                        fieldWidth: 50,
-                        fieldHeight: 50,
-                        numberOfFields: 4,
-                        borderColor: const Color(0xFF512DA8),
-                        showFieldAsBox: true,
                         keyboardType: TextInputType.number,
+                        showCursor: true,
                       ),
+                      // OtpTextField(
+
+                      //   onCodeChanged: (value) {
+                      //     setState(() {
+                      //         otp = value;
+                      //            log("OTP Entered: $otp");
+
+                      //     });
+                      //   },
+                      //   inputFormatters: [
+                      //     FilteringTextInputFormatter.digitsOnly,
+                      //     // LengthLimitingTextInputFormatter(1)
+                      //   ],
+                      //   fieldWidth: 50,
+                      //   fieldHeight: 50,
+                      //   numberOfFields: 6,
+                      //   borderColor: const Color(0xFF512DA8),
+                      //   showFieldAsBox: true,
+                      //   keyboardType: TextInputType.phone,
+                      // ),
                       kHeight,
                       TextButton(
-                        onPressed: () {},
+                        onPressed: () async {
+                          try {
+                            PhoneAuthCredential credential =
+                                PhoneAuthProvider.credential(
+                              verificationId: widget.verificationId,
+                              smsCode: otp,
+                            );
+                            FirebaseAuth.instance
+                                .signInWithCredential(credential)
+                                .then(
+                              (value) {
+                                Navigator.of(context).push(
+                                  MaterialPageRoute(
+                                    builder: (context) {
+                                      return HomeScreen();
+                                    },
+                                  ),
+                                );
+                              },
+                            );
+                          } catch (e) {
+                            log(e.toString());
+                          }
+
+                          log("test${otp.toString()}");
+                        },
                         child: const Text(
                           "Validate",
                           style: TextStyle(
