@@ -2,6 +2,7 @@ import 'dart:developer';
 import 'dart:io';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_sample/utils/utils.dart';
+import 'package:firebase_sample/view/auth/view/login_screen.dart';
 import 'package:firebase_sample/widgets/snackbar_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:google_sign_in/google_sign_in.dart';
@@ -31,32 +32,6 @@ class AuthServices {
       return user;
     } catch (e) {
       return null;
-    }
-  }
-
-  Future<String?> logOutService() async {
-    final googleSignIn = GoogleSignIn();
-    final user = FirebaseAuth.instance.currentUser;
-    try {
-      if (user != null && user.providerData.isNotEmpty) {
-        final providerId = user.providerData.first.providerId;
-
-        if (providerId == "google.com") {
-          await googleSignIn.disconnect();
-          await FirebaseAuth.instance.signOut();
-        } else {
-          await FirebaseAuth.instance.signOut();
-        }
-      } else {
-        await FirebaseAuth.instance.signOut();
-      }
-      return null;
-    } on SocketException catch (_) {
-      return "Please check your Internet connection try again later";
-    } on FirebaseException catch (e) {
-      return e.message;
-    } catch (e) {
-      return e.toString();
     }
   }
 
@@ -132,4 +107,42 @@ class AuthServices {
     }
     return null;
   }
+
+  Future<String?> logOutService(BuildContext context) async {
+    final googleSignIn = GoogleSignIn();
+    final user = FirebaseAuth.instance.currentUser;
+    try {
+      if (user != null && user.providerData.isNotEmpty) {
+        final providerId = user.providerData.first.providerId;
+
+        if (providerId == "google.com") {
+          await googleSignIn.disconnect();
+          await FirebaseAuth.instance.signOut();
+        } else {
+          await FirebaseAuth.instance.signOut();
+        }
+      } else {
+        await FirebaseAuth.instance.signOut();
+        // await Navigator.of(context).pushAndRemoveUntil(
+        //   MaterialPageRoute(
+        //     builder: (ctx) {
+        //       return LoginScreen();
+        //     },
+        //   ),
+        //   (route) {
+        //     return false;
+        //   },
+        // );
+      }
+
+      return null;
+    } on SocketException catch (_) {
+      return "Please check your Internet connection try again later";
+    } on FirebaseException catch (e) {
+      return e.message;
+    } catch (e) {
+      return e.toString();
+    }
+  }
+  
 }

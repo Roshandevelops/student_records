@@ -5,9 +5,9 @@ import 'package:firebase_sample/view/auth/view/login_screen.dart';
 import 'package:firebase_sample/view/auth/view/number_screen.dart';
 import 'package:firebase_sample/view/home/home_screen.dart';
 import 'package:firebase_sample/widgets/constants.dart';
+import 'package:firebase_sample/widgets/snackbar_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_otp_text_field/flutter_otp_text_field.dart';
 import 'package:pinput/pinput.dart';
 
 class OtpScreen extends StatefulWidget {
@@ -99,7 +99,6 @@ class _OtpScreenState extends State<OtpScreen> {
                   child: Column(
                     children: [
                       kHeight,
-
                       Pinput(
                         length: 6,
                         onCompleted: (value) {
@@ -116,26 +115,6 @@ class _OtpScreenState extends State<OtpScreen> {
                         keyboardType: TextInputType.number,
                         showCursor: true,
                       ),
-                      // OtpTextField(
-
-                      //   onCodeChanged: (value) {
-                      //     setState(() {
-                      //         otp = value;
-                      //            log("OTP Entered: $otp");
-
-                      //     });
-                      //   },
-                      //   inputFormatters: [
-                      //     FilteringTextInputFormatter.digitsOnly,
-                      //     // LengthLimitingTextInputFormatter(1)
-                      //   ],
-                      //   fieldWidth: 50,
-                      //   fieldHeight: 50,
-                      //   numberOfFields: 6,
-                      //   borderColor: const Color(0xFF512DA8),
-                      //   showFieldAsBox: true,
-                      //   keyboardType: TextInputType.phone,
-                      // ),
                       kHeight,
                       TextButton(
                         onPressed: () async {
@@ -149,7 +128,9 @@ class _OtpScreenState extends State<OtpScreen> {
                                 .signInWithCredential(credential)
                                 .then(
                               (value) {
-                                Navigator.of(context).push(
+                                
+                                snackBarWidget(context, "Login Successfull");
+                                Navigator.of(context).pushReplacement(
                                   MaterialPageRoute(
                                     builder: (context) {
                                       return HomeScreen();

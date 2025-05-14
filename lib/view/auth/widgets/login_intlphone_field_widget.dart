@@ -16,11 +16,6 @@ class IntphoneFieldWidget extends StatefulWidget {
 }
 
 class _IntphoneFieldWidgetState extends State<IntphoneFieldWidget> {
-  // final TextEditingController phoneController = TextEditingController();
-
-
-
-  // PhoneNumber phoneNumber=PhoneNumber.fromCompleteNumber(completeNumber: "");
   String completePhoneNumber="";
 
 
@@ -33,7 +28,7 @@ class _IntphoneFieldWidgetState extends State<IntphoneFieldWidget> {
           children: [
             const SizedBox(height: 30),
             IntlPhoneField(
-              // controller: phoneController,
+
               initialCountryCode: "IN",
               inputFormatters: [
                 FilteringTextInputFormatter.digitsOnly,
@@ -57,8 +52,6 @@ class _IntphoneFieldWidgetState extends State<IntphoneFieldWidget> {
                   
                 });
               
-
-
               },
               // onCountryChanged: (value) {
               //   log(value.code);
@@ -100,7 +93,7 @@ class _IntphoneFieldWidgetState extends State<IntphoneFieldWidget> {
                       codeAutoRetrievalTimeout: (String verificationId) {},
                       phoneNumber:
                       completePhoneNumber
-                      //  phoneController.text.toString(),
+                
                     );
 
                     log("hello${completePhoneNumber.toString()}");

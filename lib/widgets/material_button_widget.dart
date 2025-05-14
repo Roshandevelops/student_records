@@ -5,22 +5,35 @@ class MaterialButtonWidget extends StatelessWidget {
   const MaterialButtonWidget(
       {super.key,
       required this.formKey,
-      required this.emailController,
+      this.emailController,
       this.passwordController,
       required this.buttonText,
-      required this.onPressed});
+      required this.onPressed,
+      this.nameController,
+      this.ageController,
+      this.classController,
+      this.domainController,
+      required this.materialButtonColor,
+      required this.buttonTextColor
+      });
   final GlobalKey<FormState> formKey;
-  final TextEditingController emailController;
+  final TextEditingController? emailController;
   final TextEditingController? passwordController;
+  final TextEditingController? nameController;
+  final TextEditingController? classController;
+  final TextEditingController? ageController;
+  final TextEditingController? domainController;
   final String buttonText;
   final void Function()? onPressed;
+  final Color? materialButtonColor;
+  final Color? buttonTextColor;
 
   @override
   Widget build(BuildContext context) {
     return Container(
       width: double.infinity,
       decoration: BoxDecoration(
-        color: Colors.white,
+        color: materialButtonColor,
         borderRadius: BorderRadius.circular(30),
       ),
       child: MaterialButton(
@@ -34,7 +47,7 @@ class MaterialButtonWidget extends StatelessWidget {
           style: TextStyle(
             fontSize: 16,
             fontWeight: FontWeight.bold,
-            color: appColor,
+            color: buttonTextColor,
           ),
         ),
       ),

@@ -65,6 +65,8 @@ class LoginForgotPasswordWidget extends StatelessWidget {
                 ),
                 const SizedBox(height: 30),
                 MaterialButtonWidget(
+                  buttonTextColor: appColor,
+                  materialButtonColor: kwhite,
                   onPressed: () async {
                     if (forgotFormKey.currentState!.validate()) {
                       forgotFormKey.currentState!.save();

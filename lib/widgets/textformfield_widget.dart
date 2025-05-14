@@ -61,10 +61,11 @@ class TextformfieldWidget extends StatelessWidget {
           fillColor: fillColor,
           filled: true,
           suffixIcon: suffixIcon,
-          prefixIcon: InkWell(
-            onDoubleTap: onDoubleTap,
-            child: prefixIcon,
-          ),
+          prefixIcon: prefixIcon,
+          // InkWell(
+          //   onDoubleTap: onDoubleTap,
+          //   child: prefixIcon,
+          // ),
           border: OutlineInputBorder(
             borderSide: BorderSide.none,
             borderRadius: BorderRadius.circular(10),

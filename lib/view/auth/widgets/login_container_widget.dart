@@ -55,6 +55,8 @@ class _LoginContainerWidgetState extends State<LoginContainerWidget> {
                   forgotFormKey: forgotFormkey,
                 ),
                 MaterialButtonWidget(
+                  buttonTextColor: appColor,
+                  materialButtonColor: kwhite,
                   onPressed: () async {
                     if (_formkey.currentState!.validate()) {
                       _formkey.currentState!.save();
