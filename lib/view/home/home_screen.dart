@@ -1,4 +1,3 @@
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_sample/controller/authentication_provider.dart';
 import 'package:firebase_sample/view/adding/student_adding_screen.dart';
 import 'package:firebase_sample/widgets/constants.dart';
@@ -16,9 +15,8 @@ class HomeScreen extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Text("hey you are logged in"),
-            // Text("Name :${userName.displayName}"),
-            // Text("Email :${userName.displayName}"),
+      const      Text("hey you are logged in"),
+
             kHeight20,
             ElevatedButton(
               style: ElevatedButton.styleFrom(backgroundColor: Colors.amber),
@@ -39,12 +37,12 @@ class HomeScreen extends StatelessWidget {
           Navigator.of(context).push(
             MaterialPageRoute(
               builder: (ctx) {
-                return StudentAddingScreen();
+                return const StudentAddingScreen();
               },
             ),
           );
         },
-        child: Icon(
+        child: const Icon(
           Icons.add_comment,
           color: kwhite,
         ),

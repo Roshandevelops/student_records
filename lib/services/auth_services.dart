@@ -2,7 +2,6 @@ import 'dart:developer';
 import 'dart:io';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_sample/utils/utils.dart';
-import 'package:firebase_sample/view/auth/view/login_screen.dart';
 import 'package:firebase_sample/view/auth/view/otp_screen.dart';
 import 'package:firebase_sample/view/home/home_screen.dart';
 import 'package:firebase_sample/widgets/snackbar_widget.dart';
@@ -183,22 +182,24 @@ class AuthServices {
       }
 
       if (context.mounted) {
-       await Navigator.of(context).pushReplacement(
+        await Navigator.of(context).pushReplacement(
           MaterialPageRoute(
             builder: (ctx) {
-              return HomeScreen();
+              return const HomeScreen();
             },
           ),
         );
       }
     } on FirebaseAuthException catch (e) {
-      snackBarWidget(context, e.message ?? "Invalid OTP");
+      if (context.mounted) {
+        snackBarWidget(context, e.message ?? "Invalid OTP");
+      }
     } catch (e) {
       log("OTP verification error: $e");
-      snackBarWidget(context, "An error occurred. Please try again.");
+      if (context.mounted) {
+        snackBarWidget(context, "An error occurred. Please try again.");
+      }
     }
     return null;
-
-    // log("test${otp.toString()}");
   }
 }

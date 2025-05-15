@@ -14,7 +14,7 @@ class LoginOtpChangePhoneNumberButtonWidget extends StatelessWidget {
           onTap: () {
             Navigator.of(context).pushAndRemoveUntil(
               MaterialPageRoute(
-                builder: (ctx) => LoginScreen(),
+                builder: (ctx) =>const LoginScreen(),
               ),
               (route) {
                 return false;

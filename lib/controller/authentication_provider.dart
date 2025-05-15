@@ -1,4 +1,3 @@
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_sample/services/auth_services.dart';
 import 'package:firebase_sample/view/auth/view/login_screen.dart';
 import 'package:firebase_sample/view/home/home_screen.dart';
@@ -16,16 +15,18 @@ class AuthenticationProvider extends ChangeNotifier {
       if (context.mounted) {
         snackBarWidget(context, "Login Successfull");
       }
-      Navigator.of(context).pushAndRemoveUntil(
-        MaterialPageRoute(
-          builder: (context) {
-            return HomeScreen();
+      if (context.mounted) {
+        Navigator.of(context).pushAndRemoveUntil(
+          MaterialPageRoute(
+            builder: (context) {
+              return const HomeScreen();
+            },
+          ),
+          (route) {
+            return false;
           },
-        ),
-        (route) {
-          return false;
-        },
-      );
+        );
+      }
     }
     notifyListeners();
   }
@@ -35,17 +36,20 @@ class AuthenticationProvider extends ChangeNotifier {
     if (errorMessage == null) {
       if (context.mounted) {
         snackBarWidget(context, "Logout Successfull");
+
       }
-      await Navigator.of(context).pushAndRemoveUntil(
+        if (context.mounted) {  await Navigator.of(context).pushAndRemoveUntil(
         MaterialPageRoute(
           builder: (ctx) {
-            return LoginScreen();
+            return const LoginScreen();
           },
         ),
         (route) {
           return false;
         },
-      );
+      );}
+
+    
     } else {
       if (context.mounted) {
         snackBarWidget(context, errorMessage);
@@ -74,7 +78,7 @@ class AuthenticationProvider extends ChangeNotifier {
         Navigator.of(context).pushAndRemoveUntil(
           MaterialPageRoute(
             builder: (context) {
-              return HomeScreen();
+              return const HomeScreen();
             },
           ),
           (route) {
@@ -103,7 +107,7 @@ class AuthenticationProvider extends ChangeNotifier {
         Navigator.of(context).pushAndRemoveUntil(
           MaterialPageRoute(
             builder: (context) {
-              return HomeScreen();
+              return const HomeScreen();
             },
           ),
           (route) {

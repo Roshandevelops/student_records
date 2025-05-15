@@ -1,12 +1,10 @@
-import 'package:firebase_sample/controller/authentication_provider.dart';
 import 'package:firebase_sample/view/auth/widgets/login_intl_otp_validating_button_widget.dart';
 import 'package:firebase_sample/view/auth/widgets/login_intl_resend_otp_button_widget.dart';
 import 'package:firebase_sample/view/auth/widgets/login_otp_change_phonenumber_button_widget.dart';
 import 'package:firebase_sample/view/auth/widgets/login_otp_pinput_widget.dart';
 import 'package:firebase_sample/view/auth/widgets/login_otp_text_widget.dart';
-import 'package:firebase_sample/widgets/constants.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
+
 
 class LoginOtpColumnWidgets extends StatefulWidget {
   const LoginOtpColumnWidgets({super.key, required this.verificationId});

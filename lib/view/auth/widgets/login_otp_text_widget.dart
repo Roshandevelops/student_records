@@ -6,20 +6,22 @@ class LoginOtpTextWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(children: [
-  Text(
-                "Verification",
-                style: TextStyle(fontSize: 20, fontWeight: FontWeight.w900),
-              ),
-              kHeight,
-              Text(
-                "We have sent the code verification to",
-              ),
-              // kHeight,
-              Text(
-                "+91******0451",
-                style: TextStyle(fontWeight: FontWeight.w800),
-              ),
-    ],);
+    return const Column(
+      children: [
+        Text(
+          "Verification",
+          style: TextStyle(fontSize: 20, fontWeight: FontWeight.w900),
+        ),
+        kHeight,
+        Text(
+          "We have sent the code verification to",
+        ),
+        // kHeight,
+        Text(
+          "+91******0451",
+          style: TextStyle(fontWeight: FontWeight.w800),
+        ),
+      ],
+    );
   }
 }

@@ -89,7 +89,7 @@ class LoginForgotPasswordWidget extends StatelessWidget {
     showDialog(
         context: context,
         builder: (context) {
-          return Center(
+          return const Center(
             child: CircularProgressIndicator(),
           );
         });
@@ -101,9 +101,12 @@ class LoginForgotPasswordWidget extends StatelessWidget {
         snackBarWidget(context, "Password Reset Email Sent");
       }
       forgotEmailController.clear();
-      Navigator.of(context).popUntil(
-        (route) => route.isFirst,
-      );
+
+      if (context.mounted) {
+        Navigator.of(context).popUntil(
+          (route) => route.isFirst,
+        );
+      }
     } on FirebaseException catch (e) {
       e.message;
     } on SocketException catch (_) {

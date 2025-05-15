@@ -1,6 +1,5 @@
 import 'package:firebase_sample/view/auth/widgets/login_intl_stack_waveclipper.dart';
 import 'package:firebase_sample/widgets/material_button_widget.dart';
-import 'package:firebase_sample/widgets/snackbar_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_sample/widgets/constants.dart';
 import 'package:firebase_sample/widgets/textformfield_widget.dart';
