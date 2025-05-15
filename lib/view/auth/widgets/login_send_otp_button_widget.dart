@@ -44,6 +44,6 @@ class LoginSendOtpButtonWidget extends StatelessWidget {
       return;
     }
     await Provider.of<AuthenticationProvider>(context, listen: false)
-        .otpLogin(context, completePhoneNumber);
+        .phoneNumberActive(context, completePhoneNumber);
   }
 }

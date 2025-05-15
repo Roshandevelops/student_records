@@ -4,6 +4,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_sample/utils/utils.dart';
 import 'package:firebase_sample/view/auth/view/login_screen.dart';
 import 'package:firebase_sample/view/auth/view/otp_screen.dart';
+import 'package:firebase_sample/view/home/home_screen.dart';
 import 'package:firebase_sample/widgets/snackbar_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:google_sign_in/google_sign_in.dart';
@@ -136,7 +137,7 @@ class AuthServices {
     }
   }
 
-  Future<String?> otpService(
+  Future<String?> verifyNumberService(
       BuildContext context, String? completePhoneNumber) async {
     try {
       await FirebaseAuth.instance.verifyPhoneNumber(
@@ -166,5 +167,38 @@ class AuthServices {
       log(e.toString());
     }
     return null;
+  }
+
+  Future<String?> otpValidating(
+      BuildContext context, String verificationId, String otp) async {
+    try {
+      PhoneAuthCredential credential = PhoneAuthProvider.credential(
+        verificationId: verificationId,
+        smsCode: otp,
+      );
+
+      await FirebaseAuth.instance.signInWithCredential(credential);
+      if (context.mounted) {
+        snackBarWidget(context, "Login Successful");
+      }
+
+      if (context.mounted) {
+       await Navigator.of(context).pushReplacement(
+          MaterialPageRoute(
+            builder: (ctx) {
+              return HomeScreen();
+            },
+          ),
+        );
+      }
+    } on FirebaseAuthException catch (e) {
+      snackBarWidget(context, e.message ?? "Invalid OTP");
+    } catch (e) {
+      log("OTP verification error: $e");
+      snackBarWidget(context, "An error occurred. Please try again.");
+    }
+    return null;
+
+    // log("test${otp.toString()}");
   }
 }

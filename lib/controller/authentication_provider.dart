@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_sample/services/auth_services.dart';
 import 'package:firebase_sample/view/auth/view/login_screen.dart';
 import 'package:firebase_sample/view/home/home_screen.dart';
@@ -118,46 +119,26 @@ class AuthenticationProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  // Future<void> otpLogin(
-  //     BuildContext context, String? completePhoneNumber) async {
+  Future<void> phoneNumberActive(
+    BuildContext context,
+    String? completePhoneNumber,
+  ) async {
+    final errorMessage = await AuthServices.instance
+        .verifyNumberService(context, completePhoneNumber);
 
-
-  //   final errorMessage =
-  //       await AuthServices.instance.otpService(context, completePhoneNumber);
-  //   if (errorMessage == null) {
-  //     if (context.mounted) {
-  //       snackBarWidget(context, "Login successfull");
-  //       Navigator.of(context).pushAndRemoveUntil(
-  //         MaterialPageRoute(
-  //           builder: (context) {
-  //             return HomeScreen();
-  //           },
-  //         ),
-  //         (route) {
-  //           return false;
-  //         },
-  //       );
-  //     }
-  //   } else {
-  //     if (context.mounted) {
-  //       snackBarWidget(context, errorMessage);
-  //     }
-  //   }
-  //   notifyListeners();
-  // }
- Future<void> otpLogin(
-  BuildContext context,
-  String? completePhoneNumber,
-) async {
-  final errorMessage = await AuthServices.instance.otpService(context, completePhoneNumber);
-
-  if (errorMessage != null && context.mounted) {
-    snackBarWidget(context, errorMessage);
+    if (errorMessage != null && context.mounted) {
+      snackBarWidget(context, errorMessage);
+    }
+    notifyListeners();
   }
 
-  // ❌ Don't navigate to HomeScreen here.
-  // ✅ Wait until OTP is entered and verified in `OtpScreen`.
-}
-
-
+  Future<void> pinPutLogin(
+      BuildContext context, String? verificationId, String otp) async {
+    final errorMessage = await AuthServices.instance
+        .otpValidating(context, verificationId!, otp);
+    if (errorMessage != null && context.mounted) {
+      snackBarWidget(context, errorMessage);
+    }
+    notifyListeners();
+  }
 }
