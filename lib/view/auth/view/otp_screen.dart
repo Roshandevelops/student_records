@@ -1,4 +1,5 @@
 import 'dart:developer';
+import 'dart:io';
 
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_sample/view/auth/view/login_screen.dart';
@@ -124,24 +125,55 @@ class _OtpScreenState extends State<OtpScreen> {
                               verificationId: widget.verificationId,
                               smsCode: otp,
                             );
-                            FirebaseAuth.instance
-                                .signInWithCredential(credential)
-                                .then(
-                              (value) {
-                                
-                                snackBarWidget(context, "Login Successfull");
-                                Navigator.of(context).pushReplacement(
-                                  MaterialPageRoute(
-                                    builder: (context) {
-                                      return HomeScreen();
-                                    },
-                                  ),
-                                );
-                              },
-                            );
+
+                            await FirebaseAuth.instance
+                                .signInWithCredential(credential);
+                            if (context.mounted) {
+                              snackBarWidget(context, "Login Successful");
+                            }
+
+                            if (context.mounted) {
+                              Navigator.of(context).pushReplacement(
+                                MaterialPageRoute(
+                                  builder: (ctx) {
+                                    return HomeScreen();
+                                  },
+                                ),
+                              );
+                            }
+                          } on FirebaseAuthException catch (e) {
+                            snackBarWidget(context, e.message ?? "Invalid OTP");
                           } catch (e) {
-                            log(e.toString());
+                            log("OTP verification error: $e");
+                            snackBarWidget(context,
+                                "An error occurred. Please try again.");
                           }
+
+                          // try {
+                          //   PhoneAuthCredential credential =
+                          //       PhoneAuthProvider.credential(
+                          //     verificationId: widget.verificationId,
+                          //     smsCode: otp,
+                          //   );
+
+                          //   FirebaseAuth.instance
+                          //       .signInWithCredential(credential)
+                          //       .then(
+                          //     (value) {
+
+                          //       snackBarWidget(context, "Login Successfull");
+                          //       Navigator.of(context).pushReplacement(
+                          //         MaterialPageRoute(
+                          //           builder: (context) {
+                          //             return HomeScreen();
+                          //           },
+                          //         ),
+                          //       );
+                          //     },
+                          //   );
+                          // } catch (e) {
+                          //   log(e.toString());
+                          // }
 
                           log("test${otp.toString()}");
                         },

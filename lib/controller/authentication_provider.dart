@@ -20,7 +20,8 @@ class AuthenticationProvider extends ChangeNotifier {
           builder: (context) {
             return HomeScreen();
           },
-        ),(route) {
+        ),
+        (route) {
           return false;
         },
       );
@@ -74,7 +75,8 @@ class AuthenticationProvider extends ChangeNotifier {
             builder: (context) {
               return HomeScreen();
             },
-          ),(route) {
+          ),
+          (route) {
             return false;
           },
         );
@@ -102,7 +104,8 @@ class AuthenticationProvider extends ChangeNotifier {
             builder: (context) {
               return HomeScreen();
             },
-          ),(route) {
+          ),
+          (route) {
             return false;
           },
         );
@@ -114,4 +117,47 @@ class AuthenticationProvider extends ChangeNotifier {
     }
     notifyListeners();
   }
+
+  // Future<void> otpLogin(
+  //     BuildContext context, String? completePhoneNumber) async {
+
+
+  //   final errorMessage =
+  //       await AuthServices.instance.otpService(context, completePhoneNumber);
+  //   if (errorMessage == null) {
+  //     if (context.mounted) {
+  //       snackBarWidget(context, "Login successfull");
+  //       Navigator.of(context).pushAndRemoveUntil(
+  //         MaterialPageRoute(
+  //           builder: (context) {
+  //             return HomeScreen();
+  //           },
+  //         ),
+  //         (route) {
+  //           return false;
+  //         },
+  //       );
+  //     }
+  //   } else {
+  //     if (context.mounted) {
+  //       snackBarWidget(context, errorMessage);
+  //     }
+  //   }
+  //   notifyListeners();
+  // }
+ Future<void> otpLogin(
+  BuildContext context,
+  String? completePhoneNumber,
+) async {
+  final errorMessage = await AuthServices.instance.otpService(context, completePhoneNumber);
+
+  if (errorMessage != null && context.mounted) {
+    snackBarWidget(context, errorMessage);
+  }
+
+  // ❌ Don't navigate to HomeScreen here.
+  // ✅ Wait until OTP is entered and verified in `OtpScreen`.
+}
+
+
 }

@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_sample/utils/utils.dart';
 import 'package:firebase_sample/view/auth/view/login_screen.dart';
+import 'package:firebase_sample/view/auth/view/otp_screen.dart';
 import 'package:firebase_sample/widgets/snackbar_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:google_sign_in/google_sign_in.dart';
@@ -123,7 +124,6 @@ class AuthServices {
         }
       } else {
         await FirebaseAuth.instance.signOut();
-   
       }
 
       return null;
@@ -135,5 +135,36 @@ class AuthServices {
       return e.toString();
     }
   }
-  
+
+  Future<String?> otpService(
+      BuildContext context, String? completePhoneNumber) async {
+    try {
+      await FirebaseAuth.instance.verifyPhoneNumber(
+        verificationCompleted: (PhoneAuthCredential credential) {},
+        verificationFailed: (FirebaseAuthException exception) {
+          log("checking ${exception.message!}");
+        },
+        codeSent: (String verificationId, int? resendToken) {
+          Navigator.of(context).push(
+            MaterialPageRoute(
+              builder: (ctx) => OtpScreen(
+                verificationId: verificationId,
+              ),
+            ),
+          );
+        },
+        codeAutoRetrievalTimeout: (String verificationId) {},
+        phoneNumber: completePhoneNumber,
+      );
+
+      log("hello${completePhoneNumber.toString()}");
+    } on SocketException catch (_) {
+      return "Please check your Internet connection try again later";
+    } on FirebaseException catch (e) {
+      return e.message;
+    } catch (e) {
+      log(e.toString());
+    }
+    return null;
+  }
 }
