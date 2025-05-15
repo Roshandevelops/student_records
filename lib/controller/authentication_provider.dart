@@ -15,12 +15,14 @@ class AuthenticationProvider extends ChangeNotifier {
       if (context.mounted) {
         snackBarWidget(context, "Login Successfull");
       }
-      Navigator.of(context).pushReplacement(
+      Navigator.of(context).pushAndRemoveUntil(
         MaterialPageRoute(
           builder: (context) {
             return HomeScreen();
           },
-        ),
+        ),(route) {
+          return false;
+        },
       );
     }
     notifyListeners();
@@ -67,12 +69,14 @@ class AuthenticationProvider extends ChangeNotifier {
     if (errorMessage == null) {
       if (context.mounted) {
         snackBarWidget(context, "Login successfull");
-        Navigator.of(context).pushReplacement(
+        Navigator.of(context).pushAndRemoveUntil(
           MaterialPageRoute(
             builder: (context) {
               return HomeScreen();
             },
-          ),
+          ),(route) {
+            return false;
+          },
         );
       }
     } else {
@@ -93,12 +97,14 @@ class AuthenticationProvider extends ChangeNotifier {
     if (errorMessage == null) {
       if (context.mounted) {
         snackBarWidget(context, "Login successfull");
-        Navigator.of(context).pushReplacement(
+        Navigator.of(context).pushAndRemoveUntil(
           MaterialPageRoute(
             builder: (context) {
               return HomeScreen();
             },
-          ),
+          ),(route) {
+            return false;
+          },
         );
       }
     } else {

@@ -123,16 +123,7 @@ class AuthServices {
         }
       } else {
         await FirebaseAuth.instance.signOut();
-        // await Navigator.of(context).pushAndRemoveUntil(
-        //   MaterialPageRoute(
-        //     builder: (ctx) {
-        //       return LoginScreen();
-        //     },
-        //   ),
-        //   (route) {
-        //     return false;
-        //   },
-        // );
+   
       }
 
       return null;
