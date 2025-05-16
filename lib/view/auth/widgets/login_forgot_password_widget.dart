@@ -1,11 +1,9 @@
-import 'dart:io';
-
-import 'package:firebase_auth/firebase_auth.dart';
-import 'package:firebase_sample/widgets/material_button_widget.dart';
+import 'package:firebase_sample/controller/authentication_provider.dart';
 import 'package:firebase_sample/widgets/constants.dart';
-import 'package:firebase_sample/widgets/snackbar_widget.dart';
+import 'package:firebase_sample/widgets/text_button_widget.dart';
 import 'package:firebase_sample/widgets/textformfield_widget.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class LoginForgotPasswordWidget extends StatelessWidget {
   const LoginForgotPasswordWidget({
@@ -39,6 +37,7 @@ class LoginForgotPasswordWidget extends StatelessWidget {
                 ),
                 kHeight20,
                 const Text(
+                  textAlign: TextAlign.center,
                   "Enter your registered email below. We'll send \nyou a link to reset your password.",
                   style: TextStyle(
                     fontSize: 16,
@@ -64,18 +63,24 @@ class LoginForgotPasswordWidget extends StatelessWidget {
                   hintText: "Email",
                 ),
                 const SizedBox(height: 30),
-                MaterialButtonWidget(
-                  buttonTextColor: appColor,
-                  materialButtonColor: kwhite,
-                  onPressed: () async {
-                    if (forgotFormKey.currentState!.validate()) {
-                      forgotFormKey.currentState!.save();
-                      resetPassword(context);
-                    }
-                  },
-                  formKey: forgotFormKey,
-                  emailController: forgotEmailController,
-                  buttonText: "Reset Password",
+                Center(
+                  child: TextButtonWidget(
+                    textStyle: TextStyle(
+                      color: appColor,
+                      fontWeight: FontWeight.bold,
+                      fontSize: 18,
+                    ),
+                    style: TextButton.styleFrom(),
+                    text: "Reset Password",
+                    onPressed: () async {
+                      if (forgotFormKey.currentState!.validate()) {
+                        forgotFormKey.currentState!.save();
+                        await Provider.of<AuthenticationProvider>(context,
+                                listen: false)
+                            .resetPassword(context, forgotEmailController);
+                      }
+                    },
+                  ),
                 ),
               ],
             ),
@@ -85,34 +90,4 @@ class LoginForgotPasswordWidget extends StatelessWidget {
     );
   }
 
-  Future resetPassword(BuildContext context) async {
-    showDialog(
-        context: context,
-        builder: (context) {
-          return const Center(
-            child: CircularProgressIndicator(),
-          );
-        });
-    try {
-      final forgotEmail = forgotEmailController.text.trim();
-      await FirebaseAuth.instance.sendPasswordResetEmail(email: forgotEmail);
-
-      if (context.mounted) {
-        snackBarWidget(context, "Password Reset Email Sent");
-      }
-      forgotEmailController.clear();
-
-      if (context.mounted) {
-        Navigator.of(context).popUntil(
-          (route) => route.isFirst,
-        );
-      }
-    } on FirebaseException catch (e) {
-      e.message;
-    } on SocketException catch (_) {
-      return "Please check your Internet connection try again later";
-    } catch (e) {
-      return e.toString();
-    }
-  }
 }

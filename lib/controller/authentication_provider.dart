@@ -145,4 +145,14 @@ class AuthenticationProvider extends ChangeNotifier {
     }
     notifyListeners();
   }
+
+  Future<void>resetPassword(BuildContext context,TextEditingController forgotEmailController)async
+  {
+    final errorMessage=await AuthServices.instance.resetPasswordService(context, forgotEmailController);
+    if(errorMessage!=null && context.mounted){
+      snackBarWidget(context, errorMessage);
+    }
+    notifyListeners();
+
+  }
 }
