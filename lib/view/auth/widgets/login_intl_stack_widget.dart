@@ -7,14 +7,14 @@ class StackWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final size = MediaQuery.of(context).size;
+    final size = MediaQuery.of(context).size.height;
     return Stack(
       children: [
         ClipPath(
           clipper: WaveClipper(),
           child: Container(
             width: double.infinity,
-            height: size.height * 0.35,
+            height: size * 1 / 2,
             decoration: const BoxDecoration(
               gradient: LinearGradient(
                 colors: linearGradientColors,

@@ -65,7 +65,7 @@ class LoginForgotPasswordWidget extends StatelessWidget {
                 const SizedBox(height: 30),
                 Center(
                   child: TextButtonWidget(
-                    textStyle: TextStyle(
+                    textStyle:const TextStyle(
                       color: appColor,
                       fontWeight: FontWeight.bold,
                       fontSize: 18,

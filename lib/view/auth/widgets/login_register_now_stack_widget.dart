@@ -33,8 +33,8 @@ class _LoginRegisterNowStackWidgetState
               end: Alignment.bottomRight,
             ),
             borderRadius: BorderRadius.only(
-              bottomLeft: Radius.circular(60),
-              bottomRight: Radius.circular(60),
+              bottomLeft: Radius.circular(0),
+              bottomRight: Radius.circular(100),
             ),
           ),
         ),
