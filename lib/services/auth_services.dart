@@ -3,7 +3,7 @@ import 'dart:io';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_sample/utils/utils.dart';
 import 'package:firebase_sample/view/auth/view/otp_screen.dart';
-import 'package:firebase_sample/view/home/home_screen.dart';
+import 'package:firebase_sample/view/home/view/home_screen.dart';
 import 'package:firebase_sample/widgets/snackbar_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:google_sign_in/google_sign_in.dart';
@@ -46,6 +46,9 @@ class AuthServices {
       );
       return null;
     } on FirebaseException catch (e) {
+      if(e.code=="invalid-credential"){
+        return "Please enter a valid Email and Password";
+      }
       return e.message;
     } catch (e) {
       return e.toString();
@@ -83,12 +86,7 @@ class AuthServices {
       }
       await FirebaseAuth.instance
           .createUserWithEmailAndPassword(email: email, password: password);
-      if (context.mounted) {
-        snackBarWidget(context, "Account created successfully");
-      }
-      if (context.mounted) {
-        Navigator.of(context).pop();
-      }
+    
       return null;
     } on FirebaseException catch (e) {
       if (e.code == "email-already-in-use") {
@@ -100,13 +98,13 @@ class AuthServices {
       } else {
         return "Registration failed: ${e.message}";
       }
-    } catch (e) {
+    } 
+    catch (e) {
       log("Register Error: $e");
-      if (context.mounted) {
-        snackBarWidget(context, "something went wrong:${e.toString()}");
-      }
+      return  "something went wrong:${e.toString()}";
     }
-    return null;
+    
+  
   }
 
   Future<String?> logOutService(BuildContext context) async {
@@ -118,13 +116,15 @@ class AuthServices {
 
         if (providerId == "google.com") {
           await googleSignIn.disconnect();
-          await FirebaseAuth.instance.signOut();
-        } else {
-          await FirebaseAuth.instance.signOut();
+          // await FirebaseAuth.instance.signOut();
         }
-      } else {
-        await FirebaseAuth.instance.signOut();
+        //  else {
+          // await FirebaseAuth.instance.signOut();
+        // }
       }
+      //  else {
+        await FirebaseAuth.instance.signOut();
+      // }
 
       return null;
     } on SocketException catch (_) {

@@ -2,7 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_sample/controller/authentication_provider.dart';
 import 'package:firebase_sample/view/auth/view/login_screen.dart';
-import 'package:firebase_sample/view/home/home_screen.dart';
+import 'package:firebase_sample/view/home/view/home_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_sample/firebase_options.dart';

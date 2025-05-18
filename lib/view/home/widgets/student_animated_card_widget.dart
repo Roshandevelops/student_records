@@ -16,9 +16,9 @@ class StudentCardAnimated extends StatefulWidget {
 
   @override
   State<StudentCardAnimated> createState() => _StudentCardAnimatedState();
-  }
+}
 
-    class _StudentCardAnimatedState extends State<StudentCardAnimated>
+class _StudentCardAnimatedState extends State<StudentCardAnimated>
     with SingleTickerProviderStateMixin {
   late final AnimationController _controller;
   late final Animation<Offset> _slideAnimation;
@@ -34,14 +34,16 @@ class StudentCardAnimated extends StatefulWidget {
     );
 
     _slideAnimation = Tween<Offset>(
-      begin: const Offset(1.0, 0), // from right
+      begin: const Offset(1.0, 1.0), // from right
       end: Offset.zero,
-    ).animate(CurvedAnimation(parent: _controller, curve: Curves.easeOut));
+    ).animate(
+        CurvedAnimation(parent: _controller, curve: Curves.linearToEaseOut));
 
     _scaleAnimation = Tween<double>(
       begin: 0.8,
       end: 1.0,
-    ).animate(CurvedAnimation(parent: _controller, curve: Curves.easeOut));
+    ).animate(
+        CurvedAnimation(parent: _controller, curve: Curves.linearToEaseOut));
 
     _controller.forward();
   }
@@ -51,18 +53,6 @@ class StudentCardAnimated extends StatefulWidget {
     _controller.dispose();
     super.dispose();
   }
-
-  String getSafeTime() {
-  try {
-    // Since createdOn is non-nullable, no need to check null
-    final date = widget.studentModel.createdOn.toDate();
-    return widget.timeAgo(date);
-  } catch (e) {
-    debugPrint('Error parsing timestamp: $e');
-    return "Time not available";
-  }
-  }
-
 
   @override
   Widget build(BuildContext context) {
@@ -154,7 +144,7 @@ class StudentCardAnimated extends StatefulWidget {
                     ),
                   ],
                 ),
-                const SizedBox(height: 8),
+                kHeight,
                 Row(
                   children: [
                     const Icon(Icons.access_time,
@@ -173,5 +163,15 @@ class StudentCardAnimated extends StatefulWidget {
         ),
       ),
     );
+  }
+
+  String getSafeTime() {
+    try {
+      final date = widget.studentModel.createdOn.toDate();
+      return widget.timeAgo(date);
+    } catch (e) {
+      debugPrint('Error parsing timestamp: $e');
+      return "Time not available";
+    }
   }
 }

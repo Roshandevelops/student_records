@@ -1,3 +1,6 @@
+import 'dart:developer';
+
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_sample/model/student_model.dart';
 import 'package:firebase_sample/services/database_services.dart';
 import 'package:firebase_sample/utils/utils.dart';
@@ -33,14 +36,20 @@ class _HomeScreenState extends State<HomeScreen> {
     return Scaffold(
       backgroundColor: const Color(0xfff0f4f8),
       body: SafeArea(
-        child: StreamBuilder(
+        child: StreamBuilder<List<StudentModel>>(
           stream: databaseServices.getTodos(),
           builder: (context, snapshot) {
             if (!snapshot.hasData) {
               return const Center(child: CircularProgressIndicator());
+
             }
 
-            List todos = snapshot.data?.docs ?? [];
+            // log(snapshot.data.!.data().toString());
+            List todos=snapshot.data??[];
+
+    //         List todos = snapshot.data?.data((event) {
+    //   return StudentModel.fromJson(event.data());
+    // },).toList() ?? [];
 
             if (todos.isEmpty) {
               return const Center(
@@ -53,13 +62,12 @@ class _HomeScreenState extends State<HomeScreen> {
               padding: const EdgeInsets.all(16),
               itemCount: todos.length,
               itemBuilder: (context, index) {
-                StudentModel studentModel = todos[index].data();
+                StudentModel studentModel = todos[index];
                 String todoId = todos[index].id;
 
                 return StudentCardAnimated(
                   studentModel: studentModel,
                   onDelete: () async {
-                    // final confirmed =
                     AppUtils.alertDialogueFunction(
                       context,
                       Icons.delete,
@@ -71,9 +79,6 @@ class _HomeScreenState extends State<HomeScreen> {
                         Navigator.of(context).pop(true);
                       },
                     );
-                    // if (confirmed == true) {
-                    //   databaseServices.deleteTodo(todoId);
-                    // }
                   },
                   timeAgo: timeAgo,
                 );
@@ -86,7 +91,9 @@ class _HomeScreenState extends State<HomeScreen> {
         backgroundColor: appColor,
         onPressed: () {
           Navigator.of(context).push(
-            MaterialPageRoute(builder: (ctx) => const StudentAddingScreen()),
+            MaterialPageRoute(
+              builder: (ctx) => const StudentAddingScreen(),
+            ),
           );
         },
         child: const Icon(Icons.add, color: Colors.white),

@@ -7,6 +7,9 @@ class StudentModel {
  final String domain;
  final Timestamp createdOn;
  final Timestamp updatedOn;
+ final String? id;
+
+ 
   
 
   StudentModel({
@@ -16,16 +19,19 @@ class StudentModel {
     required this.domain,
     required this.createdOn,
     required this.updatedOn,
+     this.id
   });
 
-  factory StudentModel.fromJson(Map<String, dynamic> json) {
+  factory StudentModel.fromJson(DocumentSnapshot doc) {
+    final data = doc.data() as Map<String, dynamic>;
     return StudentModel(
-      name: json["name"],
-      age: json["age"],
-      classes: json["classes"],
-      domain: json["domain"],
-      createdOn: json["createdOn"],
-      updatedOn: json["updatedOn"]
+      name: data["name"],
+      age: data["age"],
+      classes: data["classes"],
+      domain: data["domain"],
+      createdOn: data["createdOn"],
+      updatedOn: data["updatedOn"],
+      id: doc.id,
     );
   }
 
@@ -37,6 +43,7 @@ class StudentModel {
       "domain": domain,
       "createdOn":createdOn,
       "updatedOn":updatedOn,
+     
     };
   }
 }

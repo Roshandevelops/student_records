@@ -29,7 +29,7 @@ class AppUtils {
 
   static void alertDialogueFunction(
     BuildContext context,
-     IconData? icon,
+    IconData? icon,
     String mainText,
     String subText,
     String confirm,
@@ -51,7 +51,7 @@ class AppUtils {
               const SizedBox(height: 15),
               Text(
                 mainText,
-                style: TextStyle(
+                style:const TextStyle(
                   fontSize: 22,
                   fontWeight: FontWeight.bold,
                 ),
@@ -60,7 +60,7 @@ class AppUtils {
               Text(
                 subText,
                 textAlign: TextAlign.center,
-                style: TextStyle(fontSize: 16, color: Colors.black54),
+                style:const TextStyle(fontSize: 16, color: Colors.black54),
               ),
               const SizedBox(height: 25),
               Row(
@@ -99,7 +99,7 @@ class AppUtils {
                       onPressed: onPressed,
                       child: Text(
                         confirm,
-                        style: TextStyle(
+                        style:const TextStyle(
                           fontSize: 16,
                           fontWeight: FontWeight.bold,
                         ),

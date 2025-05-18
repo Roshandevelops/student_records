@@ -1,21 +1,21 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_sample/model/student_model.dart';
 import 'package:firebase_sample/services/database_services.dart';
-import 'package:firebase_sample/view/home/home_screen.dart';
+import 'package:firebase_sample/view/home/view/home_screen.dart';
 import 'package:firebase_sample/widgets/constants.dart';
 import 'package:firebase_sample/widgets/material_button_widget.dart';
 import 'package:firebase_sample/widgets/textformfield_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
-class FormFieldWidget extends StatefulWidget {
-  const FormFieldWidget({super.key});
+class AddingFormFieldWidget extends StatefulWidget {
+  const AddingFormFieldWidget({super.key});
 
   @override
-  State<FormFieldWidget> createState() => _FormFieldWidgetState();
+  State<AddingFormFieldWidget> createState() => _AddingFormFieldWidgetState();
 }
 
-class _FormFieldWidgetState extends State<FormFieldWidget> {
+class _AddingFormFieldWidgetState extends State<AddingFormFieldWidget> {
   final _formKey = GlobalKey<FormState>();
 
   final TextEditingController nameController = TextEditingController();
@@ -107,6 +107,7 @@ class _FormFieldWidgetState extends State<FormFieldWidget> {
     if (_formKey.currentState!.validate()) {
       int parsedAge = int.parse(ageController.text.trim());
       StudentModel studentModel = StudentModel(
+        
         createdOn: Timestamp.now(),
         updatedOn: Timestamp.now(),
         name: nameController.text,
@@ -122,7 +123,7 @@ class _FormFieldWidgetState extends State<FormFieldWidget> {
       domainController.clear();
       Navigator.of(context).pushAndRemoveUntil(
         MaterialPageRoute(builder: (ctx) {
-          return HomeScreen();
+          return const HomeScreen();
         }),
         (route) {
           return false;
