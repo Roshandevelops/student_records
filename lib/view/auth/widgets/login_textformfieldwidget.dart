@@ -33,7 +33,9 @@ class LoginEmailTextformfieldwidget extends StatelessWidget {
           ),
           color: kwhite,
           padding: const EdgeInsets.symmetric(horizontal: 0),
-          fillColor: Colors.teal.withOpacity(0.1),
+          fillColor: appColor,
+          // Colors.red,
+          // Colors.teal.withOpacity(0.1),
           hintText: "Email",
           controller: emailController,
           labelText: "Email",
@@ -47,6 +49,7 @@ class LoginEmailTextformfieldwidget extends StatelessWidget {
         ),
         kHeight,
         TextformfieldWidget(
+          suffixIcon: Icon(Icons.remove_red_eye_outlined),
           validator: (value) {
             if (value!.length < 6) {
               return passwordDialogue;
@@ -59,13 +62,14 @@ class LoginEmailTextformfieldwidget extends StatelessWidget {
           ),
           color: kwhite,
           padding: const EdgeInsets.symmetric(horizontal: 0),
-          fillColor: Colors.teal.withOpacity(0.1),
-          hintText: "Paaword",
+          fillColor: appColor,
+          // Colors.teal.withOpacity(0.1),
+          hintText: "Password",
           controller: passController,
           labelText: "Password",
           prefixIcon: const Icon(
             Icons.email_outlined,
-            color: kwhite,
+            // color: kwhite,
           ),
           labelStyle: textStyleWhite,
           enabledBorder: customOutlineBorder(color: Colors.white60, width: 2),

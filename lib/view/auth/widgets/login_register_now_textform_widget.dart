@@ -25,11 +25,11 @@ class LoginRegisterNowTextformWidget extends StatelessWidget {
           padding: const EdgeInsets.symmetric(
             horizontal: 5,
           ),
-          fillColor: kwhite,
+          // fillColor: kwhite,
           controller: registerEmailController,
           prefixIcon: const Icon(
             Icons.email_outlined,
-            color: Colors.teal,
+            // color: Colors.teal,
           ),
           hintText: "Email",
         ),
@@ -38,7 +38,7 @@ class LoginRegisterNowTextformWidget extends StatelessWidget {
           padding: const EdgeInsets.symmetric(
             horizontal: 5,
           ),
-          fillColor: kwhite,
+          // fillColor: kwhite,
           controller: registerPassController,
           obscureText: true,
           onDoubleTap: () {
@@ -46,7 +46,9 @@ class LoginRegisterNowTextformWidget extends StatelessWidget {
           },
           suffixIcon:
               const Icon(Icons.remove_red_eye_outlined, color: Colors.teal),
-          prefixIcon: const Icon(Icons.lock_outline, color: Colors.teal),
+          prefixIcon: const Icon(
+            Icons.lock_outline,
+          ),
           hintText: "Password",
         ),
         const SizedBox(height: 15),
@@ -54,15 +56,18 @@ class LoginRegisterNowTextformWidget extends StatelessWidget {
           padding: const EdgeInsets.symmetric(
             horizontal: 5,
           ),
-          fillColor: kwhite,
+          // fillColor: kwhite,
           controller: confirmRegisterPassController,
           obscureText: true,
           onDoubleTap: () {
             log("eye pressed");
           },
-          suffixIcon:
-              const Icon(Icons.remove_red_eye_outlined, color: Colors.teal),
-          prefixIcon: const Icon(Icons.lock_outline, color: Colors.teal),
+          suffixIcon: const Icon(
+            Icons.remove_red_eye_outlined,
+          ),
+          prefixIcon: const Icon(
+            Icons.lock_outline,
+          ),
           hintText: "Confirm Password",
         ),
         const SizedBox(height: 30),

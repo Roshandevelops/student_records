@@ -1,3 +1,4 @@
+import 'package:firebase_sample/widgets/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
@@ -53,22 +54,27 @@ class TextformfieldWidget extends StatelessWidget {
         keyboardType: keyboardType,
         validator: validator,
         onSaved: onSaved,
-        maxLength: 30,
+        // maxLength: 30,
         obscureText: obscureText,
         style: TextStyle(
-          color: color,
+          color: kwhite,
         ),
         controller: controller,
         decoration: InputDecoration(
           labelText: labelText,
-          labelStyle: labelStyle,
+          labelStyle: TextStyle(
+            color: kwhite,
+          ),
           enabledBorder: enabledBorder,
           disabledBorder: disabledBorder,
           focusedBorder: focusedBorder,
-          fillColor: fillColor,
+          fillColor: appColor,
           filled: true,
           suffixIcon: suffixIcon,
           prefixIcon: prefixIcon,
+          prefixIconColor: kwhite,
+          suffixIconColor: kwhite,
+
           // InkWell(
           //   onDoubleTap: onDoubleTap,
           //   child: prefixIcon,
@@ -78,7 +84,7 @@ class TextformfieldWidget extends StatelessWidget {
             borderRadius: BorderRadius.circular(10),
           ),
           hintText: hintText,
-          hintStyle: hintStyle,
+          hintStyle: TextStyle(color: kwhite),
         ),
       ),
     );
