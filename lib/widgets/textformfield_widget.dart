@@ -56,13 +56,13 @@ class TextformfieldWidget extends StatelessWidget {
         onSaved: onSaved,
         // maxLength: 30,
         obscureText: obscureText,
-        style: TextStyle(
+        style:const TextStyle(
           color: kwhite,
         ),
         controller: controller,
         decoration: InputDecoration(
           labelText: labelText,
-          labelStyle: TextStyle(
+          labelStyle:const TextStyle(
             color: kwhite,
           ),
           enabledBorder: enabledBorder,
@@ -84,7 +84,7 @@ class TextformfieldWidget extends StatelessWidget {
             borderRadius: BorderRadius.circular(10),
           ),
           hintText: hintText,
-          hintStyle: TextStyle(color: kwhite),
+          hintStyle:const TextStyle(color: kwhite),
         ),
       ),
     );

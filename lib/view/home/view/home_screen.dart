@@ -1,6 +1,3 @@
-import 'dart:developer';
-
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_sample/model/student_model.dart';
 import 'package:firebase_sample/services/database_services.dart';
 import 'package:firebase_sample/utils/utils.dart';
@@ -34,6 +31,9 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        backgroundColor: Colors.amber,
+      ),
       backgroundColor: const Color(0xfff0f4f8),
       body: SafeArea(
         child: StreamBuilder<List<StudentModel>>(
@@ -41,15 +41,14 @@ class _HomeScreenState extends State<HomeScreen> {
           builder: (context, snapshot) {
             if (!snapshot.hasData) {
               return const Center(child: CircularProgressIndicator());
-
             }
 
             // log(snapshot.data.!.data().toString());
-            List todos=snapshot.data??[];
+            List todos = snapshot.data ?? [];
 
-    //         List todos = snapshot.data?.data((event) {
-    //   return StudentModel.fromJson(event.data());
-    // },).toList() ?? [];
+            //         List todos = snapshot.data?.data((event) {
+            //   return StudentModel.fromJson(event.data());
+            // },).toList() ?? [];
 
             if (todos.isEmpty) {
               return const Center(

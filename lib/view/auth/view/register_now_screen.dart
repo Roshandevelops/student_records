@@ -9,6 +9,7 @@ class RegisterNowScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return const Scaffold(
+      resizeToAvoidBottomInset: true,
       backgroundColor: Color(0xFFF9F9F9),
       body: SafeArea(
         child: LoginRegisterNowStackWidget(),

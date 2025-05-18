@@ -1,6 +1,5 @@
 import 'dart:developer';
 import 'package:firebase_sample/view/auth/widgets/login_register_now_button_widget.dart';
-import 'package:firebase_sample/widgets/constants.dart';
 import 'package:firebase_sample/widgets/textformfield_widget.dart';
 import 'package:flutter/material.dart';
 
@@ -44,8 +43,9 @@ class LoginRegisterNowTextformWidget extends StatelessWidget {
           onDoubleTap: () {
             log("eye pressed");
           },
-          suffixIcon:
-              const Icon(Icons.remove_red_eye_outlined, color: Colors.teal),
+          suffixIcon: const Icon(
+            Icons.remove_red_eye_outlined,
+          ),
           prefixIcon: const Icon(
             Icons.lock_outline,
           ),

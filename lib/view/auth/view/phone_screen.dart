@@ -8,7 +8,7 @@ class PhoneScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return const Scaffold(
-      resizeToAvoidBottomInset: false,
+      resizeToAvoidBottomInset: true,
       backgroundColor: Color(0xFFF5F8FA),
       body: SafeArea(
         child: Column(

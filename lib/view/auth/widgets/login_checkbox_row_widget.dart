@@ -1,4 +1,4 @@
-import 'package:firebase_sample/view/auth/widgets/login_forgot_password_widget.dart';
+import 'package:firebase_sample/view/auth/view/login_forgot_password_screen.dart';
 import 'package:firebase_sample/widgets/constants.dart';
 import 'package:flutter/material.dart';
 
@@ -34,7 +34,7 @@ class LoginCheckboxRowWidget extends StatelessWidget {
             InkWell(
               onTap: () {
                 Navigator.of(context).push(MaterialPageRoute(builder: (ctx) {
-                  return LoginForgotPasswordWidget(
+                  return LoginForgotPasswordScreen(
                     forgotEmailController: forgotEmailController,
                     forgotFormKey: forgotFormKey,
                   );

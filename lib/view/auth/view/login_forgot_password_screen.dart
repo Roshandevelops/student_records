@@ -1,14 +1,9 @@
-import 'package:firebase_sample/controller/authentication_provider.dart';
 import 'package:firebase_sample/view/auth/widgets/login_forgot_column_widget.dart';
-import 'package:firebase_sample/view/auth/widgets/login_forgot_container_widget.dart';
 import 'package:firebase_sample/widgets/constants.dart';
-import 'package:firebase_sample/widgets/text_button_widget.dart';
-import 'package:firebase_sample/widgets/textformfield_widget.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 
-class LoginForgotPasswordWidget extends StatelessWidget {
-  const LoginForgotPasswordWidget({
+class LoginForgotPasswordScreen extends StatelessWidget {
+  const LoginForgotPasswordScreen({
     super.key,
     required this.forgotFormKey,
     required this.forgotEmailController,
@@ -20,7 +15,7 @@ class LoginForgotPasswordWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      resizeToAvoidBottomInset: false,
+      resizeToAvoidBottomInset: true,
       backgroundColor: kwhite,
       body: SafeArea(
         child: Center(

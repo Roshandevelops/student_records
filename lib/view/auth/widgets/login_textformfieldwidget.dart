@@ -49,7 +49,8 @@ class LoginEmailTextformfieldwidget extends StatelessWidget {
         ),
         kHeight,
         TextformfieldWidget(
-          suffixIcon: Icon(Icons.remove_red_eye_outlined),
+          obscureText: true,
+          suffixIcon: const Icon(Icons.remove_red_eye_outlined),
           validator: (value) {
             if (value!.length < 6) {
               return passwordDialogue;
