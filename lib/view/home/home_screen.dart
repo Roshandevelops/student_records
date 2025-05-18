@@ -1,7 +1,7 @@
 import 'package:firebase_sample/model/student_model.dart';
 import 'package:firebase_sample/services/database_services.dart';
 import 'package:firebase_sample/utils/utils.dart';
-import 'package:firebase_sample/view/adding/student_adding_screen.dart';
+import 'package:firebase_sample/view/adding/view/student_adding_screen.dart';
 import 'package:firebase_sample/view/home/widgets/student_animated_card_widget.dart';
 import 'package:firebase_sample/widgets/constants.dart';
 import 'package:flutter/material.dart';
@@ -59,11 +59,21 @@ class _HomeScreenState extends State<HomeScreen> {
                 return StudentCardAnimated(
                   studentModel: studentModel,
                   onDelete: () async {
-                    final confirmed =
-                        await AppUtils.showDeleteConfirmDialog(context, todoId);
-                    if (confirmed == true) {
-                      databaseServices.deleteTodo(todoId);
-                    }
+                    // final confirmed =
+                    AppUtils.alertDialogueFunction(
+                      context,
+                      Icons.delete,
+                      "Confirm Delete",
+                      "Are you sure, You want to Delete?",
+                      "Delete",
+                      () {
+                        databaseServices.deleteTodo(todoId);
+                        Navigator.of(context).pop(true);
+                      },
+                    );
+                    // if (confirmed == true) {
+                    //   databaseServices.deleteTodo(todoId);
+                    // }
                   },
                   timeAgo: timeAgo,
                 );

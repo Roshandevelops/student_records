@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 class TextformfieldWidget extends StatelessWidget {
   const TextformfieldWidget({
@@ -19,7 +20,9 @@ class TextformfieldWidget extends StatelessWidget {
     this.color,
     this.onSaved,
     this.validator,
+    this.keyboardType,
     this.padding = const EdgeInsets.symmetric(horizontal: 15),
+    this.inputFormatters,
   });
   final String? hintText;
   final TextEditingController? controller;
@@ -38,12 +41,16 @@ class TextformfieldWidget extends StatelessWidget {
   final Color? color;
   final void Function(String?)? onSaved;
   final String? Function(String?)? validator;
+  final TextInputType? keyboardType;
+  final List<TextInputFormatter>? inputFormatters;
 
   @override
   Widget build(BuildContext context) {
     return Padding(
       padding: padding!,
       child: TextFormField(
+        inputFormatters: inputFormatters,
+        keyboardType: keyboardType,
         validator: validator,
         onSaved: onSaved,
         maxLength: 30,

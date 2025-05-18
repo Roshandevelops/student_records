@@ -1,5 +1,3 @@
-import 'package:firebase_sample/services/database_services.dart';
-import 'package:firebase_sample/widgets/constants.dart';
 import 'package:flutter/material.dart';
 
 class AppUtils {
@@ -29,31 +27,90 @@ class AppUtils {
     }
   }
 
-  static Future<bool?> showDeleteConfirmDialog(
-      BuildContext context, String todoId) async {
-    final DatabaseServices databaseServices = DatabaseServices();
-
-    return showDialog<bool>(
+  static void alertDialogueFunction(
+    BuildContext context,
+     IconData? icon,
+    String mainText,
+    String subText,
+    String confirm,
+    void Function()? onPressed,
+  ) async {
+    showDialog(
       context: context,
-      builder: (ctx) => AlertDialog(
-        title: const Text('Confirm Delete'),
-        content: const Text(
-            textAlign: TextAlign.center,
-            'Are you sure you want to delete this entry ?'),
-        actions: [
-          TextButton(
-            onPressed: () => Navigator.of(ctx).pop(false),
-            child: const Text('Cancel'),
+      builder: (ctx) => Dialog(
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
+        child: Container(
+          padding: const EdgeInsets.all(20),
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(20),
           ),
-          ElevatedButton(
-            style: ElevatedButton.styleFrom(backgroundColor: appColor),
-            onPressed: () {
-              databaseServices.deleteTodo(todoId);
-              Navigator.of(ctx).pop(true);
-            },
-            child: const Text('Delete'),
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Icon(icon, size: 60, color: Colors.redAccent),
+              const SizedBox(height: 15),
+              Text(
+                mainText,
+                style: TextStyle(
+                  fontSize: 22,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+              const SizedBox(height: 10),
+              Text(
+                subText,
+                textAlign: TextAlign.center,
+                style: TextStyle(fontSize: 16, color: Colors.black54),
+              ),
+              const SizedBox(height: 25),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: [
+                  Expanded(
+                    child: OutlinedButton(
+                      style: OutlinedButton.styleFrom(
+                        side: const BorderSide(color: Colors.grey),
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(10),
+                        ),
+                        padding: const EdgeInsets.symmetric(vertical: 14),
+                      ),
+                      onPressed: () {
+                        Navigator.of(ctx).pop();
+                      },
+                      child: const Text(
+                        "Cancel",
+                        style: TextStyle(color: Colors.grey, fontSize: 16),
+                      ),
+                    ),
+                  ),
+                  const SizedBox(width: 15),
+                  // Logout Button
+                  Expanded(
+                    child: ElevatedButton(
+                      style: ElevatedButton.styleFrom(
+                        padding: const EdgeInsets.symmetric(vertical: 14),
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(10),
+                        ),
+                        // Gradient background with decoration workaround
+                        backgroundColor: Colors.redAccent,
+                      ),
+                      onPressed: onPressed,
+                      child: Text(
+                        confirm,
+                        style: TextStyle(
+                          fontSize: 16,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            ],
           ),
-        ],
+        ),
       ),
     );
   }

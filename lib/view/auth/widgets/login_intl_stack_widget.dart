@@ -2,8 +2,8 @@ import 'package:firebase_sample/view/auth/widgets/login_intl_stack_waveclipper.d
 import 'package:firebase_sample/widgets/constants.dart';
 import 'package:flutter/material.dart';
 
-class StackWidget extends StatelessWidget {
-  const StackWidget({super.key});
+class LoginIntlStackWidget extends StatelessWidget {
+  const LoginIntlStackWidget({super.key});
 
   @override
   Widget build(BuildContext context) {

@@ -13,7 +13,7 @@ class PhoneScreen extends StatelessWidget {
       body: SafeArea(
         child: Column(
           children: [
-            StackWidget(),
+            LoginIntlStackWidget(),
             IntlphoneFieldWidget(),
           ],
         ),
