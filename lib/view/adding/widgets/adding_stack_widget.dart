@@ -1,10 +1,8 @@
-import 'package:firebase_sample/controller/authentication_provider.dart';
-import 'package:firebase_sample/utils/utils.dart';
 import 'package:firebase_sample/view/adding/widgets/adding_form_field_widget.dart';
 import 'package:firebase_sample/view/auth/widgets/login_intl_stack_waveclipper.dart';
+import 'package:firebase_sample/view/home/view/home_screen.dart';
 import 'package:firebase_sample/widgets/constants.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 
 class AddingStackWidget extends StatelessWidget {
   const AddingStackWidget({super.key});
@@ -17,7 +15,7 @@ class AddingStackWidget extends StatelessWidget {
         ClipPath(
           clipper: WaveClipper(),
           child: Container(
-            height: screenHeight * 1 / 3,
+            height: screenHeight * 1 / 2.5,
             decoration: const BoxDecoration(
               gradient: LinearGradient(
                 colors: linearGradientColors,
@@ -49,38 +47,29 @@ class AddingStackWidget extends StatelessWidget {
             ),
           ),
         ),
-        SafeArea(
-          child: Align(
-            alignment: Alignment.topRight,
-            child: Padding(
-              padding:const EdgeInsets.only(right: 16, top: 10),
-              child: IconButton(
-                onPressed: () async {
-                  AppUtils.alertDialogueFunction(
-                    context,
-                    Icons.logout,
-                    "Confirm Logout",
-                    "Are you sure, You want to Logout?",
-                    "Logout",
-                    () async {
-                      await Provider.of<AuthenticationProvider>(
-                        context,
-                        listen: false,
-                      ).logOut(context);
-                      if(context.mounted){
-                         Navigator.of(context).pop();
-
-                      }
-                     
-                    },
-                  );
-                },
-                icon: const Icon(
-                  Icons.no_accounts,
-                  color: kwhite,
-                  size: 30,
+        Padding(
+          padding: const EdgeInsets.only(
+            top: 30,
+            left: 20,
+            right: 0,
+            bottom: 0,
+          ),
+          child: IconButton(
+            onPressed: () {
+              Navigator.of(context).pushAndRemoveUntil(
+                MaterialPageRoute(
+                  builder: (ctx) {
+                    return const HomeScreen();
+                  },
                 ),
-              ),
+                (route) {
+                  return false;
+                },
+              );
+            },
+            icon: Icon(
+              Icons.arrow_back,
+              color: kwhite,
             ),
           ),
         ),
@@ -104,7 +93,7 @@ class AddingStackWidget extends StatelessWidget {
                       ),
                     ],
                   ),
-                  child:const AddingFormFieldWidget(),
+                  child: const AddingFormFieldWidget(),
                 )
               ],
             ),

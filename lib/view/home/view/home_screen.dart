@@ -1,3 +1,4 @@
+import 'package:firebase_sample/controller/authentication_provider.dart';
 import 'package:firebase_sample/model/student_model.dart';
 import 'package:firebase_sample/services/database_services.dart';
 import 'package:firebase_sample/utils/utils.dart';
@@ -6,6 +7,7 @@ import 'package:firebase_sample/view/home/widgets/student_animated_card_widget.d
 import 'package:firebase_sample/widgets/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'package:provider/provider.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -32,6 +34,32 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        actions: [
+          IconButton(
+            onPressed: () {
+              AppUtils.alertDialogueFunction(
+                context,
+                Icons.logout,
+                "Confirm Logout",
+                "Are you sure, You want to Logout?",
+                "Logout",
+                () async {
+                  await Provider.of<AuthenticationProvider>(
+                    context,
+                    listen: false,
+                  ).logOut(context);
+                  if (context.mounted) {
+                    Navigator.of(context).pop();
+                  }
+                },
+              );
+            },
+            icon: Icon(
+              Icons.no_accounts,
+              size: 35,
+            ),
+          )
+        ],
         backgroundColor: Colors.amber,
       ),
       backgroundColor: const Color(0xfff0f4f8),

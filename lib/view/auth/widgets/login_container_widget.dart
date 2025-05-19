@@ -38,9 +38,9 @@ class _LoginContainerWidgetState extends State<LoginContainerWidget> {
               borderRadius: BorderRadius.circular(20),
               boxShadow: [
                 BoxShadow(
-                  color: Colors.teal.shade700.withOpacity(0.4),
-                  blurRadius: 8,
-                  offset: const Offset(0, 5),
+                  color: Colors.grey,
+                  blurRadius: 1.5,
+                  offset: const Offset(0, 2),
                 ),
               ],
             ),
@@ -55,6 +55,7 @@ class _LoginContainerWidgetState extends State<LoginContainerWidget> {
                   forgotFormKey: forgotFormkey,
                 ),
                 MaterialButtonWidget(
+                  buttonWidth: double.infinity,
                   buttonTextColor: appColor,
                   materialButtonColor: kwhite,
                   onPressed: () async {

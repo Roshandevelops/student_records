@@ -1,5 +1,6 @@
 import 'package:firebase_sample/controller/authentication_provider.dart';
 import 'package:firebase_sample/widgets/constants.dart';
+import 'package:firebase_sample/widgets/material_button_widget.dart';
 import 'package:firebase_sample/widgets/snackbar_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -12,30 +13,39 @@ class LoginSendOtpButtonWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final screenWidth = MediaQuery.of(context).size.height;
-    return SizedBox(
-      width: screenWidth * 1 / 4,
-      height: 50,
-      child: ElevatedButton(
-        style: ElevatedButton.styleFrom(
-          elevation: 4,
-          backgroundColor: const Color(0xFF1B9C8F),
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(12),
-          ),
-        ),
-        onPressed: () async {
-          sendOtpButtonClicked(context);
-        },
-        child: const Text(
-          "Send OTP",
-          style: TextStyle(
-            fontSize: 16,
-            fontWeight: FontWeight.w600,
-            color: kwhite,
-          ),
-        ),
-      ),
+    return MaterialButtonWidget(
+      buttonWidth: screenWidth * 1 / 3,
+      buttonText: "Send",
+      onPressed: () {
+        sendOtpButtonClicked(context);
+      },
+      buttonTextColor: kwhite,
+      materialButtonColor: appColor,
     );
+    // SizedBox(
+    //   width: screenWidth * 1 / 4,
+    //   height: 50,
+    //   child: ElevatedButton(
+    //     style: ElevatedButton.styleFrom(
+    //       elevation: 4,
+    //       backgroundColor: const Color(0xFF1B9C8F),
+    //       shape: RoundedRectangleBorder(
+    //         borderRadius: BorderRadius.circular(12),
+    //       ),
+    //     ),
+    //     onPressed: () async {
+    //       sendOtpButtonClicked(context);
+    //     },
+    //     child: const Text(
+    //       "Send OTP",
+    //       style: TextStyle(
+    //         fontSize: 16,
+    //         fontWeight: FontWeight.w600,
+    //         color: kwhite,
+    //       ),
+    //     ),
+    //   ),
+    // );
   }
 
   Future<void> sendOtpButtonClicked(BuildContext context) async {

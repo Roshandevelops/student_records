@@ -1,3 +1,4 @@
+import 'package:firebase_sample/view/auth/view/login_screen.dart';
 import 'package:firebase_sample/view/auth/widgets/login_register_now_textform_widget.dart';
 import 'package:firebase_sample/widgets/constants.dart';
 import 'package:flutter/material.dart';
@@ -18,6 +19,7 @@ class _LoginRegisterNowStackWidgetState
 
   final TextEditingController confirmRegisterPassController =
       TextEditingController();
+  final GlobalKey<FormState> formKey = GlobalKey<FormState>();
 
   @override
   Widget build(BuildContext context) {
@@ -42,7 +44,7 @@ class _LoginRegisterNowStackWidgetState
           padding: const EdgeInsets.symmetric(horizontal: 20),
           child: Column(
             children: [
-              const SizedBox(height: 50),
+              const SizedBox(height: 80),
               const Align(
                 alignment: Alignment.centerLeft,
                 child: Text(
@@ -83,6 +85,7 @@ class _LoginRegisterNowStackWidgetState
                   ],
                 ),
                 child: LoginRegisterNowTextformWidget(
+                  formKey: formKey,
                   registerEmailController: registerEmailController,
                   registerPassController: registerPassController,
                   confirmRegisterPassController: confirmRegisterPassController,

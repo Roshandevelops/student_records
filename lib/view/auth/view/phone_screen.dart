@@ -11,6 +11,7 @@ class PhoneScreen extends StatelessWidget {
       resizeToAvoidBottomInset: true,
       backgroundColor: Color(0xFFF5F8FA),
       body: SafeArea(
+        
         child: Column(
           children: [
             LoginIntlStackWidget(),

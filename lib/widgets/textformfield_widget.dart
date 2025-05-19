@@ -24,6 +24,8 @@ class TextformfieldWidget extends StatelessWidget {
     this.keyboardType,
     this.padding = const EdgeInsets.symmetric(horizontal: 15),
     this.inputFormatters,
+    this.error,
+    this.errorStyle,
   });
   final String? hintText;
   final TextEditingController? controller;
@@ -44,6 +46,8 @@ class TextformfieldWidget extends StatelessWidget {
   final String? Function(String?)? validator;
   final TextInputType? keyboardType;
   final List<TextInputFormatter>? inputFormatters;
+  final Widget? error;
+  final TextStyle? errorStyle;
 
   @override
   Widget build(BuildContext context) {
@@ -56,13 +60,18 @@ class TextformfieldWidget extends StatelessWidget {
         onSaved: onSaved,
         // maxLength: 30,
         obscureText: obscureText,
-        style:const TextStyle(
+        style: const TextStyle(
           color: kwhite,
         ),
         controller: controller,
         decoration: InputDecoration(
+          error: error,
+          errorStyle: const TextStyle(
+            fontSize: 12,
+            fontWeight: FontWeight.bold,
+          ),
           labelText: labelText,
-          labelStyle:const TextStyle(
+          labelStyle: const TextStyle(
             color: kwhite,
           ),
           enabledBorder: enabledBorder,
@@ -84,7 +93,7 @@ class TextformfieldWidget extends StatelessWidget {
             borderRadius: BorderRadius.circular(10),
           ),
           hintText: hintText,
-          hintStyle:const TextStyle(color: kwhite),
+          hintStyle: const TextStyle(color: kwhite),
         ),
       ),
     );

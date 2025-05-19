@@ -1,82 +1,140 @@
 import 'dart:developer';
 import 'package:firebase_sample/view/auth/widgets/login_register_now_button_widget.dart';
+import 'package:firebase_sample/widgets/constants.dart';
 import 'package:firebase_sample/widgets/textformfield_widget.dart';
 import 'package:flutter/material.dart';
 
-class LoginRegisterNowTextformWidget extends StatelessWidget {
+class LoginRegisterNowTextformWidget extends StatefulWidget {
   const LoginRegisterNowTextformWidget(
       {super.key,
       required this.registerEmailController,
       required this.registerPassController,
-      required this.confirmRegisterPassController});
+      required this.confirmRegisterPassController,
+      required this.formKey});
 
   final TextEditingController registerEmailController;
 
   final TextEditingController registerPassController;
 
   final TextEditingController confirmRegisterPassController;
+  final GlobalKey<FormState> formKey;
+
+  @override
+  State<LoginRegisterNowTextformWidget> createState() =>
+      _LoginRegisterNowTextformWidgetState();
+}
+
+class _LoginRegisterNowTextformWidgetState
+    extends State<LoginRegisterNowTextformWidget> {
+  bool isPasswordVisible = false;
+  bool isConfirmPasswordVisible = false;
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        TextformfieldWidget(
-          padding: const EdgeInsets.symmetric(
-            horizontal: 5,
+    return Form(
+      key: widget.formKey,
+      child: Column(
+        children: [
+          TextformfieldWidget(
+            validator: (value) {
+              if (value!.isEmpty || !value.contains("@gmail.com")) {
+                return emailErrorDialogue;
+              } else {
+                return null;
+              }
+            },
+            padding: const EdgeInsets.symmetric(
+              horizontal: 5,
+            ),
+            // fillColor: kwhite,
+            controller: widget.registerEmailController,
+            prefixIcon: const Icon(
+              Icons.email_outlined,
+              // color: Colors.teal,
+            ),
+            hintText: "Email",
           ),
-          // fillColor: kwhite,
-          controller: registerEmailController,
-          prefixIcon: const Icon(
-            Icons.email_outlined,
-            // color: Colors.teal,
+          const SizedBox(height: 15),
+          TextformfieldWidget(
+            validator: (value) {
+              if (value!.length < 6) {
+                return passwordDialogue;
+              } else {
+                return null;
+              }
+            },
+            obscureText: !isPasswordVisible,
+            padding: const EdgeInsets.symmetric(
+              horizontal: 5,
+            ),
+            // fillColor: kwhite,
+            controller: widget.registerPassController,
+
+            onDoubleTap: () {
+              log("eye pressed");
+            },
+            suffixIcon: InkWell(
+              onTap: () {
+                setState(() {
+                  isPasswordVisible = !isPasswordVisible;
+                });
+              },
+              child: Icon(
+                isPasswordVisible ? Icons.visibility : Icons.visibility_off,
+                color: Colors.white70,
+              ),
+            ),
+            prefixIcon: const Icon(
+              Icons.lock_outline,
+            ),
+            hintText: "Password",
           ),
-          hintText: "Email",
-        ),
-        const SizedBox(height: 15),
-        TextformfieldWidget(
-          padding: const EdgeInsets.symmetric(
-            horizontal: 5,
+          const SizedBox(height: 15),
+          TextformfieldWidget(
+            validator: (value) {
+              if (value!.length < 6) {
+                return passwordDialogue;
+              } else {
+                return null;
+              }
+            },
+            obscureText: !isConfirmPasswordVisible,
+            padding: const EdgeInsets.symmetric(
+              horizontal: 5,
+            ),
+            // fillColor: kwhite,
+            controller: widget.confirmRegisterPassController,
+
+            onDoubleTap: () {
+              log("eye pressed");
+            },
+            suffixIcon: InkWell(
+              onTap: () {
+                setState(() {
+                  isConfirmPasswordVisible = !isConfirmPasswordVisible;
+                });
+              },
+              child: Icon(
+                isConfirmPasswordVisible
+                    ? Icons.visibility
+                    : Icons.visibility_off,
+                color: Colors.white70,
+              ),
+            ),
+            prefixIcon: const Icon(
+              Icons.lock_outline,
+            ),
+            hintText: "Confirm Password",
           ),
-          // fillColor: kwhite,
-          controller: registerPassController,
-          obscureText: true,
-          onDoubleTap: () {
-            log("eye pressed");
-          },
-          suffixIcon: const Icon(
-            Icons.remove_red_eye_outlined,
-          ),
-          prefixIcon: const Icon(
-            Icons.lock_outline,
-          ),
-          hintText: "Password",
-        ),
-        const SizedBox(height: 15),
-        TextformfieldWidget(
-          padding: const EdgeInsets.symmetric(
-            horizontal: 5,
-          ),
-          // fillColor: kwhite,
-          controller: confirmRegisterPassController,
-          obscureText: true,
-          onDoubleTap: () {
-            log("eye pressed");
-          },
-          suffixIcon: const Icon(
-            Icons.remove_red_eye_outlined,
-          ),
-          prefixIcon: const Icon(
-            Icons.lock_outline,
-          ),
-          hintText: "Confirm Password",
-        ),
-        const SizedBox(height: 30),
-        LoginRegisterNowButtonWidget(
-          confirmRegisterPassController: confirmRegisterPassController,
-          registerEmailController: registerEmailController,
-          registerPassController: registerPassController,
-        )
-      ],
+          const SizedBox(height: 30),
+          LoginRegisterNowButtonWidget(
+            formKey: widget.formKey,
+            confirmRegisterPassController: widget.confirmRegisterPassController,
+            registerEmailController: widget.registerEmailController,
+            registerPassController: widget.registerPassController,
+          )
+        ],
+      ),
     );
   }
 }

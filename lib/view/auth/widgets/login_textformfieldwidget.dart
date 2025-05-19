@@ -2,7 +2,7 @@ import 'package:firebase_sample/widgets/constants.dart';
 import 'package:firebase_sample/widgets/textformfield_widget.dart';
 import 'package:flutter/material.dart';
 
-class LoginEmailTextformfieldwidget extends StatelessWidget {
+class LoginEmailTextformfieldwidget extends StatefulWidget {
   const LoginEmailTextformfieldwidget({
     super.key,
     required this.emailController,
@@ -11,10 +11,15 @@ class LoginEmailTextformfieldwidget extends StatelessWidget {
   final TextEditingController emailController;
   final TextEditingController passController;
 
-  final String email = "";
-  final String password = "";
+  @override
+  State<LoginEmailTextformfieldwidget> createState() =>
+      _LoginEmailTextformfieldwidgetState();
+}
 
-  final String passwordDialogue = "Please Enter password of min length 6";
+class _LoginEmailTextformfieldwidgetState
+    extends State<LoginEmailTextformfieldwidget> {
+
+  bool isPasswordVisible = false;
 
   @override
   Widget build(BuildContext context) {
@@ -34,10 +39,8 @@ class LoginEmailTextformfieldwidget extends StatelessWidget {
           color: kwhite,
           padding: const EdgeInsets.symmetric(horizontal: 0),
           fillColor: appColor,
-          // Colors.red,
-          // Colors.teal.withOpacity(0.1),
           hintText: "Email",
-          controller: emailController,
+          controller: widget.emailController,
           labelText: "Email",
           prefixIcon: const Icon(
             Icons.email_outlined,
@@ -49,8 +52,18 @@ class LoginEmailTextformfieldwidget extends StatelessWidget {
         ),
         kHeight,
         TextformfieldWidget(
-          obscureText: true,
-          suffixIcon: const Icon(Icons.remove_red_eye_outlined),
+          obscureText: !isPasswordVisible,
+          suffixIcon: InkWell(
+            onTap: () {
+              setState(() {
+                isPasswordVisible = !isPasswordVisible;
+              });
+            },
+            child: Icon(
+              isPasswordVisible ? Icons.visibility : Icons.visibility_off,
+              color: Colors.white70,
+            ),
+          ),
           validator: (value) {
             if (value!.length < 6) {
               return passwordDialogue;
@@ -66,10 +79,10 @@ class LoginEmailTextformfieldwidget extends StatelessWidget {
           fillColor: appColor,
           // Colors.teal.withOpacity(0.1),
           hintText: "Password",
-          controller: passController,
+          controller: widget.passController,
           labelText: "Password",
           prefixIcon: const Icon(
-            Icons.email_outlined,
+            Icons.lock_outline,
             // color: kwhite,
           ),
           labelStyle: textStyleWhite,

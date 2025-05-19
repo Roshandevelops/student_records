@@ -90,6 +90,7 @@ class _AddingFormFieldWidgetState extends State<AddingFormFieldWidget> {
           ),
           kHeight20,
           MaterialButtonWidget(
+            buttonWidth: double.infinity,
             formKey: _formKey,
             buttonText: "Save Student",
             onPressed: () {
@@ -107,7 +108,6 @@ class _AddingFormFieldWidgetState extends State<AddingFormFieldWidget> {
     if (_formKey.currentState!.validate()) {
       int parsedAge = int.parse(ageController.text.trim());
       StudentModel studentModel = StudentModel(
-        
         createdOn: Timestamp.now(),
         updatedOn: Timestamp.now(),
         name: nameController.text,

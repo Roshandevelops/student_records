@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 class MaterialButtonWidget extends StatelessWidget {
   const MaterialButtonWidget(
       {super.key,
-      required this.formKey,
+      this.formKey,
       this.emailController,
       this.passwordController,
       required this.buttonText,
@@ -12,10 +12,11 @@ class MaterialButtonWidget extends StatelessWidget {
       this.ageController,
       this.classController,
       this.domainController,
-      required this.materialButtonColor,
-      required this.buttonTextColor
+      this.materialButtonColor,
+      required this.buttonTextColor,
+      required this.buttonWidth
       });
-  final GlobalKey<FormState> formKey;
+  final GlobalKey<FormState>? formKey;
   final TextEditingController? emailController;
   final TextEditingController? passwordController;
   final TextEditingController? nameController;
@@ -26,12 +27,20 @@ class MaterialButtonWidget extends StatelessWidget {
   final void Function()? onPressed;
   final Color? materialButtonColor;
   final Color? buttonTextColor;
+  final double? buttonWidth;
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      width: double.infinity,
+      width:buttonWidth,
       decoration: BoxDecoration(
+        boxShadow: const [
+          BoxShadow(
+            blurRadius: 2,
+            offset: Offset(0, 2),
+            color: Color(0xFFD6D3D3),
+          ),
+        ],
         color: materialButtonColor,
         borderRadius: BorderRadius.circular(30),
       ),

@@ -1,4 +1,6 @@
 import 'package:firebase_sample/controller/authentication_provider.dart';
+import 'package:firebase_sample/widgets/constants.dart';
+import 'package:firebase_sample/widgets/material_button_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -8,6 +10,7 @@ class LoginRegisterNowButtonWidget extends StatelessWidget {
     required this.confirmRegisterPassController,
     required this.registerEmailController,
     required this.registerPassController,
+    required this.formKey
   });
 
   final TextEditingController registerEmailController;
@@ -15,47 +18,32 @@ class LoginRegisterNowButtonWidget extends StatelessWidget {
   final TextEditingController registerPassController;
 
   final TextEditingController confirmRegisterPassController;
+  final GlobalKey<FormState> formKey ;
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      width: 180,
-      decoration: BoxDecoration(
-        gradient: const LinearGradient(
-          colors: [
-            Color(0xFF08AD9D),
-            Color(0xFF1D8076),
-          ],
-        ),
-        borderRadius: BorderRadius.circular(30),
-        boxShadow: [
-          BoxShadow(
-            color: Colors.teal.withOpacity(0.4),
-            blurRadius: 10,
-            offset: const Offset(0, 4),
-          ),
-        ],
-      ),
-      child: MaterialButton(
-        onPressed: () {
-          Provider.of<AuthenticationProvider>(context, listen: false)
-              .createEmailAccount(
-            context,
-            registerEmailController,
-            registerPassController,
-            confirmRegisterPassController,
-          );
-        },
-        padding: const EdgeInsets.symmetric(vertical: 14),
-        child: const Text(
-          "Register Now",
-          style: TextStyle(
-            color: Colors.white,
-            fontSize: 16,
-            fontWeight: FontWeight.w600,
-          ),
-        ),
-      ),
+    final screenWidth = MediaQuery.of(context).size.width;
+    return MaterialButtonWidget(
+      buttonWidth: screenWidth * 1 / 2,
+      materialButtonColor: appColor,
+      buttonText: "Register Now",
+      onPressed: () {
+        if(formKey.currentState!.validate()){
+              Provider.of<AuthenticationProvider>(context, listen: false)
+            .createEmailAccount(
+          context,
+          registerEmailController,
+          registerPassController,
+          confirmRegisterPassController,
+        );
+
+        }else{
+          
+        }
+    
+      },
+      buttonTextColor: kwhite,
     );
+ 
   }
 }

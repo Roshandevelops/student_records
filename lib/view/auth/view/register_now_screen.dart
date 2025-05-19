@@ -11,9 +11,7 @@ class RegisterNowScreen extends StatelessWidget {
     return const Scaffold(
       resizeToAvoidBottomInset: true,
       backgroundColor: Color(0xFFF9F9F9),
-      body: SafeArea(
-        child: LoginRegisterNowStackWidget(),
-      ),
+      body: LoginRegisterNowStackWidget(),
     );
   }
 }

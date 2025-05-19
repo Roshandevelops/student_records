@@ -103,13 +103,21 @@ class _StudentCardAnimatedState extends State<StudentCardAnimated>
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text(
-                            student.name,
+                            safeText(student.name),
                             style: const TextStyle(
                               fontSize: 20,
                               fontWeight: FontWeight.bold,
                               color: Colors.black87,
                             ),
                           ),
+                          // Text(
+                          //   student.name,
+                          //   style: const TextStyle(
+                          //     fontSize: 20,
+                          //     fontWeight: FontWeight.bold,
+                          //     color: Colors.black87,
+                          //   ),
+                          // ),
                           const SizedBox(height: 4),
                           Row(
                             children: [
@@ -117,13 +125,12 @@ class _StudentCardAnimatedState extends State<StudentCardAnimated>
                                   size: 16, color: Colors.black54),
                               const SizedBox(width: 6),
                               Flexible(
-                                child: Text(
-                                  student.domain,
-                                  style: const TextStyle(
-                                      fontSize: 14, color: Colors.black54),
-                                  overflow: TextOverflow.ellipsis,
-                                ),
-                              ),
+                                  child: Text(
+                                safeText(student.domain),
+                                style: const TextStyle(
+                                    fontSize: 14, color: Colors.black54),
+                                overflow: TextOverflow.ellipsis,
+                              )),
                             ],
                           ),
                         ],
@@ -172,6 +179,15 @@ class _StudentCardAnimatedState extends State<StudentCardAnimated>
     } catch (e) {
       debugPrint('Error parsing timestamp: $e');
       return "Time not available";
+    }
+  }
+
+  String safeText(String input) {
+    try {
+      return String.fromCharCodes(input.runes);
+    } catch (e) {
+      debugPrint('Invalid UTF-16 sequence: $e');
+      return 'Invalid';
     }
   }
 }

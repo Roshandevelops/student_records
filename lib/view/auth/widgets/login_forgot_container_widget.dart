@@ -41,7 +41,9 @@ class _LoginForgotContainerWidgetState
         children: [
           TextformfieldWidget(
             validator: (value) {
-              if (value == null || value.isEmpty || !value.contains('@')) {
+              if (value == null ||
+                  value.isEmpty ||
+                  !value.contains('@gmail.com')) {
                 return emailErrorDialogue;
               }
               return null;

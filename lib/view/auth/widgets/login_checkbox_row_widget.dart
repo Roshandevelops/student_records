@@ -2,7 +2,7 @@ import 'package:firebase_sample/view/auth/view/login_forgot_password_screen.dart
 import 'package:firebase_sample/widgets/constants.dart';
 import 'package:flutter/material.dart';
 
-class LoginCheckboxRowWidget extends StatelessWidget {
+class LoginCheckboxRowWidget extends StatefulWidget {
   const LoginCheckboxRowWidget(
       {super.key,
       required this.forgotEmailController,
@@ -10,6 +10,12 @@ class LoginCheckboxRowWidget extends StatelessWidget {
   final TextEditingController forgotEmailController;
   final GlobalKey<FormState> forgotFormKey;
 
+  @override
+  State<LoginCheckboxRowWidget> createState() => _LoginCheckboxRowWidgetState();
+}
+
+class _LoginCheckboxRowWidgetState extends State<LoginCheckboxRowWidget> {
+  bool isRemembered = true;
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -20,9 +26,14 @@ class LoginCheckboxRowWidget extends StatelessWidget {
             Row(
               children: [
                 Checkbox(
-                  value: true,
-                  onChanged: (value) {},
-                  activeColor: Colors.white,
+                
+                  value: isRemembered,
+                  onChanged: (value) {
+                    setState(() {
+                      isRemembered = !isRemembered;
+                    });
+                  },
+                  activeColor: kwhite,
                   checkColor: Colors.teal,
                 ),
                 const Text(
@@ -35,8 +46,8 @@ class LoginCheckboxRowWidget extends StatelessWidget {
               onTap: () {
                 Navigator.of(context).push(MaterialPageRoute(builder: (ctx) {
                   return LoginForgotPasswordScreen(
-                    forgotEmailController: forgotEmailController,
-                    forgotFormKey: forgotFormKey,
+                    forgotEmailController: widget.forgotEmailController,
+                    forgotFormKey: widget.forgotFormKey,
                   );
                 }));
               },
