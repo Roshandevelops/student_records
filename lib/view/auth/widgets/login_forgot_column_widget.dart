@@ -15,7 +15,7 @@ class LoginForgotColumnWidget extends StatelessWidget {
     return Form(
       key: forgotFormKey,
       child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
+        crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           const Icon(
             Icons.lock_reset,

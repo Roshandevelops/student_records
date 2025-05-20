@@ -95,6 +95,23 @@ class _LoginRegisterNowStackWidgetState
             ],
           ),
         ),
+        Padding(
+          padding: const EdgeInsets.only(
+            top: 30,
+            left: 20,
+            right: 0,
+            bottom: 0,
+          ),
+          child: IconButton(
+            onPressed: () {
+              Navigator.of(context).pop();
+            },
+            icon: Icon(
+              Icons.arrow_back,
+              color: kwhite,
+            ),
+          ),
+        ),
       ],
     );
   }
