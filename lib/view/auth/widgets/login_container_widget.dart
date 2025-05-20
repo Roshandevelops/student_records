@@ -36,11 +36,11 @@ class _LoginContainerWidgetState extends State<LoginContainerWidget> {
                 end: Alignment.bottomRight,
               ),
               borderRadius: BorderRadius.circular(20),
-              boxShadow: [
+              boxShadow:const [
                 BoxShadow(
                   color: Colors.grey,
                   blurRadius: 1.5,
-                  offset: const Offset(0, 2),
+                  offset: Offset(0, 2),
                 ),
               ],
             ),

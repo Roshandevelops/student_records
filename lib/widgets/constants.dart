@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-const String emailErrorDialogue = "Please Enter Valid Email";
-  const String passwordDialogue = "Please Enter password of min length 6";
+const String emailErrorDialogue = "Please enter valid email";
+  const String passwordDialogue = "Please enter password of min length 6";
 const Color kwhite = Colors.white;
 const Color kBlack = Colors.black;
 const SizedBox kHeight = SizedBox(height: 10);

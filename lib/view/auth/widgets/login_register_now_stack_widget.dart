@@ -1,4 +1,5 @@
 import 'package:firebase_sample/view/auth/view/login_screen.dart';
+import 'package:firebase_sample/view/auth/widgets/login_otp_pinput_widget.dart';
 import 'package:firebase_sample/view/auth/widgets/login_register_now_textform_widget.dart';
 import 'package:firebase_sample/widgets/constants.dart';
 import 'package:flutter/material.dart';
@@ -85,6 +86,21 @@ class _LoginRegisterNowStackWidgetState
                   ],
                 ),
                 child: LoginRegisterNowTextformWidget(
+                  // validator: (value) {
+                  //   if (registerPassController.text.isEmpty) {
+                  //     return passwordDialogue;
+                  //   } else if (confirmRegisterPassController.text.isEmpty) {
+                  //     return passwordDialogue;
+                  //   } else if (registerPassController.text !=
+                  //       confirmRegisterPassController.text) {
+                  //     return "Password doesn't matching";
+                  //   } else if (registerPassController.text.length < 6 ||
+                  //       confirmRegisterPassController.text.length < 6) {
+                  //     return passwordDialogue;
+                  //   } else {
+                  //     return null;
+                  //   }
+                  // },
                   formKey: formKey,
                   registerEmailController: registerEmailController,
                   registerPassController: registerPassController,
@@ -104,9 +120,18 @@ class _LoginRegisterNowStackWidgetState
           ),
           child: IconButton(
             onPressed: () {
-              Navigator.of(context).pop();
+              Navigator.of(context).pushAndRemoveUntil(
+                MaterialPageRoute(
+                  builder: (ctx) {
+                    return const LoginScreen();
+                  },
+                ),
+                (route) {
+                  return false;
+                },
+              );
             },
-            icon: Icon(
+            icon: const Icon(
               Icons.arrow_back,
               color: kwhite,
             ),

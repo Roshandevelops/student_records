@@ -50,10 +50,11 @@ class LoginSendOtpButtonWidget extends StatelessWidget {
 
   Future<void> sendOtpButtonClicked(BuildContext context) async {
     if (completePhoneNumber == null || completePhoneNumber!.isEmpty) {
-      snackBarWidget(context, "Please Enter a valid phone Number");
+      snackBarWidget(context, "Please enter a valid phone number");
       return;
+    } else {
+      await Provider.of<AuthenticationProvider>(context, listen: false)
+          .verifyNumber(context, completePhoneNumber);
     }
-    await Provider.of<AuthenticationProvider>(context, listen: false)
-        .phoneNumberActive(context, completePhoneNumber);
   }
 }

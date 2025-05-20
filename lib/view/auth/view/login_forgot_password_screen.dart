@@ -31,12 +31,12 @@ class LoginForgotPasswordScreen extends StatelessWidget {
               onPressed: () {
                 Navigator.of(context).pushAndRemoveUntil(
                   MaterialPageRoute(builder: (ctx) {
-                    return LoginScreen();
+                    return const LoginScreen();
                   }),
                   (route) => false,
                 );
               },
-              icon: Icon(
+              icon: const Icon(
                 Icons.arrow_back,
                 color: appColor,
               ),

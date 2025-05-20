@@ -74,6 +74,8 @@ class TextformfieldWidget extends StatelessWidget {
           labelStyle: const TextStyle(
             color: kwhite,
           ),
+          // enabledBorder: customOutlineBorder(color: Colors.white60, width: 2),
+          // focusedBorder: customOutlineBorder(color: kwhite, width: 2),
           enabledBorder: enabledBorder,
           disabledBorder: disabledBorder,
           focusedBorder: focusedBorder,

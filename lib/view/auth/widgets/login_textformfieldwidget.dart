@@ -18,7 +18,6 @@ class LoginEmailTextformfieldwidget extends StatefulWidget {
 
 class _LoginEmailTextformfieldwidgetState
     extends State<LoginEmailTextformfieldwidget> {
-
   bool isPasswordVisible = false;
 
   @override

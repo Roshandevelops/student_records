@@ -1,3 +1,4 @@
+import 'package:firebase_sample/view/auth/view/login_screen.dart';
 import 'package:firebase_sample/view/auth/widgets/login_intl_stack_waveclipper.dart';
 import 'package:firebase_sample/widgets/constants.dart';
 import 'package:flutter/material.dart';
@@ -24,8 +25,34 @@ class LoginIntlStackWidget extends StatelessWidget {
             ),
           ),
         ),
+        Padding(
+          padding: const EdgeInsets.only(
+            top: 30,
+            left: 20,
+            right: 0,
+            bottom: 0,
+          ),
+          child: IconButton(
+            onPressed: () {
+              Navigator.of(context).pushAndRemoveUntil(
+                MaterialPageRoute(
+                  builder: (ctx) {
+                    return const LoginScreen();
+                  },
+                ),
+                (route) {
+                  return false;
+                },
+              );
+            },
+            icon: const Icon(
+              Icons.arrow_back,
+              color: kwhite,
+            ),
+          ),
+        ),
         const Positioned(
-          top: 60,
+          top: 100,
           left: 24,
           right: 24,
           child: Column(

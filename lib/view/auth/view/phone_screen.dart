@@ -10,14 +10,11 @@ class PhoneScreen extends StatelessWidget {
     return const Scaffold(
       resizeToAvoidBottomInset: true,
       backgroundColor: Color(0xFFF5F8FA),
-      body: SafeArea(
-        
-        child: Column(
-          children: [
-            LoginIntlStackWidget(),
-            IntlphoneFieldWidget(),
-          ],
-        ),
+      body: Column(
+        children: [
+          LoginIntlStackWidget(),
+          IntlphoneFieldWidget(),
+        ],
       ),
     );
   }

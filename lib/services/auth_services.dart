@@ -46,8 +46,8 @@ class AuthServices {
       );
       return null;
     } on FirebaseException catch (e) {
-      if(e.code=="invalid-credential"){
-        return "Please enter a valid Email and Password";
+      if (e.code == "invalid-credential") {
+        return "Please enter a valid email and password";
       }
       return e.message;
     } catch (e) {
@@ -86,7 +86,7 @@ class AuthServices {
       }
       await FirebaseAuth.instance
           .createUserWithEmailAndPassword(email: email, password: password);
-    
+
       return null;
     } on FirebaseException catch (e) {
       if (e.code == "email-already-in-use") {
@@ -98,41 +98,9 @@ class AuthServices {
       } else {
         return "Registration failed: ${e.message}";
       }
-    } 
-    catch (e) {
-      log("Register Error: $e");
-      return  "something went wrong:${e.toString()}";
-    }
-    
-  
-  }
-
-  Future<String?> logOutService(BuildContext context) async {
-    final googleSignIn = GoogleSignIn();
-    final user = FirebaseAuth.instance.currentUser;
-    try {
-      if (user != null && user.providerData.isNotEmpty) {
-        final providerId = user.providerData.first.providerId;
-
-        if (providerId == "google.com") {
-          await googleSignIn.disconnect();
-          // await FirebaseAuth.instance.signOut();
-        }
-        //  else {
-          // await FirebaseAuth.instance.signOut();
-        // }
-      }
-      //  else {
-        await FirebaseAuth.instance.signOut();
-      // }
-
-      return null;
-    } on SocketException catch (_) {
-      return "Please check your Internet connection try again later";
-    } on FirebaseException catch (e) {
-      return e.message;
     } catch (e) {
-      return e.toString();
+      log("Register Error: $e");
+      return "something went wrong:${e.toString()}";
     }
   }
 
@@ -158,20 +126,20 @@ class AuthServices {
       );
 
       log("hello${completePhoneNumber.toString()}");
+      return null;
     } on SocketException catch (_) {
       return "Please check your Internet connection try again later";
     } on FirebaseException catch (e) {
       return e.message;
     } catch (e) {
-      log(e.toString());
+      return e.toString();
     }
-    return null;
   }
 
   Future<String?> otpValidating(
       BuildContext context, String verificationId, String otp) async {
-    try {
-      PhoneAuthCredential credential = PhoneAuthProvider.credential(
+       try {
+       PhoneAuthCredential credential = PhoneAuthProvider.credential(
         verificationId: verificationId,
         smsCode: otp,
       );
@@ -190,27 +158,33 @@ class AuthServices {
           ),
         );
       }
+      return null;
+    } on SocketException catch (e) {
+      return e.message;
     } on FirebaseAuthException catch (e) {
-      if (context.mounted) {
-        snackBarWidget(context, e.message ?? "Invalid OTP");
-      }
+      return e.message ?? "Invalid OTP";
+      // if (context.mounted) {
+      //   snackBarWidget(context, e.message ?? "Invalid OTP");
+      // }
     } catch (e) {
-      log("OTP verification error: $e");
-      if (context.mounted) {
-        snackBarWidget(context, "An error occurred. Please try again.");
-      }
+      return e.toString();
+      // log("OTP verification error: $e");
+      // if (context.mounted) {
+      //   snackBarWidget(context, "An error occurred. Please try again.");
+      // }
     }
-    return null;
   }
 
-  Future<String?>resetPasswordService(BuildContext context,TextEditingController forgotEmailController)async{
-     showDialog(
-        context: context,
-        builder: (context) {
-          return const Center(
-            child: CircularProgressIndicator(),
-          );
-        });
+  Future<String?> resetPasswordService(
+      BuildContext context, TextEditingController forgotEmailController) async {
+    showDialog(
+      context: context,
+      builder: (context) {
+        return const Center(
+          child: CircularProgressIndicator(),
+        );
+      },
+    );
     try {
       final forgotEmail = forgotEmailController.text.trim();
       await FirebaseAuth.instance.sendPasswordResetEmail(email: forgotEmail);
@@ -225,6 +199,7 @@ class AuthServices {
           (route) => route.isFirst,
         );
       }
+      return null;
     } on FirebaseException catch (e) {
       e.message;
     } on SocketException catch (_) {
@@ -234,6 +209,28 @@ class AuthServices {
     }
     return null;
   }
-  
-  }
 
+  Future<String?> logOutService(BuildContext context) async {
+    final googleSignIn = GoogleSignIn();
+    final user = FirebaseAuth.instance.currentUser;
+    try {
+      if (user != null && user.providerData.isNotEmpty) {
+        final providerId = user.providerData.first.providerId;
+
+        if (providerId == "google.com") {
+          await googleSignIn.disconnect();
+        }
+      }
+
+      await FirebaseAuth.instance.signOut();
+
+      return null;
+    } on SocketException catch (_) {
+      return "Please check your Internet connection try again later";
+    } on FirebaseException catch (e) {
+      return e.message;
+    } catch (e) {
+      return e.toString();
+    }
+  }
+}

@@ -5,12 +5,14 @@ import 'package:firebase_sample/widgets/textformfield_widget.dart';
 import 'package:flutter/material.dart';
 
 class LoginRegisterNowTextformWidget extends StatefulWidget {
-  const LoginRegisterNowTextformWidget(
-      {super.key,
-      required this.registerEmailController,
-      required this.registerPassController,
-      required this.confirmRegisterPassController,
-      required this.formKey});
+  const LoginRegisterNowTextformWidget({
+    super.key,
+    required this.registerEmailController,
+    required this.registerPassController,
+    required this.confirmRegisterPassController,
+    required this.formKey,
+    // required this.validator,
+  });
 
   final TextEditingController registerEmailController;
 
@@ -19,6 +21,7 @@ class LoginRegisterNowTextformWidget extends StatefulWidget {
   final TextEditingController confirmRegisterPassController;
   final GlobalKey<FormState> formKey;
 
+  // final String? Function(String?)? validator;
   @override
   State<LoginRegisterNowTextformWidget> createState() =>
       _LoginRegisterNowTextformWidgetState();
@@ -56,6 +59,7 @@ class _LoginRegisterNowTextformWidgetState
           ),
           const SizedBox(height: 15),
           TextformfieldWidget(
+            // validator: widget.validator,
             validator: (value) {
               if (value!.length < 6) {
                 return passwordDialogue;
@@ -91,6 +95,7 @@ class _LoginRegisterNowTextformWidgetState
           ),
           const SizedBox(height: 15),
           TextformfieldWidget(
+            // validator: widget.validator,
             validator: (value) {
               if (value!.length < 6) {
                 return passwordDialogue;
