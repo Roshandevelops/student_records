@@ -1,3 +1,4 @@
+import 'package:firebase_sample/widgets/constants.dart';
 import 'package:flutter/material.dart';
 
 class AppUtils {
@@ -47,11 +48,11 @@ class AppUtils {
           child: Column(
             mainAxisSize: MainAxisSize.min,
             children: [
-              Icon(icon, size: 60, color: Colors.redAccent),
+              Icon(icon, size: 60, color: Colors.red),
               const SizedBox(height: 15),
               Text(
                 mainText,
-                style:const TextStyle(
+                style: const TextStyle(
                   fontSize: 22,
                   fontWeight: FontWeight.bold,
                 ),
@@ -60,7 +61,7 @@ class AppUtils {
               Text(
                 subText,
                 textAlign: TextAlign.center,
-                style:const TextStyle(fontSize: 16, color: Colors.black54),
+                style: const TextStyle(fontSize: 16, color: Colors.black54),
               ),
               const SizedBox(height: 25),
               Row(
@@ -94,14 +95,17 @@ class AppUtils {
                           borderRadius: BorderRadius.circular(10),
                         ),
                         // Gradient background with decoration workaround
-                        backgroundColor: Colors.redAccent,
+                        backgroundColor: Colors.red,
                       ),
                       onPressed: onPressed,
                       child: Text(
                         confirm,
-                        style:const TextStyle(
+                        style: const TextStyle(
                           fontSize: 16,
                           fontWeight: FontWeight.bold,
+                          color: Color(
+                            0xB7FFFFFF,
+                          ),
                         ),
                       ),
                     ),

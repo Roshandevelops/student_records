@@ -22,30 +22,6 @@ class LoginSendOtpButtonWidget extends StatelessWidget {
       buttonTextColor: kwhite,
       materialButtonColor: appColor,
     );
-    // SizedBox(
-    //   width: screenWidth * 1 / 4,
-    //   height: 50,
-    //   child: ElevatedButton(
-    //     style: ElevatedButton.styleFrom(
-    //       elevation: 4,
-    //       backgroundColor: const Color(0xFF1B9C8F),
-    //       shape: RoundedRectangleBorder(
-    //         borderRadius: BorderRadius.circular(12),
-    //       ),
-    //     ),
-    //     onPressed: () async {
-    //       sendOtpButtonClicked(context);
-    //     },
-    //     child: const Text(
-    //       "Send OTP",
-    //       style: TextStyle(
-    //         fontSize: 16,
-    //         fontWeight: FontWeight.w600,
-    //         color: kwhite,
-    //       ),
-    //     ),
-    //   ),
-    // );
   }
 
   Future<void> sendOtpButtonClicked(BuildContext context) async {

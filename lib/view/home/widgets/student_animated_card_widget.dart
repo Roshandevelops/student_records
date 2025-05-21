@@ -87,9 +87,7 @@ class _StudentCardAnimatedState extends State<StudentCardAnimated>
                       backgroundColor: appColor,
                       radius: 30,
                       child: Text(
-                        student.name.isNotEmpty
-                            ? student.name[0].toUpperCase()
-                            : '?',
+                        getInitials(student.name),
                         style: const TextStyle(
                           fontSize: 24,
                           color: Colors.white,
@@ -104,33 +102,29 @@ class _StudentCardAnimatedState extends State<StudentCardAnimated>
                         children: [
                           Text(
                             safeText(student.name),
+                            overflow: TextOverflow.ellipsis,
                             style: const TextStyle(
                               fontSize: 20,
                               fontWeight: FontWeight.bold,
                               color: Colors.black87,
                             ),
                           ),
-                          // Text(
-                          //   student.name,
-                          //   style: const TextStyle(
-                          //     fontSize: 20,
-                          //     fontWeight: FontWeight.bold,
-                          //     color: Colors.black87,
-                          //   ),
-                          // ),
                           const SizedBox(height: 4),
                           Row(
                             children: [
-                              const Icon(Icons.work_outline,
+                              const Icon(Icons.class_,
                                   size: 16, color: Colors.black54),
                               const SizedBox(width: 6),
                               Flexible(
-                                  child: Text(
-                                safeText(student.domain),
-                                style: const TextStyle(
-                                    fontSize: 14, color: Colors.black54),
-                                overflow: TextOverflow.ellipsis,
-                              )),
+                                child: Text(
+                                  safeText(
+                                    "class: ${getCleanText(student.classes)}",
+                                  ),
+                                  style: const TextStyle(
+                                      fontSize: 14, color: Colors.black54),
+                                  overflow: TextOverflow.ellipsis,
+                                ),
+                              ),
                             ],
                           ),
                         ],
@@ -146,6 +140,7 @@ class _StudentCardAnimatedState extends State<StudentCardAnimated>
                     const SizedBox(width: 6),
                     Text(
                       "Age: ${student.age}",
+                      overflow: TextOverflow.ellipsis,
                       style:
                           const TextStyle(fontSize: 14, color: Colors.black87),
                     ),
@@ -154,11 +149,19 @@ class _StudentCardAnimatedState extends State<StudentCardAnimated>
                 kHeight,
                 Row(
                   children: [
-                    const Icon(Icons.access_time,
-                        size: 16, color: Colors.black54),
+                    const Icon(Icons.domain, size: 16, color: Colors.black54),
                     const SizedBox(width: 6),
+                    Expanded(
+                      child: Text(
+                        "Domain: ${getCleanText(student.domain)}",
+                        overflow: TextOverflow.ellipsis,
+                        style: const TextStyle(
+                            fontSize: 13, color: Colors.black54),
+                      ),
+                    ),
                     Text(
                       getSafeTime(),
+                      overflow: TextOverflow.ellipsis,
                       style:
                           const TextStyle(fontSize: 13, color: Colors.black54),
                     ),
@@ -189,5 +192,16 @@ class _StudentCardAnimatedState extends State<StudentCardAnimated>
       debugPrint('Invalid UTF-16 sequence: $e');
       return 'Invalid';
     }
+  }
+
+  String getInitials(String name) {
+    final trimmed = name.trim();
+    if (trimmed.isEmpty) return '?';
+    return trimmed[0].toUpperCase();
+  }
+
+  String getCleanText(String input) {
+    final trimmed = input.trim();
+    return trimmed.isEmpty ? 'Not specified' : trimmed;
   }
 }

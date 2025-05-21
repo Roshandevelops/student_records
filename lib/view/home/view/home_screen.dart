@@ -33,98 +33,151 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        actions: [
-          IconButton(
-            onPressed: () {
-              AppUtils.alertDialogueFunction(
-                context,
-                Icons.logout,
-                "Confirm Logout",
-                "Are you sure, You want to Logout?",
-                "Logout",
-                () async {
-                  await Provider.of<AuthenticationProvider>(
-                    context,
-                    listen: false,
-                  ).logOut(context);
-                  if (context.mounted) {
-                    Navigator.of(context).pop();
-                  }
-                },
-              );
-            },
-            icon:const Icon(
-              Icons.no_accounts,
-              size: 35,
-            ),
-          )
-        ],
-        backgroundColor: Colors.amber,
-      ),
       backgroundColor: const Color(0xfff0f4f8),
-      body: SafeArea(
-        child: StreamBuilder<List<StudentModel>>(
-          stream: databaseServices.getTodos(),
-          builder: (context, snapshot) {
-            if (!snapshot.hasData) {
-              return const Center(child: CircularProgressIndicator());
-            }
+      body: StreamBuilder<List<StudentModel>>(
+        stream: databaseServices.getTodos(),
+        builder: (context, snapshot) {
+          if (!snapshot.hasData) {
+            return const Center(child: CircularProgressIndicator());
+          }
 
-            // log(snapshot.data.!.data().toString());
-            List todos = snapshot.data ?? [];
+          List<StudentModel> todos = snapshot.data ?? [];
 
-            //         List todos = snapshot.data?.data((event) {
-            //   return StudentModel.fromJson(event.data());
-            // },).toList() ?? [];
+          return CustomScrollView(
+            physics: const BouncingScrollPhysics(),
+            slivers: [
+              SliverAppBar(
+                pinned: true,
+                backgroundColor: appColor,
+                expandedHeight: 160,
+                elevation: 4,
+                // shape: const RoundedRectangleBorder(
+                //   borderRadius: BorderRadius.only(
+                //     bottomLeft: Radius.circular(24),
+                //     bottomRight: Radius.circular(24),
+                //   ),
+                // ),
+                actions: [
+                  IconButton(
+                    tooltip: "Logout",
+                    onPressed: () async => await logoutUser(),
+                    icon:
+                        const Icon(Icons.logout, color: Colors.white, size: 30),
+                  ),
+                ],
+                flexibleSpace: FlexibleSpaceBar(
+                  centerTitle: true,
+                  title: Row(
+                    mainAxisSize: MainAxisSize.min,
+                    children: const [
+                      Icon(
+                        Icons.school,
+                        color: Colors.white,
+                        size: 24,
+                      ),
+                      kWidth,
+                      Text(
+                        "Student Details",
+                        style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          color: Colors.white,
+                          fontSize: 20,
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+              if (todos.isEmpty)
+                const SliverFillRemaining(
+                  hasScrollBody: false,
+                  child: Center(
+                    child: Text(
+                      "No student data available",
+                      style: TextStyle(fontSize: 18),
+                    ),
+                  ),
+                )
+              else
+                SliverPadding(
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
+                  sliver: SliverList(
+                    delegate: SliverChildBuilderDelegate(
+                      (context, index) {
+                        final studentModel = todos[index];
+                        final todoId = todos[index].id;
 
-            if (todos.isEmpty) {
-              return const Center(
-                child:
-                    Text("No data available", style: TextStyle(fontSize: 18)),
-              );
-            }
-
-            return ListView.builder(
-              padding: const EdgeInsets.all(16),
-              itemCount: todos.length,
-              itemBuilder: (context, index) {
-                StudentModel studentModel = todos[index];
-                String todoId = todos[index].id;
-
-                return StudentCardAnimated(
-                  studentModel: studentModel,
-                  onDelete: () async {
-                    AppUtils.alertDialogueFunction(
-                      context,
-                      Icons.delete,
-                      "Confirm Delete",
-                      "Are you sure, You want to Delete?",
-                      "Delete",
-                      () {
-                        databaseServices.deleteTodo(todoId);
-                        Navigator.of(context).pop(true);
+                        return Padding(
+                          padding: const EdgeInsets.only(bottom: 16),
+                          child: StudentCardAnimated(
+                            studentModel: studentModel,
+                            onDelete: () async {
+                              await deleteItem(todoId!);
+                            },
+                            timeAgo: timeAgo,
+                          ),
+                        );
                       },
-                    );
-                  },
-                  timeAgo: timeAgo,
-                );
-              },
-            );
-          },
-        ),
+                      childCount: todos.length,
+                    ),
+                  ),
+                ),
+            ],
+          );
+        },
       ),
-      floatingActionButton: FloatingActionButton(
+      floatingActionButton: FloatingActionButton.extended(
         backgroundColor: appColor,
         onPressed: () {
-          Navigator.of(context).push(
+          Navigator.of(context).pushReplacement(
             MaterialPageRoute(
               builder: (ctx) => const StudentAddingScreen(),
             ),
           );
         },
-        child: const Icon(Icons.add, color: Colors.white),
+        label: const Text(
+          "Add Student",
+          style: TextStyle(color: kwhite),
+        ),
+        icon: const Icon(
+          Icons.add,
+          color: kwhite,
+        ),
       ),
+    );
+  }
+
+  Future<void> deleteItem(String todoId) async {
+    AppUtils.alertDialogueFunction(
+      context,
+      Icons.delete,
+      "Confirm Delete",
+      "Are you sure you want to delete this student?",
+      "Delete",
+      () {
+        databaseServices.deleteTodo(todoId);
+        Navigator.of(context).pop(true);
+      },
+    );
+  }
+
+  Future<void> logoutUser() async {
+    AppUtils.alertDialogueFunction(
+      context,
+      Icons.logout,
+      "Confirm Logout",
+      "Are you sure you want to logout?",
+      "Logout",
+      () async {
+        await Provider.of<AuthenticationProvider>(
+          context,
+          listen: false,
+        ).logOut(context);
+        if (context.mounted) {
+          Navigator.of(context).pop();
+        }
+      },
     );
   }
 }
