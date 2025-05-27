@@ -1,5 +1,4 @@
 import 'package:firebase_sample/view/auth/view/login_screen.dart';
-import 'package:firebase_sample/view/auth/widgets/login_otp_pinput_widget.dart';
 import 'package:firebase_sample/view/auth/widgets/login_register_now_textform_widget.dart';
 import 'package:firebase_sample/widgets/constants.dart';
 import 'package:flutter/material.dart';

@@ -6,16 +6,6 @@ const String todoCollectionRef = "todo";
 
 class DatabaseServices {
   final fireStore = FirebaseFirestore.instance;
-  // late final CollectionReference todoRefs;
-
-  DatabaseServices() {
-    // todoRefs =
-    //     fireStore.collection(todoCollectionRef).withConverter<StudentModel>(
-    //           fromFirestore: (snapshots, _) =>
-    //               StudentModel.fromJson(snapshots.data()!),
-    //           toFirestore: (todo, _) => todo.toJson(),
-    //         );
-  }
 
   Stream<List<StudentModel>> getTodos() {
     final userId = FirebaseAuth.instance.currentUser!.uid;
@@ -55,5 +45,17 @@ class DatabaseServices {
         .delete();
 
     // await todoRefs.doc(todoId).delete();
+  }
+
+  Future<bool> isRegNoExists(String regNo) async {
+    final userId = FirebaseAuth.instance.currentUser!.uid;
+
+    final querySnapshot = await fireStore
+        .collection(todoCollectionRef)
+        .doc(userId)
+        .collection("notes")
+        .where("regNoLower", isEqualTo: regNo.toLowerCase())
+        .get();
+    return querySnapshot.docs.isNotEmpty;
   }
 }

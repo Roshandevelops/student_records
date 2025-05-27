@@ -4,13 +4,13 @@ import 'package:flutter/material.dart';
 
 class StudentCardAnimated extends StatefulWidget {
   final StudentModel studentModel;
-  final VoidCallback onDelete;
+  final VoidCallback? onDelete;
   final String Function(DateTime) timeAgo;
 
   const StudentCardAnimated({
     super.key,
     required this.studentModel,
-    required this.onDelete,
+    this.onDelete,
     required this.timeAgo,
   });
 
@@ -27,14 +27,13 @@ class _StudentCardAnimatedState extends State<StudentCardAnimated>
   @override
   void initState() {
     super.initState();
-
     _controller = AnimationController(
       duration: const Duration(milliseconds: 500),
       vsync: this,
     );
 
     _slideAnimation = Tween<Offset>(
-      begin: const Offset(1.0, 1.0), // from right
+      begin: const Offset(1.0, 1.0),
       end: Offset.zero,
     ).animate(
         CurvedAnimation(parent: _controller, curve: Curves.linearToEaseOut));
@@ -110,22 +109,17 @@ class _StudentCardAnimatedState extends State<StudentCardAnimated>
                             ),
                           ),
                           const SizedBox(height: 4),
-                          Row(
-                            children: [
-                              const Icon(Icons.class_,
-                                  size: 16, color: Colors.black54),
-                              const SizedBox(width: 6),
-                              Flexible(
-                                child: Text(
-                                  safeText(
-                                    "class: ${getCleanText(student.classes)}",
-                                  ),
-                                  style: const TextStyle(
-                                      fontSize: 14, color: Colors.black54),
-                                  overflow: TextOverflow.ellipsis,
-                                ),
-                              ),
-                            ],
+                          // Icon(Icons.cake_rounded,
+                          //     size: 18, color: appColor.withOpacity(0.8)),
+                          const SizedBox(width: 6),
+                          Text(
+                            "Age: ${student.age}",
+                            overflow: TextOverflow.ellipsis,
+                            style: const TextStyle(
+                              fontSize: 14,
+                              color: Colors.black54,
+                              fontWeight: FontWeight.w500,
+                            ),
                           ),
                         ],
                       ),
@@ -135,35 +129,62 @@ class _StudentCardAnimatedState extends State<StudentCardAnimated>
                 const SizedBox(height: 16),
                 Row(
                   children: [
-                    const Icon(Icons.cake_outlined,
-                        size: 16, color: Colors.black54),
+                    Icon(Icons.format_list_numbered_rtl,
+                        size: 18, color: appColor.withOpacity(0.8)),
                     const SizedBox(width: 6),
-                    Text(
-                      "Age: ${student.age}",
-                      overflow: TextOverflow.ellipsis,
-                      style:
-                          const TextStyle(fontSize: 14, color: Colors.black87),
+                    Expanded(
+                      child: Text(
+                        "Reg: ${student.regNo}",
+                        overflow: TextOverflow.ellipsis,
+                        style: const TextStyle(
+                            fontSize: 14,
+                            color: Colors.black54,
+                            fontWeight: FontWeight.w500),
+                      ),
                     ),
                   ],
                 ),
                 kHeight,
                 Row(
                   children: [
-                    const Icon(Icons.domain, size: 16, color: Colors.black54),
+                    Icon(Icons.class_,
+                        size: 18, color: appColor.withOpacity(0.8)),
+                    const SizedBox(width: 6),
+                    Flexible(
+                      child: Text(
+                        "Class: ${getCleanText(student.classes)}",
+                        style: const TextStyle(
+                            fontSize: 14,
+                            color: Colors.black54,
+                            fontWeight: FontWeight.w500),
+                        overflow: TextOverflow.ellipsis,
+                      ),
+                    ),
+                  ],
+                ),
+                kHeight,
+                Row(
+                  children: [
+                    Icon(Icons.domain,
+                        size: 18, color: appColor.withOpacity(0.8)),
                     const SizedBox(width: 6),
                     Expanded(
                       child: Text(
                         "Domain: ${getCleanText(student.domain)}",
                         overflow: TextOverflow.ellipsis,
                         style: const TextStyle(
-                            fontSize: 13, color: Colors.black54),
+                            fontSize: 13,
+                            color: Colors.black54,
+                            fontWeight: FontWeight.w500),
                       ),
                     ),
                     Text(
                       getSafeTime(),
                       overflow: TextOverflow.ellipsis,
-                      style:
-                          const TextStyle(fontSize: 13, color: Colors.black54),
+                      style: const TextStyle(
+                          fontSize: 13,
+                          color: Colors.black45,
+                          fontWeight: FontWeight.w400),
                     ),
                   ],
                 ),

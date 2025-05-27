@@ -26,7 +26,6 @@ class _LoginCheckboxRowWidgetState extends State<LoginCheckboxRowWidget> {
             Row(
               children: [
                 Checkbox(
-                
                   value: isRemembered,
                   onChanged: (value) {
                     setState(() {

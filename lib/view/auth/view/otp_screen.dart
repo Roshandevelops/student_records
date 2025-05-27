@@ -1,7 +1,6 @@
 import 'package:firebase_sample/view/auth/widgets/login_otp_column_widgets.dart';
 import 'package:flutter/material.dart';
 
-
 class OtpScreen extends StatefulWidget {
   const OtpScreen({
     super.key,
@@ -15,7 +14,6 @@ class OtpScreen extends StatefulWidget {
 }
 
 class _OtpScreenState extends State<OtpScreen> {
-  String otp = "";
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -38,7 +36,6 @@ class _OtpScreenState extends State<OtpScreen> {
                     ],
                   ),
                 ),
-                
               ],
             ),
           ),

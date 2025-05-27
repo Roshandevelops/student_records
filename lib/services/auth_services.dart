@@ -138,8 +138,8 @@ class AuthServices {
 
   Future<String?> otpValidating(
       BuildContext context, String verificationId, String otp) async {
-       try {
-       PhoneAuthCredential credential = PhoneAuthProvider.credential(
+    try {
+      PhoneAuthCredential credential = PhoneAuthProvider.credential(
         verificationId: verificationId,
         smsCode: otp,
       );
@@ -150,12 +150,15 @@ class AuthServices {
       }
 
       if (context.mounted) {
-        await Navigator.of(context).pushReplacement(
+        await Navigator.of(context).pushAndRemoveUntil(
           MaterialPageRoute(
             builder: (ctx) {
               return const HomeScreen();
             },
           ),
+          (route) {
+            return false;
+          },
         );
       }
       return null;

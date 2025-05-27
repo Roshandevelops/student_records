@@ -4,6 +4,7 @@ import 'package:firebase_sample/services/database_services.dart';
 import 'package:firebase_sample/view/home/view/home_screen.dart';
 import 'package:firebase_sample/widgets/constants.dart';
 import 'package:firebase_sample/widgets/material_button_widget.dart';
+import 'package:firebase_sample/widgets/snackbar_widget.dart';
 import 'package:firebase_sample/widgets/textformfield_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -17,15 +18,11 @@ class AddingFormFieldWidget extends StatefulWidget {
 
 class _AddingFormFieldWidgetState extends State<AddingFormFieldWidget> {
   final _formKey = GlobalKey<FormState>();
-
   final TextEditingController nameController = TextEditingController();
-
+  final TextEditingController regNoController = TextEditingController();
   final TextEditingController classController = TextEditingController();
-
   final TextEditingController ageController = TextEditingController();
-
   final TextEditingController domainController = TextEditingController();
-
   final DatabaseServices databaseServices = DatabaseServices();
 
   @override
@@ -39,7 +36,6 @@ class _AddingFormFieldWidgetState extends State<AddingFormFieldWidget> {
               if (value == null || value.trim().isEmpty) {
                 return "Name is Required";
               }
-
               return null;
             },
             prefixIcon: const Icon(Icons.person),
@@ -48,20 +44,10 @@ class _AddingFormFieldWidgetState extends State<AddingFormFieldWidget> {
           ),
           kHeight,
           TextformfieldWidget(
-            validator: (value) {
-              if (value == null || value.trim().isEmpty) {
-                return "Class is Required";
-              }
-
-              return null;
-            },
-            prefixIcon: const Icon(Icons.class_),
-            hintText: "Enter class or grade",
-            controller: classController,
-          ),
-          kHeight,
-          TextformfieldWidget(
-            inputFormatters: [FilteringTextInputFormatter.digitsOnly],
+            inputFormatters: [
+              FilteringTextInputFormatter.digitsOnly,
+              LengthLimitingTextInputFormatter(3),
+            ],
             keyboardType: TextInputType.number,
             prefixIcon: const Icon(Icons.cake),
             hintText: "Enter age",
@@ -79,12 +65,38 @@ class _AddingFormFieldWidgetState extends State<AddingFormFieldWidget> {
           TextformfieldWidget(
             validator: (value) {
               if (value == null || value.trim().isEmpty) {
+                return "Reg No. is Required";
+              }
+
+              return null;
+            },
+            prefixIcon: const Icon(Icons.format_list_numbered_rtl),
+            hintText: "Enter Reg No",
+            controller: regNoController,
+          ),
+          kHeight,
+          TextformfieldWidget(
+            validator: (value) {
+              if (value == null || value.trim().isEmpty) {
+                return "Class is Required";
+              }
+
+              return null;
+            },
+            prefixIcon: const Icon(Icons.class_),
+            hintText: "Enter class or grade",
+            controller: classController,
+          ),
+          kHeight,
+          TextformfieldWidget(
+            validator: (value) {
+              if (value == null || value.trim().isEmpty) {
                 return "Domain is Required";
               }
 
               return null;
             },
-            prefixIcon: const Icon(Icons.category),
+            prefixIcon: const Icon(Icons.domain),
             hintText: "Enter domain (e.g., Science)",
             controller: domainController,
           ),
@@ -104,10 +116,21 @@ class _AddingFormFieldWidgetState extends State<AddingFormFieldWidget> {
     );
   }
 
-  void submitStudentData(BuildContext context) {
+  Future<void> submitStudentData(BuildContext context) async {
     if (_formKey.currentState!.validate()) {
+      final regNo = regNoController.text.trim();
+      final exists = await databaseServices.isRegNoExists(regNo);
+      if (exists) {
+        if (context.mounted) {
+          snackBarWidget(
+              context, "The register number you entered already exists");
+        }
+        return;
+      }
       int parsedAge = int.parse(ageController.text.trim());
       StudentModel studentModel = StudentModel(
+        regNoLower: regNoController.text.trim().toLowerCase(),
+        regNo: regNoController.text,
         createdOn: Timestamp.now(),
         updatedOn: Timestamp.now(),
         name: nameController.text,
@@ -116,19 +139,21 @@ class _AddingFormFieldWidgetState extends State<AddingFormFieldWidget> {
         classes: classController.text,
       );
       databaseServices.addTodo(studentModel);
-
       nameController.clear();
       classController.clear();
       ageController.clear();
       domainController.clear();
-      Navigator.of(context).pushAndRemoveUntil(
-        MaterialPageRoute(builder: (ctx) {
-          return const HomeScreen();
-        }),
-        (route) {
-          return false;
-        },
-      );
+      regNoController.clear();
+      if (context.mounted) {
+        Navigator.of(context).pushAndRemoveUntil(
+          MaterialPageRoute(builder: (ctx) {
+            return const HomeScreen();
+          }),
+          (route) {
+            return false;
+          },
+        );
+      }
     }
   }
 }
