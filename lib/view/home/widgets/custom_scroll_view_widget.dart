@@ -9,106 +9,96 @@ import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 
 class CustomScrollViewWidget extends StatefulWidget {
-  const CustomScrollViewWidget({super.key,required this.snapshot});
-  
-
-
+  const CustomScrollViewWidget({super.key, required this.snapshot});
   final AsyncSnapshot<List<StudentModel>> snapshot;
-
   @override
   State<CustomScrollViewWidget> createState() => _CustomScrollViewWidgetState();
 }
 
 class _CustomScrollViewWidgetState extends State<CustomScrollViewWidget> {
-
-    final DatabaseServices databaseServices = DatabaseServices();
-
-     
-  
+  final DatabaseServices databaseServices = DatabaseServices();
   @override
   Widget build(BuildContext context) {
-     final  List<StudentModel> todos =widget.snapshot.data ?? [];
-    return   CustomScrollView(
-            physics: const BouncingScrollPhysics(),
-            slivers: [
-              SliverAppBar(
-                pinned: true,
-                backgroundColor: appColor,
-                expandedHeight: 160,
-                elevation: 4,
-                actions: [
-                  IconButton(
-                    tooltip: "Logout",
-                    onPressed: () async {
-                      await logoutUser(context);
-                    },
-                    icon:
-                        const Icon(Icons.logout, color: Colors.white, size: 30),
-                  ),
-                ],
-                flexibleSpace: FlexibleSpaceBar(
-                  centerTitle: true,
-                  title: Row(
-                    mainAxisSize: MainAxisSize.min,
-                    children: const [
-                      Icon(
-                        Icons.school,
-                        color: Colors.white,
-                        size: 24,
-                      ),
-                      kWidth,
-                      Text(
-                        "Student Details",
-                        style: TextStyle(
-                          fontWeight: FontWeight.bold,
-                          color: Colors.white,
-                          fontSize: 20,
-                        ),
-                      ),
-                    ],
+    final List<StudentModel> todos = widget.snapshot.data ?? [];
+    return CustomScrollView(
+      physics: const BouncingScrollPhysics(),
+      slivers: [
+        SliverAppBar(
+          pinned: true,
+          backgroundColor: appColor,
+          expandedHeight: 160,
+          elevation: 4,
+          actions: [
+            IconButton(
+              tooltip: "Logout",
+              onPressed: () async {
+                await logoutUser(context);
+              },
+              icon: const Icon(Icons.logout, color: Colors.white, size: 30),
+            ),
+          ],
+          flexibleSpace: FlexibleSpaceBar(
+            centerTitle: true,
+            title: Row(
+              mainAxisSize: MainAxisSize.min,
+              children: const [
+                Icon(
+                  Icons.school,
+                  color: Colors.white,
+                  size: 24,
+                ),
+                kWidth,
+                Text(
+                  "Student Details",
+                  style: TextStyle(
+                    fontWeight: FontWeight.bold,
+                    color: Colors.white,
+                    fontSize: 20,
                   ),
                 ),
+              ],
+            ),
+          ),
+        ),
+        if (todos.isEmpty)
+          const SliverFillRemaining(
+            hasScrollBody: false,
+            child: Center(
+              child: Text(
+                "No student data available",
+                style: TextStyle(fontSize: 18),
               ),
-              if (todos.isEmpty)
-                const SliverFillRemaining(
-                  hasScrollBody: false,
-                  child: Center(
-                    child: Text(
-                      "No student data available",
-                      style: TextStyle(fontSize: 18),
-                    ),
-                  ),
-                )
-              else
-                SliverPadding(
-                  padding:
-                      const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
-                  sliver: SliverList(
-                    delegate: SliverChildBuilderDelegate(
-                      (context, index) {
-                        final studentModel = todos[index];
-                        final todoId = todos[index].id;
+            ),
+          )
+        else
+          SliverPadding(
+            padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
+            sliver: SliverList(
+              delegate: SliverChildBuilderDelegate(
+                (context, index) {
+                  final studentModel = todos[index];
+                  final todoId = todos[index].id;
 
-                        return Padding(
-                          padding: const EdgeInsets.only(bottom: 16),
-                          child: StudentCardAnimated(
-                            studentModel: studentModel,
-                            onDelete: () async {
-                              await deleteItem(todoId!,context);
-                            },
-                            timeAgo: timeAgo,
-                          ),
-                        );
+                  return Padding(
+                    padding: const EdgeInsets.only(bottom: 16),
+                    child: StudentCardAnimated(
+                      studentModel: studentModel,
+                      onDelete: () async {
+                        await deleteItem(todoId!, context);
                       },
-                      childCount: todos.length,
+                      timeAgo: timeAgo,
                     ),
-                  ),
-                ),
-            ],
-          );
+                  );
+                },
+                childCount: todos.length,
+              ),
+            ),
+          ),
+      ],
+    );
   }
 
-    Future<void> logoutUser(BuildContext context) async {
+  Future<void> logoutUser(BuildContext context) async {
     AppUtils.alertDialogueFunction(
       context,
       Icons.logout,
@@ -127,7 +117,7 @@ class _CustomScrollViewWidgetState extends State<CustomScrollViewWidget> {
     );
   }
 
-    Future<void> deleteItem(String todoId,BuildContext context) async {
+  Future<void> deleteItem(String todoId, BuildContext context) async {
     AppUtils.alertDialogueFunction(
       context,
       Icons.delete,
@@ -140,7 +130,8 @@ class _CustomScrollViewWidgetState extends State<CustomScrollViewWidget> {
       },
     );
   }
-   String timeAgo(DateTime date) {
+
+  String timeAgo(DateTime date) {
     final now = DateTime.now();
     final diff = now.difference(date);
 

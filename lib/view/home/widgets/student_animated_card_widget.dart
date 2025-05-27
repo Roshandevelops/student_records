@@ -109,8 +109,6 @@ class _StudentCardAnimatedState extends State<StudentCardAnimated>
                             ),
                           ),
                           const SizedBox(height: 4),
-                          // Icon(Icons.cake_rounded,
-                          //     size: 18, color: appColor.withOpacity(0.8)),
                           const SizedBox(width: 6),
                           Text(
                             "Age: ${student.age}",
