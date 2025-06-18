@@ -17,6 +17,7 @@ class AddingFormFieldWidget extends StatefulWidget {
 }
 
 class _AddingFormFieldWidgetState extends State<AddingFormFieldWidget> {
+
   final _formKey = GlobalKey<FormState>();
   final TextEditingController nameController = TextEditingController();
   final TextEditingController regNoController = TextEditingController();
@@ -24,7 +25,7 @@ class _AddingFormFieldWidgetState extends State<AddingFormFieldWidget> {
   final TextEditingController ageController = TextEditingController();
   final TextEditingController domainController = TextEditingController();
   final DatabaseServices databaseServices = DatabaseServices();
-
+  bool isLoading = false;
   @override
   Widget build(BuildContext context) {
     return Form(
@@ -101,12 +102,18 @@ class _AddingFormFieldWidgetState extends State<AddingFormFieldWidget> {
             controller: domainController,
           ),
           kHeight20,
+          // if (isLoading)
+          //   Padding(
+          //     padding: EdgeInsets.only(bottom: 10),
+          //     child: CircularProgressIndicator(),
+          //   ),
           MaterialButtonWidget(
+            isLoading: isLoading,
             buttonWidth: double.infinity,
             formKey: _formKey,
             buttonText: "Save Student",
             onPressed: () {
-              submitStudentData(context);
+              saveStudentData(context);
             },
             materialButtonColor: appColor,
             buttonTextColor: kwhite,
@@ -116,8 +123,11 @@ class _AddingFormFieldWidgetState extends State<AddingFormFieldWidget> {
     );
   }
 
-  Future<void> submitStudentData(BuildContext context) async {
+  Future<void> saveStudentData(BuildContext context) async {
     if (_formKey.currentState!.validate()) {
+      setState(() {
+        isLoading = true;
+      });
       final regNo = regNoController.text.trim();
       final exists = await databaseServices.isRegNoExists(regNo);
       if (exists) {
@@ -125,6 +135,11 @@ class _AddingFormFieldWidgetState extends State<AddingFormFieldWidget> {
           snackBarWidget(
               context, "The register number you entered already exists");
         }
+        setState(
+          () {
+            isLoading = false;
+          },
+        );
         return;
       }
       int parsedAge = int.parse(ageController.text.trim());
@@ -138,12 +153,18 @@ class _AddingFormFieldWidgetState extends State<AddingFormFieldWidget> {
         domain: domainController.text,
         classes: classController.text,
       );
-      databaseServices.addTodo(studentModel);
+        setState(
+        () {
+          isLoading = false;
+        },
+      );
+      await databaseServices.addTodo(studentModel);
       nameController.clear();
       classController.clear();
       ageController.clear();
       domainController.clear();
       regNoController.clear();
+    
       if (context.mounted) {
         Navigator.of(context).pushAndRemoveUntil(
           MaterialPageRoute(builder: (ctx) {

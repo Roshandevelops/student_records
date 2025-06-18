@@ -16,8 +16,9 @@ void main() async {
   FirebaseFirestore.instance.settings = const Settings(
     persistenceEnabled: true,
   );
-
-  runApp(const MyApp());
+  runApp(
+    const MyApp()
+    );
 }
 
 class MyApp extends StatelessWidget {

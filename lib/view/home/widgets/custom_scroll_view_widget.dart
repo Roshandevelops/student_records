@@ -37,11 +37,11 @@ class _CustomScrollViewWidgetState extends State<CustomScrollViewWidget> {
               icon: const Icon(Icons.logout, color: Colors.white, size: 30),
             ),
           ],
-          flexibleSpace: FlexibleSpaceBar(
+          flexibleSpace:const FlexibleSpaceBar(
             centerTitle: true,
             title: Row(
               mainAxisSize: MainAxisSize.min,
-              children: const [
+              children:  [
                 Icon(
                   Icons.school,
                   color: Colors.white,

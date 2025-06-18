@@ -67,7 +67,7 @@ class AddingStackWidget extends StatelessWidget {
                 },
               );
             },
-            icon:const Icon(
+            icon: const Icon(
               Icons.arrow_back,
               color: kwhite,
             ),

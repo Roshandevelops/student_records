@@ -23,7 +23,7 @@ class DatabaseServices {
             .toList());
   }
 
-  void addTodo(StudentModel studentModel) async {
+  Future<void> addTodo(StudentModel studentModel) async {
     final userId = FirebaseAuth.instance.currentUser!.uid;
     await fireStore
         .collection(todoCollectionRef)

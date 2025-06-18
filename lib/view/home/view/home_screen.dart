@@ -25,7 +25,9 @@ class _HomeScreenState extends State<HomeScreen> {
           if (!snapshot.hasData) {
             return const Center(child: CircularProgressIndicator());
           }
-          return  CustomScrollViewWidget(snapshot:snapshot);
+          return  CustomScrollViewWidget(
+            snapshot:snapshot
+            );
         }
       ),
       floatingActionButton: FloatingActionButton.extended(

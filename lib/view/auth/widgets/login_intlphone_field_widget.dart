@@ -29,7 +29,9 @@ class _IntlphoneFieldWidgetState extends State<IntlphoneFieldWidget> {
                 );
               },
             ),
-            LoginSendOtpButtonWidget(completePhoneNumber: completePhoneNumber),
+            LoginSendOtpButtonWidget(
+              completePhoneNumber: completePhoneNumber,
+            ),
           ],
         ),
       ),

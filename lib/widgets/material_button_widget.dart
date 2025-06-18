@@ -1,21 +1,23 @@
+import 'package:firebase_sample/widgets/constants.dart';
 import 'package:flutter/material.dart';
 
 class MaterialButtonWidget extends StatelessWidget {
-  const MaterialButtonWidget(
-      {super.key,
-      this.formKey,
-      this.emailController,
-      this.passwordController,
-      required this.buttonText,
-      required this.onPressed,
-      this.nameController,
-      this.ageController,
-      this.classController,
-      this.domainController,
-      this.materialButtonColor,
-      required this.buttonTextColor,
-      required this.buttonWidth
-      });
+  const MaterialButtonWidget({
+    super.key,
+    this.formKey,
+    this.emailController,
+    this.passwordController,
+    required this.buttonText,
+    required this.onPressed,
+    this.nameController,
+    this.ageController,
+    this.classController,
+    this.domainController,
+    this.materialButtonColor,
+    required this.buttonTextColor,
+    required this.buttonWidth,
+    this.isLoading = false,
+  });
   final GlobalKey<FormState>? formKey;
   final TextEditingController? emailController;
   final TextEditingController? passwordController;
@@ -28,11 +30,12 @@ class MaterialButtonWidget extends StatelessWidget {
   final Color? materialButtonColor;
   final Color? buttonTextColor;
   final double? buttonWidth;
+  final bool isLoading;
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      width:buttonWidth,
+      width: buttonWidth,
       decoration: BoxDecoration(
         boxShadow: const [
           BoxShadow(
@@ -45,19 +48,28 @@ class MaterialButtonWidget extends StatelessWidget {
         borderRadius: BorderRadius.circular(30),
       ),
       child: MaterialButton(
-        onPressed: onPressed,
+        onPressed: isLoading ? null : onPressed,
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(30),
         ),
         padding: const EdgeInsets.symmetric(vertical: 14),
-        child: Text(
-          buttonText,
-          style: TextStyle(
-            fontSize: 16,
-            fontWeight: FontWeight.bold,
-            color: buttonTextColor,
-          ),
-        ),
+        child: isLoading
+            ? SizedBox(
+                width: 24,
+                height: 24,
+                child: CircularProgressIndicator(
+                  color: kwhite,
+                  strokeWidth: 2,
+                ),
+              )
+            : Text(
+                buttonText,
+                style: TextStyle(
+                  fontSize: 16,
+                  fontWeight: FontWeight.bold,
+                  color: buttonTextColor,
+                ),
+              ),
       ),
     );
   }
