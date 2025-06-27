@@ -42,7 +42,7 @@ class _CustomScrollViewWidgetState extends State<CustomScrollViewWidget> {
                   ),
                 ));
               },
-              icon: Icon(
+              icon:const Icon(
                 CupertinoIcons.search,
                 size: 25,
                 color: kwhite,
@@ -101,7 +101,7 @@ class _CustomScrollViewWidgetState extends State<CustomScrollViewWidget> {
                   return Padding(
                     padding: const EdgeInsets.only(bottom: 16),
                     child: StudentCardAnimated(
-                      
+
                       index: todos.length - index - 1,
                       studentModel: studentModel,
                       onDelete: () async {

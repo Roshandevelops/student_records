@@ -54,7 +54,7 @@ class MaterialButtonWidget extends StatelessWidget {
         ),
         padding: const EdgeInsets.symmetric(vertical: 14),
         child: isLoading
-            ? SizedBox(
+            ?const SizedBox(
                 width: 24,
                 height: 24,
                 child: CircularProgressIndicator(

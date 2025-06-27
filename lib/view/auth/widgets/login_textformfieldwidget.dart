@@ -25,8 +25,8 @@ class _LoginEmailTextformfieldwidgetState
     return Column(
       children: [
         TextformfieldWidget(
-          hintStyle: TextStyle(color: kwhite),
-          contentStyle: TextStyle(color: kwhite),
+          hintStyle:const TextStyle(color: kwhite),
+          contentStyle:const TextStyle(color: kwhite),
           validator: (value) {
             if (value!.isEmpty || !value.contains("@")) {
               return emailErrorDialogue;
@@ -50,8 +50,8 @@ class _LoginEmailTextformfieldwidgetState
         ),
         kHeight,
         TextformfieldWidget(
-          hintStyle: TextStyle(color: kwhite),
-          contentStyle: TextStyle(color: kwhite),
+          hintStyle:const TextStyle(color: kwhite),
+          contentStyle:const TextStyle(color: kwhite),
           obscureText: !isPasswordVisible,
           suffixIcon: InkWell(
             onTap: () {

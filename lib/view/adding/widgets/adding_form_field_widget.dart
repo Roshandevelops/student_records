@@ -45,8 +45,8 @@ class _AddingFormFieldWidgetState extends State<AddingFormFieldWidget> {
       child: Column(
         children: [
           TextformfieldWidget(
-            hintStyle: TextStyle(color: kwhite),
-            contentStyle: TextStyle(color: kwhite),
+            hintStyle:const TextStyle(color: kwhite),
+            contentStyle:const TextStyle(color: kwhite),
             fillColor: appColor,
             validator: (value) {
               if (value == null || value.trim().isEmpty) {
@@ -60,8 +60,8 @@ class _AddingFormFieldWidgetState extends State<AddingFormFieldWidget> {
           ),
           kHeight,
           TextformfieldWidget(
-            hintStyle: TextStyle(color: kwhite),
-            contentStyle: TextStyle(color: kwhite),
+            hintStyle:const TextStyle(color: kwhite),
+            contentStyle:const TextStyle(color: kwhite),
             fillColor: appColor,
             inputFormatters: [
               FilteringTextInputFormatter.digitsOnly,
@@ -82,8 +82,8 @@ class _AddingFormFieldWidgetState extends State<AddingFormFieldWidget> {
           ),
           kHeight,
           TextformfieldWidget(
-            hintStyle: TextStyle(color: kwhite),
-            contentStyle: TextStyle(color: kwhite),
+            hintStyle:const TextStyle(color: kwhite),
+            contentStyle:const TextStyle(color: kwhite),
             fillColor: appColor,
             validator: (value) {
               if (value == null || value.trim().isEmpty) {
@@ -98,8 +98,8 @@ class _AddingFormFieldWidgetState extends State<AddingFormFieldWidget> {
           ),
           kHeight,
           TextformfieldWidget(
-            hintStyle: TextStyle(color: kwhite),
-            contentStyle: TextStyle(color: kwhite),
+            hintStyle:const TextStyle(color: kwhite),
+            contentStyle:const TextStyle(color: kwhite),
             fillColor: appColor,
             validator: (value) {
               if (value == null || value.trim().isEmpty) {
@@ -114,8 +114,8 @@ class _AddingFormFieldWidgetState extends State<AddingFormFieldWidget> {
           ),
           kHeight,
           TextformfieldWidget(
-            hintStyle: TextStyle(color: kwhite),
-            contentStyle: TextStyle(color: kwhite),
+            hintStyle:const TextStyle(color: kwhite),
+            contentStyle:const TextStyle(color: kwhite),
             fillColor: appColor,
             validator: (value) {
               if (value == null || value.trim().isEmpty) {
@@ -129,11 +129,7 @@ class _AddingFormFieldWidgetState extends State<AddingFormFieldWidget> {
             controller: domainController,
           ),
           kHeight20,
-          // if (isLoading)
-          //   Padding(
-          //     padding: EdgeInsets.only(bottom: 10),
-          //     child: CircularProgressIndicator(),
-          //   ),
+     
           MaterialButtonWidget(
             isLoading: isLoading,
             buttonWidth: double.infinity,

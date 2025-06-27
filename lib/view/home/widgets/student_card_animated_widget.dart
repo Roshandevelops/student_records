@@ -132,14 +132,14 @@ class _StudentCardAnimatedState extends State<StudentCardAnimated>
                                         ),
                                       ));
                                     },
-                                    icon: Icon(
+                                    icon:const Icon(
                                       Icons.edit,
                                       color: Colors.green,
                                     )),
                                 IconButton(
                                   tooltip: "Delete",
                                   onPressed: widget.onDelete,
-                                  icon: Icon(Icons.delete,
+                                  icon:const Icon(Icons.delete,
                                       color: Colors.redAccent),
                                 ),
                               ],

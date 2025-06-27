@@ -40,8 +40,8 @@ class _LoginForgotContainerWidgetState
       child: Column(
         children: [
           TextformfieldWidget(
-            hintStyle: TextStyle(color: kwhite),
-            contentStyle: TextStyle(color: kwhite),
+            hintStyle:const TextStyle(color: kwhite),
+            contentStyle:const TextStyle(color: kwhite),
             // labelText: "Email",
             validator: (value) {
               if (value == null ||

@@ -64,12 +64,12 @@ class _SearchScreenState extends State<SearchScreen> {
             Padding(
                 padding: const EdgeInsets.all(16),
                 child: TextformfieldWidget(
-                  contentStyle: TextStyle(color: kBlack),
-                  hintStyle: TextStyle(
+                  contentStyle:const TextStyle(color: kBlack),
+                  hintStyle:const TextStyle(
                     color: kBlack,
                   ),
                   hintText: "Search by Name or Reg no",
-                  prefixIcon: Icon(
+                  prefixIcon:const Icon(
                     CupertinoIcons.search,
                     color: kBlack,
                   ),
@@ -77,26 +77,14 @@ class _SearchScreenState extends State<SearchScreen> {
                   onChanged: filterSearch,
                   controller: searchController,
                   enabledBorder: OutlineInputBorder(
-                    borderSide: BorderSide(color: kBlack),
+                    borderSide:const BorderSide(color: kBlack),
                     borderRadius: BorderRadius.circular(10),
                   ),
                   focusedBorder: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(10),
-                    borderSide: BorderSide(color: Colors.black),
+                    borderSide:const BorderSide(color: Colors.black),
                   ),
                 )
-
-                //  TextFormField(
-                //   controller: searchController,
-                //   onChanged: filterSearch,
-                //   decoration: InputDecoration(
-                //     prefixIcon: const Icon(CupertinoIcons.search),
-                //     hintText: "Search by name or reg no",
-                //     border: OutlineInputBorder(
-                //       borderRadius: BorderRadius.circular(10),
-                //     ),
-                //   ),
-                // ),
                 ),
             Expanded(
               child: filteredList.isEmpty
