@@ -2,7 +2,7 @@ import 'package:firebase_sample/controller/authentication_provider.dart';
 import 'package:firebase_sample/model/student_model.dart';
 import 'package:firebase_sample/services/database_services.dart';
 import 'package:firebase_sample/utils/utils.dart';
-import 'package:firebase_sample/view/home/widgets/student_animated_card_widget.dart';
+import 'package:firebase_sample/view/home/widgets/student_card_animated_widget.dart';
 import 'package:firebase_sample/widgets/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
@@ -37,11 +37,11 @@ class _CustomScrollViewWidgetState extends State<CustomScrollViewWidget> {
               icon: const Icon(Icons.logout, color: Colors.white, size: 30),
             ),
           ],
-          flexibleSpace:const FlexibleSpaceBar(
+          flexibleSpace: const FlexibleSpaceBar(
             centerTitle: true,
             title: Row(
               mainAxisSize: MainAxisSize.min,
-              children:  [
+              children: [
                 Icon(
                   Icons.school,
                   color: Colors.white,

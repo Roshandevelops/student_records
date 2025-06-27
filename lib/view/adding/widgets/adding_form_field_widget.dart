@@ -17,7 +17,6 @@ class AddingFormFieldWidget extends StatefulWidget {
 }
 
 class _AddingFormFieldWidgetState extends State<AddingFormFieldWidget> {
-
   final _formKey = GlobalKey<FormState>();
   final TextEditingController nameController = TextEditingController();
   final TextEditingController regNoController = TextEditingController();
@@ -40,24 +39,24 @@ class _AddingFormFieldWidgetState extends State<AddingFormFieldWidget> {
               return null;
             },
             prefixIcon: const Icon(Icons.person),
-            hintText: "Enter full name",
+            hintText: "Enter Full Name",
             controller: nameController,
           ),
           kHeight,
           TextformfieldWidget(
             inputFormatters: [
               FilteringTextInputFormatter.digitsOnly,
-              LengthLimitingTextInputFormatter(3),
+              LengthLimitingTextInputFormatter(2),
             ],
             keyboardType: TextInputType.number,
             prefixIcon: const Icon(Icons.cake),
-            hintText: "Enter age",
+            hintText: "Enter Age",
             controller: ageController,
             validator: (value) {
               if (value == null || value.trim().isEmpty) {
                 return "Age is Required";
               } else if (int.tryParse(value.trim()) == null) {
-                return "Enter a Valid number";
+                return "Enter a Valid Number";
               }
               return null;
             },
@@ -85,7 +84,7 @@ class _AddingFormFieldWidgetState extends State<AddingFormFieldWidget> {
               return null;
             },
             prefixIcon: const Icon(Icons.class_),
-            hintText: "Enter class or grade",
+            hintText: "Enter Class or Grade",
             controller: classController,
           ),
           kHeight,
@@ -98,7 +97,7 @@ class _AddingFormFieldWidgetState extends State<AddingFormFieldWidget> {
               return null;
             },
             prefixIcon: const Icon(Icons.domain),
-            hintText: "Enter domain (e.g., Science)",
+            hintText: "Enter Domain (e.g., Science)",
             controller: domainController,
           ),
           kHeight20,
@@ -153,7 +152,7 @@ class _AddingFormFieldWidgetState extends State<AddingFormFieldWidget> {
         domain: domainController.text,
         classes: classController.text,
       );
-        setState(
+      setState(
         () {
           isLoading = false;
         },
@@ -164,7 +163,7 @@ class _AddingFormFieldWidgetState extends State<AddingFormFieldWidget> {
       ageController.clear();
       domainController.clear();
       regNoController.clear();
-    
+
       if (context.mounted) {
         Navigator.of(context).pushAndRemoveUntil(
           MaterialPageRoute(builder: (ctx) {

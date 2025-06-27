@@ -62,7 +62,7 @@ class _StudentCardAnimatedState extends State<StudentCardAnimated>
       child: ScaleTransition(
         scale: _scaleAnimation,
         child: GestureDetector(
-          onLongPress: widget.onDelete,
+          // onLongPress: widget.onDelete,
           child: Container(
             margin: const EdgeInsets.only(bottom: 20),
             padding: const EdgeInsets.all(20),
@@ -99,14 +99,28 @@ class _StudentCardAnimatedState extends State<StudentCardAnimated>
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Text(
-                            safeText(student.name),
-                            overflow: TextOverflow.ellipsis,
-                            style: const TextStyle(
-                              fontSize: 20,
-                              fontWeight: FontWeight.bold,
-                              color: Colors.black87,
-                            ),
+                          Row(
+                            children: [
+                              Text(
+                                safeText(student.name),
+                                overflow: TextOverflow.ellipsis,
+                                style: const TextStyle(
+                                  fontSize: 20,
+                                  fontWeight: FontWeight.bold,
+                                  color: Colors.black87,
+                                ),
+                              ),
+                              Spacer(),
+                              Row(
+                                children: [
+                                  IconButton(
+                                      onPressed: () {}, icon: Icon(Icons.edit)),
+                                  IconButton(
+                                      onPressed: widget.onDelete,
+                                      icon: Icon(Icons.delete)),
+                                ],
+                              )
+                            ],
                           ),
                           const SizedBox(height: 4),
                           const SizedBox(width: 6),
@@ -186,6 +200,17 @@ class _StudentCardAnimatedState extends State<StudentCardAnimated>
                     ),
                   ],
                 ),
+                // Column(
+                //   children: [
+                //     Row(
+                //       mainAxisAlignment: MainAxisAlignment.end,
+                //       children: [
+                //         IconButton(onPressed: () {}, icon: Icon(Icons.delete)),
+                //         IconButton(onPressed: () {}, icon: Icon(Icons.edit)),
+                //       ],
+                //     )
+                //   ],
+                // )
               ],
             ),
           ),
