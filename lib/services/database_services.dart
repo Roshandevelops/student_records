@@ -58,4 +58,19 @@ class DatabaseServices {
         .get();
     return querySnapshot.docs.isNotEmpty;
   }
+
+  Future<void> updateTodo(StudentModel studentModel) async {
+  final userId = FirebaseAuth.instance.currentUser!.uid;
+
+  if (studentModel.id == null || studentModel.id!.isEmpty) {
+    throw Exception("Student ID is missing for update.");
+  }
+
+  await fireStore
+      .collection(todoCollectionRef)
+      .doc(userId)
+      .collection("notes")
+      .doc(studentModel.id)
+      .update(studentModel.toJson());
+}
 }

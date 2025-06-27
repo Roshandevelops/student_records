@@ -10,13 +10,30 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
 class AddingFormFieldWidget extends StatefulWidget {
-  const AddingFormFieldWidget({super.key});
+
+   final StudentModel? student;
+  const AddingFormFieldWidget({super.key,this.student});
+
+  
 
   @override
   State<AddingFormFieldWidget> createState() => _AddingFormFieldWidgetState();
 }
 
 class _AddingFormFieldWidgetState extends State<AddingFormFieldWidget> {
+
+
+  @override
+  void initState() {
+    if (widget.student != null) {
+    nameController.text = widget.student!.name;
+    regNoController.text = widget.student!.regNo!;
+    classController.text = widget.student!.classes;
+    ageController.text = widget.student!.age.toString();
+    domainController.text = widget.student!.domain;
+  }
+    super.initState();
+  }
   final _formKey = GlobalKey<FormState>();
   final TextEditingController nameController = TextEditingController();
   final TextEditingController regNoController = TextEditingController();
@@ -123,28 +140,28 @@ class _AddingFormFieldWidgetState extends State<AddingFormFieldWidget> {
   }
 
   Future<void> saveStudentData(BuildContext context) async {
-    if (_formKey.currentState!.validate()) {
-      setState(() {
-        isLoading = true;
-      });
-      final regNo = regNoController.text.trim();
+  if (_formKey.currentState!.validate()) {
+    setState(() {
+      isLoading = true;
+    });
+
+    final regNo = regNoController.text.trim();
+    int parsedAge = int.parse(ageController.text.trim());
+
+    // For new student
+    if (widget.student == null) {
       final exists = await databaseServices.isRegNoExists(regNo);
       if (exists) {
         if (context.mounted) {
-          snackBarWidget(
-              context, "The register number you entered already exists");
+          snackBarWidget(context, "The register number you entered already exists");
         }
-        setState(
-          () {
-            isLoading = false;
-          },
-        );
+        setState(() => isLoading = false);
         return;
       }
-      int parsedAge = int.parse(ageController.text.trim());
-      StudentModel studentModel = StudentModel(
-        regNoLower: regNoController.text.trim().toLowerCase(),
-        regNo: regNoController.text,
+
+      final newStudent = StudentModel(
+        regNoLower: regNo.toLowerCase(),
+        regNo: regNo,
         createdOn: Timestamp.now(),
         updatedOn: Timestamp.now(),
         name: nameController.text,
@@ -152,28 +169,93 @@ class _AddingFormFieldWidgetState extends State<AddingFormFieldWidget> {
         domain: domainController.text,
         classes: classController.text,
       );
-      setState(
-        () {
-          isLoading = false;
-        },
-      );
-      await databaseServices.addTodo(studentModel);
-      nameController.clear();
-      classController.clear();
-      ageController.clear();
-      domainController.clear();
-      regNoController.clear();
 
-      if (context.mounted) {
-        Navigator.of(context).pushAndRemoveUntil(
-          MaterialPageRoute(builder: (ctx) {
-            return const HomeScreen();
-          }),
-          (route) {
-            return false;
-          },
-        );
-      }
+      await databaseServices.addTodo(newStudent);
+    } else {
+      // For updating existing student
+      final updatedStudent = StudentModel(
+        id: widget.student!.id,
+        regNoLower: widget.student!.regNoLower,
+        regNo: widget.student!.regNo,
+        createdOn: widget.student!.createdOn,
+        updatedOn: Timestamp.now(),
+        name: nameController.text,
+        age: parsedAge,
+        domain: domainController.text,
+        classes: classController.text,
+      );
+
+      await databaseServices.updateTodo(updatedStudent);
+    }
+
+    setState(() => isLoading = false);
+
+    if (context.mounted) {
+      Navigator.of(context).pushAndRemoveUntil(
+        MaterialPageRoute(builder: (ctx) => const HomeScreen()),
+        (route) => false,
+      );
     }
   }
+}
+
+
+//   Future<void> saveStudentData(BuildContext context) async {
+//     if (_formKey.currentState!.validate()) {
+//       setState(() {
+//         isLoading = true;
+//       });
+//       final regNo = regNoController.text.trim();
+
+//       if(widget.student==null){
+//  final exists = await databaseServices.isRegNoExists(regNo);
+//       if (exists) {
+//         if (context.mounted) {
+//           snackBarWidget(
+//               context, "The register number you entered already exists");
+//         }
+//       }
+     
+//         setState(
+//           () {
+//             isLoading = false;
+//           },
+//         );
+//         return;
+//       }
+//       int parsedAge = int.parse(ageController.text.trim());
+//       StudentModel studentModel = StudentModel(
+//         regNoLower: regNoController.text.trim().toLowerCase(),
+//         regNo: regNoController.text,
+//         createdOn: Timestamp.now(),
+//         updatedOn: Timestamp.now(),
+//         name: nameController.text,
+//         age: parsedAge,
+//         domain: domainController.text,
+//         classes: classController.text,
+//       );
+//       setState(
+//         () {
+//           isLoading = false;
+//         },
+//       );
+//       await databaseServices.addTodo(studentModel);
+//       nameController.clear();
+//       classController.clear();
+//       ageController.clear();
+//       domainController.clear();
+//       regNoController.clear();
+
+//       if (context.mounted) {
+//         Navigator.of(context).pushAndRemoveUntil(
+//           MaterialPageRoute(builder: (ctx) {
+//             return const HomeScreen();
+//           }),
+//           (route) {
+//             return false;
+//           },
+//         );
+//       }
+//     }
+//   }
 }

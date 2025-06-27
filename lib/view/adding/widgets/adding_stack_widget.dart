@@ -1,3 +1,4 @@
+import 'package:firebase_sample/model/student_model.dart';
 import 'package:firebase_sample/view/adding/widgets/adding_form_field_widget.dart';
 import 'package:firebase_sample/view/auth/widgets/login_intl_stack_waveclipper.dart';
 import 'package:firebase_sample/view/home/view/home_screen.dart';
@@ -5,7 +6,9 @@ import 'package:firebase_sample/widgets/constants.dart';
 import 'package:flutter/material.dart';
 
 class AddingStackWidget extends StatelessWidget {
-  const AddingStackWidget({super.key});
+  const AddingStackWidget({super.key,this.student});
+
+    final StudentModel? student;
 
   @override
   Widget build(BuildContext context) {
@@ -93,7 +96,7 @@ class AddingStackWidget extends StatelessWidget {
                       ),
                     ],
                   ),
-                  child: const AddingFormFieldWidget(),
+                  child:  AddingFormFieldWidget(student: student,),
                 )
               ],
             ),

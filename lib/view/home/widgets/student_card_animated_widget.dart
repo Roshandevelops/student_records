@@ -1,4 +1,5 @@
 import 'package:firebase_sample/model/student_model.dart';
+import 'package:firebase_sample/view/adding/view/student_adding_screen.dart';
 import 'package:firebase_sample/widgets/constants.dart';
 import 'package:flutter/material.dart';
 
@@ -6,12 +7,14 @@ class StudentCardAnimated extends StatefulWidget {
   final StudentModel studentModel;
   final VoidCallback? onDelete;
   final String Function(DateTime) timeAgo;
+  final int index;
 
   const StudentCardAnimated({
     super.key,
     required this.studentModel,
     this.onDelete,
     required this.timeAgo,
+    required this.index,
   });
 
   @override
@@ -61,158 +64,166 @@ class _StudentCardAnimatedState extends State<StudentCardAnimated>
       position: _slideAnimation,
       child: ScaleTransition(
         scale: _scaleAnimation,
-        child: GestureDetector(
-          // onLongPress: widget.onDelete,
-          child: Container(
-            margin: const EdgeInsets.only(bottom: 20),
-            padding: const EdgeInsets.all(20),
-            decoration: BoxDecoration(
-              color: Colors.white,
-              borderRadius: BorderRadius.circular(20),
-              boxShadow: [
-                BoxShadow(
-                  color: Colors.grey.withOpacity(0.3),
-                  blurRadius: 10,
-                  offset: const Offset(0, 6),
-                )
-              ],
-            ),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Row(
-                  children: [
-                    CircleAvatar(
-                      backgroundColor: appColor,
-                      radius: 30,
-                      child: Text(
-                        getInitials(student.name),
-                        style: const TextStyle(
-                          fontSize: 24,
-                          color: Colors.white,
-                          fontWeight: FontWeight.bold,
-                        ),
+        child: Container(
+          margin: const EdgeInsets.only(bottom: 20),
+          padding: const EdgeInsets.all(20),
+          decoration: BoxDecoration(
+            color: Colors.white,
+            borderRadius: BorderRadius.circular(20),
+            boxShadow: [
+              BoxShadow(
+                color: Colors.grey.withOpacity(0.3),
+                blurRadius: 10,
+                offset: const Offset(0, 6),
+              )
+            ],
+          ),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Row(
+                children: [
+                  CircleAvatar(
+                    backgroundColor: appColor,
+                    radius: 30,
+                    child: Text(
+                      "${widget.index + 1}",
+                      overflow: TextOverflow.ellipsis,
+                      // getInitials(student.name),
+                      style: const TextStyle(
+                        fontSize: 24,
+                        color: Colors.white,
+                        fontWeight: FontWeight.bold,
                       ),
                     ),
-                    const SizedBox(width: 16),
-                    Expanded(
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Row(
-                            children: [
-                              Text(
-                                safeText(student.name),
-                                overflow: TextOverflow.ellipsis,
-                                style: const TextStyle(
-                                  fontSize: 20,
-                                  fontWeight: FontWeight.bold,
-                                  color: Colors.black87,
+                  ),
+                  const SizedBox(width: 16),
+                  Expanded(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Row(
+                          children: [
+                            Expanded(
+                              child: Tooltip(
+                                message: safeText(student.name),
+                                child: Text(
+                                  safeText(student.name),
+                                  overflow: TextOverflow.ellipsis,
+                                  style: const TextStyle(
+                                    fontSize: 20,
+                                    fontWeight: FontWeight.bold,
+                                    color: Colors.black87,
+                                  ),
                                 ),
                               ),
-                              Spacer(),
-                              Row(
-                                children: [
-                                  IconButton(
-                                      onPressed: () {}, icon: Icon(Icons.edit)),
-                                  IconButton(
-                                      onPressed: widget.onDelete,
-                                      icon: Icon(Icons.delete)),
-                                ],
-                              )
-                            ],
-                          ),
-                          const SizedBox(height: 4),
-                          const SizedBox(width: 6),
-                          Text(
-                            "Age: ${student.age}",
-                            overflow: TextOverflow.ellipsis,
-                            style: const TextStyle(
-                              fontSize: 14,
-                              color: Colors.black54,
-                              fontWeight: FontWeight.w500,
                             ),
+                            // Spacer(),
+                            Row(
+                              children: [
+                                IconButton(
+                                    tooltip: "Edit",
+                                    onPressed: () {
+                                      Navigator.of(context)
+                                          .push(MaterialPageRoute(
+                                        builder: (context) =>
+                                            StudentAddingScreen(
+                                          student: widget.studentModel,
+                                        ),
+                                      ));
+                                    },
+                                    icon: Icon(
+                                      Icons.edit,
+                                      color: Colors.green,
+                                    )),
+                                IconButton(
+                                    tooltip: "Delete",
+                                    onPressed: widget.onDelete,
+                                    icon: Icon(Icons.delete,
+                                        color: Colors.redAccent)),
+                              ],
+                            )
+                          ],
+                        ),
+                        const SizedBox(height: 4),
+                        const SizedBox(width: 6),
+                        Text(
+                          "Age: ${student.age}",
+                          overflow: TextOverflow.ellipsis,
+                          style: const TextStyle(
+                            fontSize: 14,
+                            color: Colors.black54,
+                            fontWeight: FontWeight.w500,
                           ),
-                        ],
-                      ),
+                        ),
+                      ],
                     ),
-                  ],
-                ),
-                const SizedBox(height: 16),
-                Row(
-                  children: [
-                    Icon(Icons.format_list_numbered_rtl,
-                        size: 18, color: appColor.withOpacity(0.8)),
-                    const SizedBox(width: 6),
-                    Expanded(
-                      child: Text(
-                        "Reg: ${student.regNo}",
-                        overflow: TextOverflow.ellipsis,
-                        style: const TextStyle(
-                            fontSize: 14,
-                            color: Colors.black54,
-                            fontWeight: FontWeight.w500),
-                      ),
+                  ),
+                ],
+              ),
+              const SizedBox(height: 16),
+              Row(
+                children: [
+                  Icon(Icons.format_list_numbered_rtl,
+                      size: 18, color: appColor.withOpacity(0.8)),
+                  const SizedBox(width: 6),
+                  Expanded(
+                    child: Text(
+                      "Reg: ${student.regNo}",
+                      overflow: TextOverflow.ellipsis,
+                      style: const TextStyle(
+                          fontSize: 14,
+                          color: Colors.black54,
+                          fontWeight: FontWeight.w500),
                     ),
-                  ],
-                ),
-                kHeight,
-                Row(
-                  children: [
-                    Icon(Icons.class_,
-                        size: 18, color: appColor.withOpacity(0.8)),
-                    const SizedBox(width: 6),
-                    Flexible(
-                      child: Text(
-                        "Class: ${getCleanText(student.classes)}",
-                        style: const TextStyle(
-                            fontSize: 14,
-                            color: Colors.black54,
-                            fontWeight: FontWeight.w500),
-                        overflow: TextOverflow.ellipsis,
-                      ),
+                  ),
+                ],
+              ),
+              kHeight,
+              Row(
+                children: [
+                  Icon(Icons.class_,
+                      size: 18, color: appColor.withOpacity(0.8)),
+                  const SizedBox(width: 6),
+                  Flexible(
+                    child: Text(
+                      "Class: ${getCleanText(student.classes)}",
+                      style: const TextStyle(
+                          fontSize: 14,
+                          color: Colors.black54,
+                          fontWeight: FontWeight.w500),
+                      overflow: TextOverflow.ellipsis,
                     ),
-                  ],
-                ),
-                kHeight,
-                Row(
-                  children: [
-                    Icon(Icons.domain,
-                        size: 18, color: appColor.withOpacity(0.8)),
-                    const SizedBox(width: 6),
-                    Expanded(
-                      child: Text(
-                        "Domain: ${getCleanText(student.domain)}",
-                        overflow: TextOverflow.ellipsis,
-                        style: const TextStyle(
-                            fontSize: 13,
-                            color: Colors.black54,
-                            fontWeight: FontWeight.w500),
-                      ),
-                    ),
-                    Text(
-                      getSafeTime(),
+                  ),
+                ],
+              ),
+              kHeight,
+              Row(
+                children: [
+                  Icon(Icons.domain,
+                      size: 18, color: appColor.withOpacity(0.8)),
+                  const SizedBox(width: 6),
+                  Expanded(
+                    child: Text(
+                      "Domain: ${getCleanText(student.domain)}",
                       overflow: TextOverflow.ellipsis,
                       style: const TextStyle(
                           fontSize: 13,
-                          color: Colors.black45,
-                          fontWeight: FontWeight.w400),
+                          color: Colors.black54,
+                          fontWeight: FontWeight.w500),
                     ),
-                  ],
-                ),
-                // Column(
-                //   children: [
-                //     Row(
-                //       mainAxisAlignment: MainAxisAlignment.end,
-                //       children: [
-                //         IconButton(onPressed: () {}, icon: Icon(Icons.delete)),
-                //         IconButton(onPressed: () {}, icon: Icon(Icons.edit)),
-                //       ],
-                //     )
-                //   ],
-                // )
-              ],
-            ),
+                  ),
+                  Text(
+                    getSafeTime(),
+                    overflow: TextOverflow.ellipsis,
+                    style: const TextStyle(
+                        fontSize: 13,
+                        color: Colors.black45,
+                        fontWeight: FontWeight.w400),
+                  ),
+                ],
+              ),
+            ],
           ),
         ),
       ),

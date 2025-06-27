@@ -4,6 +4,7 @@ import 'package:firebase_sample/services/database_services.dart';
 import 'package:firebase_sample/utils/utils.dart';
 import 'package:firebase_sample/view/home/widgets/student_card_animated_widget.dart';
 import 'package:firebase_sample/widgets/constants.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
@@ -29,6 +30,14 @@ class _CustomScrollViewWidgetState extends State<CustomScrollViewWidget> {
           expandedHeight: 160,
           elevation: 4,
           actions: [
+            IconButton(
+              onPressed: () {},
+              icon: const Icon(
+                CupertinoIcons.search,
+                size: 30,
+                color: kwhite,
+              ),
+            ),
             IconButton(
               tooltip: "Logout",
               onPressed: () async {
@@ -82,6 +91,7 @@ class _CustomScrollViewWidgetState extends State<CustomScrollViewWidget> {
                   return Padding(
                     padding: const EdgeInsets.only(bottom: 16),
                     child: StudentCardAnimated(
+                      index: todos.length - index - 1,
                       studentModel: studentModel,
                       onDelete: () async {
                         await deleteItem(todoId!, context);
