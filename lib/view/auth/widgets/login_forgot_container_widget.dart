@@ -40,6 +40,8 @@ class _LoginForgotContainerWidgetState
       child: Column(
         children: [
           TextformfieldWidget(
+            hintStyle: TextStyle(color: kwhite),
+            contentStyle: TextStyle(color: kwhite),
             // labelText: "Email",
             validator: (value) {
               if (value == null ||
@@ -49,7 +51,8 @@ class _LoginForgotContainerWidgetState
               }
               return null;
             },
-            fillColor: Colors.grey.shade100,
+            fillColor: appColor,
+            //  Colors.grey.shade100,
             controller: widget.forgotEmailController,
             prefixIcon: const Icon(Icons.email_outlined),
             hintText: "Email",

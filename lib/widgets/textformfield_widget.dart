@@ -3,30 +3,31 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
 class TextformfieldWidget extends StatelessWidget {
-  const TextformfieldWidget({
-    super.key,
-    this.hintText,
-    this.controller,
-    this.suffixIcon,
-    this.prefixIcon,
-    this.onDoubleTap,
-    this.obscureText = false,
-    this.disabledBorder,
-    this.enabledBorder,
-    this.focusedBorder,
-    this.labelStyle,
-    this.labelText,
-    this.fillColor,
-    this.hintStyle,
-    this.color,
-    this.onSaved,
-    this.validator,
-    this.keyboardType,
-    this.padding = const EdgeInsets.symmetric(horizontal: 15),
-    this.inputFormatters,
-    this.error,
-    this.errorStyle,
-  });
+  const TextformfieldWidget(
+      {super.key,
+      this.hintText,
+      this.controller,
+      this.suffixIcon,
+      this.prefixIcon,
+      this.onDoubleTap,
+      this.obscureText = false,
+      this.disabledBorder,
+      this.enabledBorder,
+      this.focusedBorder,
+      this.labelStyle,
+      this.labelText,
+      this.fillColor,
+      this.hintStyle,
+      this.color,
+      this.onSaved,
+      this.validator,
+      this.keyboardType,
+      this.padding = const EdgeInsets.symmetric(horizontal: 15),
+      this.inputFormatters,
+      this.error,
+      this.errorStyle,
+      this.contentStyle,
+      this.onChanged});
   final String? hintText;
   final TextEditingController? controller;
   final Widget? suffixIcon;
@@ -48,21 +49,22 @@ class TextformfieldWidget extends StatelessWidget {
   final List<TextInputFormatter>? inputFormatters;
   final Widget? error;
   final TextStyle? errorStyle;
+  final void Function(String)? onChanged;
+  final TextStyle? contentStyle;
 
   @override
   Widget build(BuildContext context) {
     return Padding(
       padding: padding!,
       child: TextFormField(
+        onChanged: onChanged,
         inputFormatters: inputFormatters,
         keyboardType: keyboardType,
         validator: validator,
         onSaved: onSaved,
         // maxLength: 30,
         obscureText: obscureText,
-        style: const TextStyle(
-          color: kwhite,
-        ),
+        style: contentStyle,
         controller: controller,
         decoration: InputDecoration(
           error: error,
@@ -79,7 +81,8 @@ class TextformfieldWidget extends StatelessWidget {
           enabledBorder: enabledBorder,
           disabledBorder: disabledBorder,
           focusedBorder: focusedBorder,
-          fillColor: appColor,
+          fillColor: fillColor,
+          // appColor,
           filled: true,
           suffixIcon: suffixIcon,
           prefixIcon: prefixIcon,
@@ -95,7 +98,7 @@ class TextformfieldWidget extends StatelessWidget {
             borderRadius: BorderRadius.circular(10),
           ),
           hintText: hintText,
-          hintStyle: const TextStyle(color: kwhite),
+          hintStyle: hintStyle,
         ),
       ),
     );

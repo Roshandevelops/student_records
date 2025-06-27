@@ -39,6 +39,9 @@ class _LoginRegisterNowTextformWidgetState
       child: Column(
         children: [
           TextformfieldWidget(
+            fillColor: appColor,
+            hintStyle: TextStyle(color: kwhite),
+            contentStyle: TextStyle(color: kwhite),
             validator: (value) {
               if (value!.isEmpty || !value.contains("@gmail.com")) {
                 return emailErrorDialogue;
@@ -59,6 +62,9 @@ class _LoginRegisterNowTextformWidgetState
           ),
           const SizedBox(height: 15),
           TextformfieldWidget(
+            fillColor: appColor,
+            hintStyle: TextStyle(color: kwhite),
+            contentStyle: TextStyle(color: kwhite),
             // validator: widget.validator,
             validator: (value) {
               if (value!.length < 6) {
@@ -95,6 +101,9 @@ class _LoginRegisterNowTextformWidgetState
           ),
           const SizedBox(height: 15),
           TextformfieldWidget(
+            fillColor: appColor,
+            hintStyle: TextStyle(color: kwhite),
+            contentStyle: TextStyle(color: kwhite),
             // validator: widget.validator,
             validator: (value) {
               if (value!.length < 6) {

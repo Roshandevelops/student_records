@@ -137,10 +137,11 @@ class _StudentCardAnimatedState extends State<StudentCardAnimated>
                                       color: Colors.green,
                                     )),
                                 IconButton(
-                                    tooltip: "Delete",
-                                    onPressed: widget.onDelete,
-                                    icon: Icon(Icons.delete,
-                                        color: Colors.redAccent)),
+                                  tooltip: "Delete",
+                                  onPressed: widget.onDelete,
+                                  icon: Icon(Icons.delete,
+                                      color: Colors.redAccent),
+                                ),
                               ],
                             )
                           ],
