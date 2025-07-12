@@ -1,5 +1,5 @@
-import 'package:firebase_sample/view/auth/view/login_screen.dart';
-import 'package:firebase_sample/view/auth/view/phone_screen.dart';
+import 'package:firebase_sample/auth/view/login_screen.dart';
+import 'package:firebase_sample/auth/view/phone_screen.dart';
 import 'package:firebase_sample/widgets/constants.dart';
 import 'package:flutter/material.dart';
 

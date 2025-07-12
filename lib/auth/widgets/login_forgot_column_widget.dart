@@ -1,4 +1,4 @@
-import 'package:firebase_sample/view/auth/widgets/login_forgot_container_widget.dart';
+import 'package:firebase_sample/auth/widgets/login_forgot_container_widget.dart';
 import 'package:firebase_sample/widgets/constants.dart';
 import 'package:flutter/material.dart';
 

@@ -64,12 +64,12 @@ class _SearchScreenState extends State<SearchScreen> {
             Padding(
                 padding: const EdgeInsets.all(16),
                 child: TextformfieldWidget(
-                  contentStyle:const TextStyle(color: kBlack),
-                  hintStyle:const TextStyle(
+                  contentStyle: const TextStyle(color: kBlack),
+                  hintStyle: const TextStyle(
                     color: kBlack,
                   ),
                   hintText: "Search by Name or Reg no",
-                  prefixIcon:const Icon(
+                  prefixIcon: const Icon(
                     CupertinoIcons.search,
                     color: kBlack,
                   ),
@@ -77,18 +77,17 @@ class _SearchScreenState extends State<SearchScreen> {
                   onChanged: filterSearch,
                   controller: searchController,
                   enabledBorder: OutlineInputBorder(
-                    borderSide:const BorderSide(color: kBlack),
+                    borderSide: const BorderSide(color: kBlack),
                     borderRadius: BorderRadius.circular(10),
                   ),
                   focusedBorder: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(10),
-                    borderSide:const BorderSide(color: Colors.black),
+                    borderSide: const BorderSide(color: Colors.black),
                   ),
-                )
-                ),
+                )),
             Expanded(
               child: filteredList.isEmpty
-                  ? const Center(child: Text("No Matching Students"))
+                  ? const Center(child: Text("Search Students"))
                   : ListView.builder(
                       itemCount: filteredList.length,
                       itemBuilder: (context, index) {
@@ -99,16 +98,12 @@ class _SearchScreenState extends State<SearchScreen> {
                           child: StudentCardAnimated(
                             index: filteredList.length - index - 1,
                             studentModel: student,
-                            onDelete: null, // or provide delete logic if needed
+                            onDelete: null,
                             timeAgo: (date) =>
-                                '', // or reuse your timeAgo function if needed
+                                '', 
                           ),
                         );
-                        //  ListTile(
-                        //   leading: CircleAvatar(child: Text('${index + 1}')),
-                        //   title: Text(student.name),
-                        //   subtitle: Text("Reg No: ${student.regNo}"),
-                        // );
+              
                       },
                     ),
             ),

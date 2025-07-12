@@ -1,7 +1,7 @@
 import 'dart:developer';
 
 import 'package:firebase_sample/controller/authentication_provider.dart';
-import 'package:firebase_sample/view/auth/view/phone_screen.dart';
+import 'package:firebase_sample/auth/view/phone_screen.dart';
 import 'package:firebase_sample/widgets/outlined_button_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';

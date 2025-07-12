@@ -1,4 +1,4 @@
-import 'package:firebase_sample/view/auth/widgets/login_otp_column_widgets.dart';
+import 'package:firebase_sample/auth/widgets/login_otp_column_widgets.dart';
 import 'package:flutter/material.dart';
 
 class OtpScreen extends StatefulWidget {

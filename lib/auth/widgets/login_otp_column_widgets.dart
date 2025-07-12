@@ -1,8 +1,8 @@
-import 'package:firebase_sample/view/auth/widgets/login_intl_otp_validating_button_widget.dart';
-import 'package:firebase_sample/view/auth/widgets/login_intl_resend_otp_button_widget.dart';
-import 'package:firebase_sample/view/auth/widgets/login_otp_change_phonenumber_button_widget.dart';
-import 'package:firebase_sample/view/auth/widgets/login_otp_pinput_widget.dart';
-import 'package:firebase_sample/view/auth/widgets/login_otp_text_widget.dart';
+import 'package:firebase_sample/auth/widgets/login_intl_otp_validating_button_widget.dart';
+import 'package:firebase_sample/auth/widgets/login_intl_resend_otp_button_widget.dart';
+import 'package:firebase_sample/auth/widgets/login_otp_change_phonenumber_button_widget.dart';
+import 'package:firebase_sample/auth/widgets/login_otp_pinput_widget.dart';
+import 'package:firebase_sample/auth/widgets/login_otp_text_widget.dart';
 import 'package:flutter/material.dart';
 
 

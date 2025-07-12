@@ -43,8 +43,7 @@ class DatabaseServices {
         .collection("notes")
         .doc(todoId)
         .delete();
-
-    // await todoRefs.doc(todoId).delete();
+    
   }
 
   Future<bool> isRegNoExists(String regNo) async {

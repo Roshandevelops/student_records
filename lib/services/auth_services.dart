@@ -2,7 +2,7 @@ import 'dart:developer';
 import 'dart:io';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_sample/utils/utils.dart';
-import 'package:firebase_sample/view/auth/view/otp_screen.dart';
+import 'package:firebase_sample/auth/view/otp_screen.dart';
 import 'package:firebase_sample/view/home/view/home_screen.dart';
 import 'package:firebase_sample/widgets/snackbar_widget.dart';
 import 'package:flutter/material.dart';

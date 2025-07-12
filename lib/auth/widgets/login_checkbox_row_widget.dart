@@ -1,4 +1,4 @@
-import 'package:firebase_sample/view/auth/view/login_forgot_password_screen.dart';
+import 'package:firebase_sample/auth/view/login_forgot_password_screen.dart';
 import 'package:firebase_sample/widgets/constants.dart';
 import 'package:flutter/material.dart';
 

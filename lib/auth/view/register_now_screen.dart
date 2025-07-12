@@ -1,4 +1,4 @@
-import 'package:firebase_sample/view/auth/widgets/login_register_now_stack_widget.dart';
+import 'package:firebase_sample/auth/widgets/login_register_now_stack_widget.dart';
 import 'package:flutter/material.dart';
 
 class RegisterNowScreen extends StatelessWidget {

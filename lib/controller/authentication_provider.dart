@@ -1,5 +1,5 @@
 import 'package:firebase_sample/services/auth_services.dart';
-import 'package:firebase_sample/view/auth/view/login_screen.dart';
+import 'package:firebase_sample/auth/view/login_screen.dart';
 import 'package:firebase_sample/view/home/view/home_screen.dart';
 import 'package:firebase_sample/widgets/snackbar_widget.dart';
 import 'package:flutter/material.dart';

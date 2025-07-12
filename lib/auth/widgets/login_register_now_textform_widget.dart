@@ -1,5 +1,5 @@
 import 'dart:developer';
-import 'package:firebase_sample/view/auth/widgets/login_register_now_button_widget.dart';
+import 'package:firebase_sample/auth/widgets/login_register_now_button_widget.dart';
 import 'package:firebase_sample/widgets/constants.dart';
 import 'package:firebase_sample/widgets/textformfield_widget.dart';
 import 'package:flutter/material.dart';

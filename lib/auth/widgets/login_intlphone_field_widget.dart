@@ -1,5 +1,5 @@
-import 'package:firebase_sample/view/auth/widgets/login_intlphone_textfield_widget.dart';
-import 'package:firebase_sample/view/auth/widgets/login_send_otp_button_widget.dart';
+import 'package:firebase_sample/auth/widgets/login_intlphone_textfield_widget.dart';
+import 'package:firebase_sample/auth/widgets/login_send_otp_button_widget.dart';
 import 'package:flutter/material.dart';
 
 class IntlphoneFieldWidget extends StatefulWidget {
@@ -20,14 +20,16 @@ class _IntlphoneFieldWidgetState extends State<IntlphoneFieldWidget> {
         child: Column(
           children: [
             const SizedBox(height: 30),
-            LoginIntlphoneTextfieldWidget(
-              onPhoneNumberChanged: (value) {
-                setState(
-                  () {
-                    completePhoneNumber = value;
-                  },
-                );
-              },
+            SingleChildScrollView(
+              child: LoginIntlphoneTextfieldWidget(
+                onPhoneNumberChanged: (value) {
+                  setState(
+                    () {
+                      completePhoneNumber = value;
+                    },
+                  );
+                },
+              ),
             ),
             LoginSendOtpButtonWidget(
               completePhoneNumber: completePhoneNumber,

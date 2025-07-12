@@ -1,6 +1,6 @@
 import 'package:firebase_sample/controller/authentication_provider.dart';
-import 'package:firebase_sample/view/auth/widgets/login_textformfieldwidget.dart';
-import 'package:firebase_sample/view/auth/widgets/login_checkbox_row_widget.dart';
+import 'package:firebase_sample/auth/widgets/login_textformfieldwidget.dart';
+import 'package:firebase_sample/auth/widgets/login_checkbox_row_widget.dart';
 import 'package:firebase_sample/widgets/material_button_widget.dart';
 import 'package:firebase_sample/widgets/constants.dart';
 import 'package:flutter/material.dart';
